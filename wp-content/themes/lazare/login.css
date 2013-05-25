@@ -1,0 +1,11 @@
+.login h1 a {
+	background: url("http://www.charlesdupoiron.com/lazare/wp-content/themes/lazare/images/header.png") no-repeat scroll center top transparent;
+	height: 70px;
+	padding-bottom: 50px;
+	width: 100%;
+	background-size : inherit;
+}
+
+#login {
+	width: 650px;
+}

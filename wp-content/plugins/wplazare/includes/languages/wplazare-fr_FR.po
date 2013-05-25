@@ -1,0 +1,841 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Wp-Paybox\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-01-09 23:59+0100\n"
+"PO-Revision-Date: 2013-01-10 00:00+0100\n"
+"Last-Translator: charles dupoiron <charlesdupoiron@yahoo.fr>\n"
+"Language-Team: développement eoxia <dev@eoxia.com>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
+"X-Poedit-Basepath: ../includes\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: ../../includes\n"
+"X-Poedit-SearchPath-1: ../includes\n"
+"X-Poedit-SearchPath-2: C:\\php\\Workspace\\lazare\\wp-content\\plugins"
+"\\wplazare\\includes\\languages\n"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:12
+msgid "valid"
+msgstr "Activ&eacute;"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:13
+msgid "moderated"
+msgstr "D&eacute;sactiv&eacute;"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:14
+msgid "deleted"
+msgstr "Supprim&eacute;"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:16
+msgid "error"
+msgstr "Erreur"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:18
+msgid "status"
+msgstr "Statut"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:19
+msgid "order_status"
+msgstr "Statut du don"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:20
+msgid "order_currency"
+msgstr "Devise"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:21
+msgid "order_amount"
+msgstr "Montant"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:22
+msgid "order_reference"
+msgstr "R&eacute;f&eacute;rence de la commande"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:23
+msgid "order_error"
+msgstr "Code retour"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:24
+msgid "order_transaction"
+msgstr "Identifiant transaction"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:25
+msgid "order_autorisation"
+msgstr "Num&eacute;ro identification"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:26
+msgid "creation_date"
+msgstr "Date de cr&eacute;ation"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:27
+msgid "order_creation_date"
+msgstr "Date de don"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:28
+msgid "offer_id"
+msgstr "Identifiant de l'offre"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:30
+msgid "none"
+msgstr "Inconnu"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:31
+msgid "initialised"
+msgstr "Initialis&eacute;"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:32
+msgid "in_progress"
+msgstr "En cours"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:33
+msgid "closed"
+msgstr "Termin&eacute;"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:34
+msgid "payed"
+msgstr "Pay&eacute;"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:36
+msgid "user_email"
+msgstr "Votre email"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:37
+msgid "user_lastname"
+msgstr "Votre nom"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:38
+msgid "user_firstname"
+msgstr "Votre pr&eacute;nom"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:39
+msgid "user_phone"
+msgstr "Votre num&eacute;ro de t&eacute;l&eacute;phone"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:40
+msgid "user_adress"
+msgstr "Votre adresse"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:41
+msgid "user_code_postal"
+msgstr "Code Postal"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:42
+msgid "user_ville"
+msgstr "Ville"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:43
+msgid "user_birthday"
+msgstr "Votre date d'anniversaire (JJ/MM/AAAA)"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:44
+msgid "user_personnal_code"
+msgstr "Code personnel"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:45
+msgid "selectedOffer"
+msgstr "Offre d&eacute;sir&eacute;e"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:47
+msgid "user_email_admin_side"
+msgstr "Email du client"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:48
+msgid "user_lastname_admin_side"
+msgstr "Nom du client"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:49
+msgid "user_firstname_admin_side"
+msgstr "Pr&eacute;nom du client"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:50
+msgid "user_phone_admin_side"
+msgstr "Num&eacute;ro de t&eacute;l&eacute;phone du client"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:51
+msgid "user_adress_admin_side"
+msgstr "Adresse du client"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:52
+msgid "user_birthday_admin_side"
+msgstr "Date d'anniversaire du client"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:53
+msgid "user_personnal_code_admin_side"
+msgstr "Code client"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:54
+msgid "user_association"
+msgstr "Association"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:55
+msgid "user_code_postal_admin_side"
+msgstr "Code Postal"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:56
+msgid "user_ville_admin_side"
+msgstr "Ville"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:57
+msgid "user_association_admin_side"
+msgstr "Association"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:58
+msgid "user_recu_admin_side"
+msgstr "Re&ccedil;u"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:59
+msgid "user_reception_recu_admin_side"
+msgstr "Type de re&ccedil;u"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:61
+msgid "payment_form_type"
+msgstr "Type de formulaire"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:62
+msgid "payment_form_mandatory_fields"
+msgstr "Champs obligatoire pour l'utilisateur"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:63
+msgid "payment_form_button_content"
+msgstr "Intitulé du boutton du formulaire"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:64
+msgid "payment_form_cgv_url"
+msgstr "Url vers les conditions g&eacute;n&eacute;rale de vente"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:66
+msgid "single_payment"
+msgstr "Paiement CB"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:67
+msgid "multiple_payment"
+msgstr "Virement"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:68
+msgid "cheque_payment"
+msgstr "Paiement par ch&egrave;que"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:69
+msgid "payment_amount"
+msgstr "Montant"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:70
+msgid "payment_currency"
+msgstr "Devise"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:71
+msgid "payment_type"
+msgstr "Type de paiement"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:72
+msgid "payment_recurrent_amount"
+msgstr "Montant des pr&eacute;l&egrave;vements"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:73
+msgid "payment_recurrent_number"
+msgstr "Nombre de pr&eacute;l&egrave;vements"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:74
+msgid "payment_recurrent_frequency"
+msgstr "Fr&eacute;quence des pr&eacute;l&egrave;vements"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:75
+msgid "payment_recurrent_day_of_month"
+msgstr "Jour du mois auquel le pr&eacute;l&egrave;vement aura lieu"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:76
+msgid "payment_recurrent_start_delay"
+msgstr "D&eacute;lai d'ex&eacute;cution"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:77
+msgid "payment_form_name"
+msgstr "Nom du formulaire"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:78
+msgid "payment_reference_prefix"
+msgstr "Pr&eacute;fixe pour la r&eacute;f&eacute;rence"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:79
+msgid "payment_name"
+msgstr "Nom de l'offre"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:81
+msgid "lazare"
+msgstr "lazare"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:82
+msgid "liste des acteurs"
+msgstr "liste des utilisateurs"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:83
+msgid "adresse"
+msgstr "Adresse"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:84
+msgid "code_postal"
+msgstr "Code Postal"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:85
+msgid "ville"
+msgstr "Ville"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:86
+msgid "responsable"
+msgstr "Responsable"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:87
+msgid "prix"
+msgstr "Prix"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:88
+msgid "nom"
+msgstr "Nom"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:89
+msgid "maison"
+msgstr "Maison"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:90
+msgid "recherche"
+msgstr "Recherche"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:91
+msgid "user"
+msgstr "Utilisateur"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:92
+msgid "titre"
+msgstr "Titre"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:93
+msgid "association"
+msgstr "Association"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:94
+msgid "nbr_logements"
+msgstr "Nbr de logements"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:95
+msgid "prenom"
+msgstr "Pr&eacute;nom"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:96
+msgid "email"
+msgstr "Votre email"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:97
+msgid "tel"
+msgstr "Téléphone"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:98
+msgid "date_de_naissance"
+msgstr "Date de naissance"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:99
+msgid "commentaires"
+msgstr "Commentaires"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:101
+msgid "subscriber"
+msgstr "Personne accueillie"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:102
+msgid "administration"
+msgstr "Administration"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:103
+msgid "donateur"
+msgstr "Donateur"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:104
+msgid "benevole"
+msgstr "B&eacute;n&eacute;vole"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:105
+msgid "partenaire_social"
+msgstr "Partenaire Social"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:106
+msgid "administrator"
+msgstr "Administrateur"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:107
+msgid "postulant"
+msgstr "Postulant"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:108
+msgid "attendee"
+msgstr "Participant"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:109
+msgid "role"
+msgstr "R&ocirc;le"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:110
+msgid "banque_nom"
+msgstr "Nom de votre banque"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:111
+msgid "banque_adresse"
+msgstr "Adresse"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:112
+msgid "banque_code_postal"
+msgstr "Code Postal"
+
+#: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:113
+msgid "banque_ville"
+msgstr "Ville"
+
+#~ msgid "Euro"
+#~ msgstr "Euro"
+
+#~ msgid "US Dollar"
+#~ msgstr "US Dollar"
+
+#~ msgid "Modifier"
+#~ msgstr "Modifier"
+
+#~ msgid "Voir"
+#~ msgstr "Voir"
+
+#~ msgid "Supprimer"
+#~ msgstr "Supprimer"
+
+#~ msgid ""
+#~ "&Ecirc;tes vous s&ucirc;r de vouloir quitter cette page? Vous perdrez "
+#~ "toutes les modification que vous aurez effectu&eacute;es"
+#~ msgstr ""
+#~ "&Ecirc;tes vous s&ucirc;r de vouloir quitter cette page? Vous perdrez "
+#~ "toutes les modification que vous aurez effectu&eacute;es"
+
+#~ msgid "Enregistrer et continuer l'&eacute;dition"
+#~ msgstr "Enregistrer et continuer l'&eacute;dition"
+
+#~ msgid "Valider mon paiement"
+#~ msgstr "Valider mon paiement"
+
+#~ msgid ""
+#~ "Cette page doit &ecirc;tre cr&eacute;&eacute; dans %s &agrave; la ligne %d"
+#~ msgstr ""
+#~ "Cette page doit &ecirc;tre cr&eacute;&eacute; dans %s &agrave; la ligne %d"
+
+#~ msgid "Aucune aide n'est disponible pour cette page."
+#~ msgstr "Aucune aide n'est disponible pour cette page."
+
+#~ msgid "Fiche utilisateur"
+#~ msgstr "Fiche utilisateur"
+
+#~ msgid "Question"
+#~ msgstr "Question"
+
+#~ msgid "Input type not allowed here in "
+#~ msgstr "Input type not allowed here in "
+
+#~ msgid "Historique"
+#~ msgstr "Historique"
+
+#~ msgid "Nouvelle page"
+#~ msgstr "Nouvelle Page"
+
+#~ msgid "ajouter_page"
+#~ msgstr "Ajouter Page"
+
+#~ msgid "Options principale du module de paiement paybox"
+#~ msgstr "Options principale du module de paiement "
+
+#~ msgid "Paybox"
+#~ msgstr "Paybox"
+
+#~ msgid "Options principale du module Lazare"
+#~ msgstr "Options principale du module de gestion de lazare"
+
+#~ msgid "Lazare"
+#~ msgstr "Lazare"
+
+#~ msgid "Commandes"
+#~ msgstr "Dons"
+
+#~ msgid "Offres"
+#~ msgstr "Offres"
+
+#~ msgid "Liste des offres"
+#~ msgstr "Listes des offres"
+
+#~ msgid "&Eacute;diter l'offre"
+#~ msgstr "&Eacute;diter l'offre"
+
+#~ msgid "Ajouter une offre"
+#~ msgstr "Ajouter une offre"
+
+#~ msgid "Une erreur est survenue lors de l'enregistrement de %s"
+#~ msgstr "Une erreur est survenue lors de l'enregistrement de %s"
+
+#~ msgid ""
+#~ "L'enregistrement de %s s'est d&eacute;roul&eacute; avec succ&eacute;s"
+#~ msgstr ""
+#~ "L'enregistrement de %s s'est d&eacute;roul&eacute; avec succ&eacute;s"
+
+#~ msgid ""
+#~ "Vous n'avez pas les droits n&eacute;cessaire pour effectuer cette action."
+#~ msgstr ""
+#~ "Vous n'avez pas les droits n&eacute;cessaire pour effectuer cette action."
+
+#~ msgid "Existing payment forms listing"
+#~ msgstr "Existing payment forms listing"
+
+#~ msgid "Libell&eacute; de l'offre"
+#~ msgstr "Libell&eacute; de l'offre"
+
+#~ msgid "Type d'offre"
+#~ msgstr "Type d'offre"
+
+#~ msgid "Montant"
+#~ msgstr "Montant"
+
+#~ msgid "R&eacute;f&eacute;rence"
+#~ msgstr "R&eacute;f&eacute;rence"
+
+#~ msgid "Abonnement"
+#~ msgstr "Abonnement"
+
+#~ msgid "%d pr&eacute;l&egrave;vements de %s %s"
+#~ msgstr "%d pr&eacute;l&egrave;vements de %s %s"
+
+#~ msgid "Ajouter"
+#~ msgstr "Ajouter"
+
+#~ msgid "Aucune offre n'a encore &eacute;t&eacute; cr&eacute;&eacute;"
+#~ msgstr "Aucune offre n'a encore &eacute;t&eacute; cr&eacute;&eacute;"
+
+#~ msgid ""
+#~ "Permet de localiser une offre rapidement. N'a aucune incidence sur le "
+#~ "paiment en lui m&ecirc;me"
+#~ msgstr ""
+#~ "Permet de localiser une offre rapidement. N'a aucune incidence sur le "
+#~ "paiment en lui m&ecirc;me"
+
+#~ msgid ""
+#~ "D&eacute;finit une pr&eacute;fixe pour l'offre. Permet d'obtenir un "
+#~ "identifiant unique par transaction"
+#~ msgstr ""
+#~ "D&eacute;finit une pr&eacute;fixe pour l'offre. Permet d'obtenir un "
+#~ "identifiant unique par transaction"
+
+#~ msgid ""
+#~ "Si le montant est le m&ecirc;me que le premier paiement, mettre 0 "
+#~ "(z&eacute;ro)"
+#~ msgstr ""
+#~ "Si le montant est le m&ecirc;me que le premier paiement, mettre 0 "
+#~ "(z&eacute;ro)"
+
+#~ msgid "En mois"
+#~ msgstr "En mois"
+
+#~ msgid ""
+#~ "Si le pr&eacute;l&egrave;vement a lieu le m&ecirc;me jour que le premier "
+#~ "paiement, mettre 0 (z&eacute;ro)"
+#~ msgstr ""
+#~ "Si le pr&eacute;l&egrave;vement a lieu le m&ecirc;me jour que le premier "
+#~ "paiement, mettre 0 (z&eacute;ro)"
+
+#~ msgid ""
+#~ "Nombre de jours avant l'ex&eacute;cution du paiement (0 pour un d&eacute;"
+#~ "but imm&eacute;diat)"
+#~ msgstr ""
+#~ "Nombre de jours avant l'ex&eacute;cution du paiement (0 pour un d&eacute;"
+#~ "but imm&eacute;diat)"
+
+#~ msgid "Param&egrave;tres pour les abonnements"
+#~ msgstr "Param&egrave;tres pour les abonnements"
+
+#~ msgid "&Ecirc;tes vous s&ucirc;r de vouloir supprimer ce formulaire?"
+#~ msgstr "&Ecirc;tes vous s&ucirc;r de vouloir supprimer ce formulaire?"
+
+#~ msgid "Enregistrer"
+#~ msgstr "Enregistrer"
+
+#~ msgid "Retour"
+#~ msgstr "Retour"
+
+#~ msgid "Paiement unique"
+#~ msgstr "Paiement unique"
+
+#~ msgid "Abonnement: %s&nbsp;%s; %s&nbsp;fois"
+#~ msgstr "Abonnement: %s&nbsp;%s; %s&nbsp;fois"
+
+#~ msgid "Supprimer l'association enter l'offre et le formulaire"
+#~ msgstr "Supprimer l'association enter l'offre et le formulaire"
+
+#~ msgid "Associer cette offre"
+#~ msgstr "Associer cette offre"
+
+#~ msgid ""
+#~ "Aucune offre n'a &eacute;t&eacute; d&eacute;finie pour le moment. Pour en "
+#~ "cr&eacute;er une, rendez-vous dans le menu \"Offres\" &agrave; gauche"
+#~ msgstr ""
+#~ "Aucune offre n'a &eacute;t&eacute; d&eacute;finie pour le moment. Pour en "
+#~ "cr&eacute;er une, rendez-vous dans le menu \"Offres\" &agrave; gauche"
+
+#~ msgid ""
+#~ "Un formulaire peut contenir une ou plusieurs offres que le client pourra "
+#~ "choisir"
+#~ msgstr ""
+#~ "Un formulaire peut contenir une ou plusieurs offres que le client pourra "
+#~ "choisir"
+
+#~ msgid ""
+#~ "Vous ne disposez pas des droits suffisant pour visualiser la liste des "
+#~ "offres affect&eacute;es &agrave; ce formulaire"
+#~ msgstr ""
+#~ "Vous ne disposez pas des droits suffisant pour visualiser la liste des "
+#~ "offres affect&eacute;es &agrave; ce formulaire"
+
+#~ msgid "%s &agrave; %s %s"
+#~ msgstr "%s &agrave; %s %s"
+
+#~ msgid ""
+#~ "%s &agrave; %s %s, puis pr&eacute;l&eacute;vement de %s %s tous les %s "
+#~ "mois pendant %s mois"
+#~ msgstr ""
+#~ "%s &agrave; %s %s, puis pr&eacute;l&eacute;vement de %s %s tous les %s "
+#~ "mois pendant %s mois"
+
+#~ msgid "Liste des commandes"
+#~ msgstr "Liste des commandes"
+
+#~ msgid "Voir la commande \"%s\""
+#~ msgstr "Voir la commande \"%s\""
+
+#~ msgid ""
+#~ "La commande \"%s\" a &eacute;t&eacute; supprim&eacute;e avec succ&eacute;s"
+#~ msgstr ""
+#~ "La commande \"%s\" a &eacute;t&eacute; supprim&eacute;e avec succ&eacute;s"
+
+#~ msgid "Une erreur est survenue lors de la suppression de %s"
+#~ msgstr "Une erreur est survenue lors de la suppression de %s"
+
+#~ msgid "orders listing"
+#~ msgstr "Liste des commandes"
+
+#~ msgid "Date"
+#~ msgstr "Date"
+
+#~ msgid "Statut"
+#~ msgstr "Statut"
+
+#~ msgid "Type"
+#~ msgstr "Type"
+
+#~ msgid "Aucun don"
+#~ msgstr "Aucun don."
+
+#~ msgid "Informations commandes"
+#~ msgstr "Informations commandes"
+
+#~ msgid "Informations client"
+#~ msgstr "Informations client"
+
+#~ msgid "Informations paiement"
+#~ msgstr "Informations paiement"
+
+#~ msgid "&Ecirc;tes vous s&ucirc;r de vouloir supprimer cette commande?"
+#~ msgstr "&Ecirc;tes vous s&ucirc;r de vouloir supprimer cette commande?"
+
+#~ msgid ""
+#~ "&Ecirc;tes vous s&ucirc;r de vouloir valider le paiement de cette "
+#~ "commande?"
+#~ msgstr ""
+#~ "&Ecirc;tes vous s&ucirc;r de vouloir valider le paiement de cette "
+#~ "commande?"
+
+#~ msgid "Votre paiement de %s a bien &eacute;t&eacute; effectu&eacute;"
+#~ msgstr "Votre paiement de %s a bien &eacute;t&eacute; effectu&eacute;"
+
+#~ msgid ""
+#~ "Une erreur est survenue lors de votre paiement, pour plus d'informations "
+#~ "contactez nous en pr&eacute;cisant le code d'erreur suivant: "
+#~ "PaymentReturn#"
+#~ msgstr ""
+#~ "Une erreur est survenue lors de votre paiement, pour plus d'informations "
+#~ "contactez nous en pr&eacute;cisant le code d'erreur suivant: "
+#~ "PaymentReturn#"
+
+#~ msgid "Liste des formulaires"
+#~ msgstr "Liste des formulaires"
+
+#~ msgid "&Eacute;diter le formulaire"
+#~ msgstr "&Eacute;diter le formulaire "
+
+#~ msgid "Ajouter un formulaire"
+#~ msgstr "Ajouter un formulaire"
+
+#~ msgid "Nom du formulaire"
+#~ msgstr "Nom du formulaire"
+
+#~ msgid "Aucun formulaire n'a encore &eacute;t&eacute; cr&eacute;&eacute;"
+#~ msgstr "Aucun formulaire n'a encore &eacute;t&eacute; cr&eacute;&eacute;"
+
+#~ msgid ""
+#~ "Le montant est exprim&eacute; en centimes.<br/>exemple: pour 1&euro; "
+#~ "mettre 100"
+#~ msgstr ""
+#~ "Le montant est exprim&eacute; en centimes.<br/>exemple: pour 1&euro; "
+#~ "mettre 100"
+
+#~ msgid ""
+#~ "Cochez les champs que vous souhaitez d&eacute;finir comme obligatoire "
+#~ "pour ce formulaire"
+#~ msgstr ""
+#~ "Cochez les champs que vous souhaitez d&eacute;finir comme obligatoire "
+#~ "pour ce formulaire"
+
+#~ msgid ""
+#~ "&Ecirc;tes vous s&ucirc;r de vouloir supprimer l'association entre cette "
+#~ "offre et ce formulaire?"
+#~ msgstr ""
+#~ "&Ecirc;tes vous s&ucirc;r de vouloir supprimer l'association entre cette "
+#~ "offre et ce formulaire?"
+
+#~ msgid ""
+#~ "Pour utiliser ce formulaire, ins&eacute;rer le code ci-dessous &agrave; "
+#~ "l'endroit que vous souhaitez"
+#~ msgstr ""
+#~ "Pour utiliser ce formulaire, ins&eacute;rer le code ci-dessous &agrave; "
+#~ "l'endroit que vous souhaitez"
+
+#~ msgid "L'adresse email fournie n'est pas une adresse email valable"
+#~ msgstr "L'adresse email fournie n'est pas une adresse email valable"
+
+#~ msgid "ERREUR, veuillez contacter le webmaster."
+#~ msgstr "ERREUR, veuillez contacter le webmaster."
+
+#~ msgid "Tous les champs marqu&eacute;s d'une &eacute;toile sont obligatoires"
+#~ msgstr ""
+#~ "Tous les champs marqu&eacute;s d'une &eacute;toile sont obligatoires"
+
+#~ msgid ""
+#~ "Une erreur est survenue. Merci de nous contacter en pr&eacute;cisant le "
+#~ "code d'erreur suivant: Form%dInvalid"
+#~ msgstr ""
+#~ "Une erreur est survenue. Merci de nous contacter en pr&eacute;cisant le "
+#~ "code d'erreur suivant: Form%dInvalid"
+
+#~ msgid ""
+#~ "Aucune offre n'est associ&eacute;e &agrave; ce formulaire. Nous ne "
+#~ "pouvons donner suite &agrave; votre demande. Pour plus d'informations, "
+#~ "contactez-nous en indiquant le code d'erreur suivant: ErrorNOF#%d"
+#~ msgstr ""
+#~ "Aucune offre n'est associ&eacute;e &agrave; ce formulaire. Nous ne "
+#~ "pouvons donner suite &agrave; votre demande. Pour plus d'informations, "
+#~ "contactez-nous en indiquant le code d'erreur suivant: ErrorNOF#%d"
+
+#~ msgid "Les options ont bien &eacute;t&eacute; enregistr&eacute;es"
+#~ msgstr "Les options ont bien &eacute;t&eacute; enregistr&eacute;es"
+
+#~ msgid "Configuration g&eacute;n&eacute;rale"
+#~ msgstr "J'accepte les conditions g&eacute;n&eacute;rales de vente"
+
+#~ msgid "Avertir par email des futurs anniversaires"
+#~ msgstr "Avertir par email des futurs anniversaires"
+
+#~ msgid "Informations de la boutique"
+#~ msgstr "Informations de la boutique"
+
+#~ msgid "Urls de retour apr&eacute;s un paiement"
+#~ msgstr "Urls de retour apr&eacute;s un paiement"
+
+#~ msgid "Ajouter : %s dans les pages que vous allez cr&eacute;er."
+#~ msgstr "Ajouter : %s dans les pages que vous allez cr&eacute;er."
+
+#~ msgid "Num&eacute;ro de TPE de la boutique"
+#~ msgstr "Num&eacute;ro de TPE de la boutique"
+
+#~ msgid "Num&eacute;ro de rang de la boutique"
+#~ msgstr "Num&eacute;ro de rang de la boutique"
+
+#~ msgid "Identifiant de la boutique"
+#~ msgstr "Identifiant de la boutique"
+
+#~ msgid "Url du fichier cgi"
+#~ msgstr "Url du fichier cgi"
+
+#~ msgid "Environnement de la boutique"
+#~ msgstr "Environnement de la boutique"
+
+#~ msgid "Mode test"
+#~ msgstr "Mode test"
+
+#~ msgid "Mode Production"
+#~ msgstr "Mode Production"
+
+#~ msgid "Url de retour pour un paiement accept&eacute;"
+#~ msgstr "Url de retour pour un paiement accept&eacute;"
+
+#~ msgid "Url de retour pour un paiement annul&eacute;"
+#~ msgstr "Url de retour pour un paiement annul&eacute;"
+
+#~ msgid "Url de retour pour un paiement refus&eacute;"
+#~ msgstr "Url de retour pour un paiement refus&eacute;"
+
+#~ msgid "accompagnateur"
+#~ msgstr "Accompagnateur"
+
+#~ msgid "postulant_accompagnateur"
+#~ msgstr "Postulant Accompagnateur"
+
+#~ msgid "Aucune commande n'a encore &eacute;t&eacute; pass&eacute;e"
+#~ msgstr "Aucune commande n'a encore &eacute;t&eacute; pass&eacute;e"
+
+#~ msgid "D&eacute;but imm&eacute;diat"
+#~ msgstr "D&eacute;but imm&eacute;diat"
+
+#~ msgid "%d jours apr&eacute;s l'inscription"
+#~ msgstr "%d jours apr&eacute;s l'inscription"
+
+#~ msgid "Le %d de chaque mois"
+#~ msgstr "Le %d de chaque mois"
+
+#~ msgid "Vous devez accepter les conditions g&eacute;n&eacute;rales de vente"
+#~ msgstr "Vous devez accepter les conditions g&eacute;n&eacute;rales de vente"
+
+#~ msgid "Liste des acteurs"
+#~ msgstr "Liste des acteurs"
+
+#~ msgid "Acteurs"
+#~ msgstr "Acteurs"
+
+#~ msgid "Listes des commandes"
+#~ msgstr "Listes des commandes"
+
+#~ msgid "Listes des formulaires"
+#~ msgstr "Listes des formulaires"
+
+#~ msgid "Cr&eacute;er une nouvelle offre"
+#~ msgstr "Cr&eacute;er une nouvelle offre"
+
+#~ msgid "Annuler"
+#~ msgstr "Annuler"
+
+#~ msgid "Enregistrer l'offre"
+#~ msgstr "Enregistrer l'offre"
+
+#~ msgid "%s a &eacute;t&eacute; supprim&eacute;e avec succ&eacute;s"
+#~ msgstr "%s a &eacute;t&eacute; supprim&eacute;e avec succ&eacute;s"
+
+#~ msgid "Laisser vide si identique au montant initial"
+#~ msgstr "Laisser vide si identique au montant initial"
+
+#~ msgid "currency"
+#~ msgstr "Devise"
+
+#, fuzzy
+#~ msgid "single_offer"
+#~ msgstr "Paiement unique"
+
+#, fuzzy
+#~ msgid "multiple_offer"
+#~ msgstr "Paiement en plusieurs fois"

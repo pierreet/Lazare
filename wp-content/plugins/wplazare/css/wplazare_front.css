@@ -1,0 +1,26 @@
+.clear{	clear:both;	}
+.wplazare_form_label{	display:table; vertical-align:top; float:left;	}
+.wplazare_form_input{	width:50%; }
+input[type=radio].wplazare_form_input{	width: inherit; }
+.wplazare_form_input textarea, .wplazare_form_input select, .wplazare_form_input input[type=text], .wplazare_form_input input[type=file]{	width:60% !important;	}
+.wplazare_form_input input[type=radio], .wplazare_form_input input[type=checkbox]{	margin:0px 1px 0px 6px; vertical-align:middle;	}
+
+.errorFieldAlert{	margin:6px 0px; border:1px dashed #990000; background-color:#FFFF66; color:red; width:80%; text-align:center;	}
+.mandatoryFieldAlert{	margin:6px 0px; border:1px dashed #990000; background-color:#FFFF66; color:red; width:80%; text-align:center;	}
+.isMandatoryField{	color:red;	}
+
+.lazareButtonFormPayment{	border:0px solid black;	}
+.lazareButtonFormPrePayment{	border:0px solid black;	}
+
+#banque_iban{ width: 200px;}
+.orienter_personne .wplazare_form_label {
+  width:20%;
+}
+
+.orienter_personne .clear {
+    padding: 5px;
+}
+
+.association_choice_div{
+    display:none;
+}
