@@ -12,14 +12,14 @@
 <div id="primary">
 	<div role="main" id="content">		
 		<div class="colonnes deux-tiers-colonnes">
-			<h1>Actualité de <?php the_title();?></h1>
+			<h1>Actualité de <?php echo trim(substr(get_the_title(),11));?></h1>
 			<div class='news_container'>
 				<a href="#" class="nav-previous"><span id="prev"><span class="meta-nav">←</span> Précédent</span></a>
 				<a href="#" class="nav-next"><span id="next">Suivant <span class="meta-nav">→</span></span></a>
 				<div id="news-slideshow" class="cycle">
 					<?php
-					$i = 0;
-					$term = get_term_by('name', 'Actualité de '.get_the_title(), 'category');
+					$i = 0;					
+					$term = get_term_by('name', 'Actualité de '.trim(substr(get_the_title(),11)), 'category');
 					$id = $term->term_id;
 					 query_posts( 'showposts=5&cat='.$id.'&order=DESC&orderby=date' );
 					 if (have_posts()) :

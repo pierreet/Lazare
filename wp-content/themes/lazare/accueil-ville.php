@@ -11,7 +11,7 @@
 ?>
 <div id="primary">
 	<div role="main" id="content">		
-		<div class="colonnes">
+		<div class="">
 		<?php $page_data = get_page( $page_id ); ?> 
 		<?php echo apply_filters('the_content', $page_data->post_content);?>
 		</div>
