@@ -284,16 +284,17 @@ class wplazare_users {
 			if (isset($_REQUEST['role']) && $_REQUEST['role'] == $role_tmp)
 				$class = 'current';
 
-			$roles_link .= ' | ';
 
-			$roles_link .= '<li>' . '<a href="'
-					. admin_url(
-							'admin.php?page=' . WPLAZARE_URL_SLUG_USERS_LISTING
-									. '&role=' . $role_tmp, 'http') . '"'
-					. ' class="' . $class . '">' . __($role_tmp, 'wplazare')
-					. '</a>' . '('
-					. wplazare_tools::getUserCountByRole($role_tmp) . ')</li>';
-
+			if($role_tmp!='donateur'){
+				$roles_link .= ' | ';
+				$roles_link .= '<li>' . '<a href="'
+						. admin_url(
+								'admin.php?page=' . WPLAZARE_URL_SLUG_USERS_LISTING
+										. '&role=' . $role_tmp, 'http') . '"'
+						. ' class="' . $class . '">' . __($role_tmp, 'wplazare')
+						. '</a>' . '('
+						. wplazare_tools::getUserCountByRole($role_tmp) . ')</li>';
+			}
 		}
 
 		$role_tmp = "attente";
@@ -643,7 +644,13 @@ class wplazare_users {
 
 					</div>
 
-				</div>
+				</div><br/>
+				';
+				$_GET['user_id']=$user_id;
+				ob_start();
+				require '../wp-content/plugins/user-access-manager/tpl/userProfileEditForm.php';
+				$the_view .= ob_get_clean();
+			echo '
 
 			</form>
 
