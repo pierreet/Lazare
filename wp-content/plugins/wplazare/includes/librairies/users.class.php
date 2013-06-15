@@ -652,11 +652,20 @@ class wplazare_users {
 					</div>
 
 				</div><br/>
-				';
+				';		
+			//possibilité de modifier les groupe uniquement pour les admin bureau
+			global $oUserAccessManager;
+			$aUserGroupsForObject = $oUserAccessManager->getAccessHandler()->getUserGroupsForObject(
+				'user',
+				wp_get_current_user()->get('ID')
+			);
+			//l'utilisateur ne se modifie pas lui même et appartient au bureau ou est administrateur
+			if(wp_get_current_user()->get('ID')!=$user_id && (array_key_exists(WPLAZARE_UAM_GROUP_BUREAU, $aUserGroupsForObject) || $oUserAccessManager->getAccessHandler()->userIsAdmin(wp_get_current_user()->get('ID')))){
 				$_GET['user_id']=$user_id;
 				ob_start();
 				require '../wp-content/plugins/user-access-manager/tpl/userProfileEditForm.php';
 				$the_view .= ob_get_clean();
+			}
 			echo '
 
 			</form>
