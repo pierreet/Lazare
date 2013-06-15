@@ -277,15 +277,22 @@ class wplazare_users {
 						'admin.php?page=' . WPLAZARE_URL_SLUG_USERS_LISTING,
 						'http') . '" class=' . $class . '>Tous</a>';
 
+		//accès base donateur uniquement admin bureau
+		global $oUserAccessManager;
+		$aUserGroupsForObject = $oUserAccessManager->getAccessHandler()->getUserGroupsForObject(
+			'user',
+			wp_get_current_user()->get('ID')
+		);
+
 		foreach (wplazare_tools::getRoles() as $role_tmp) {
 
 			$class = '';
 
 			if (isset($_REQUEST['role']) && $_REQUEST['role'] == $role_tmp)
 				$class = 'current';
-
-
-			if($role_tmp!='donateur'){
+		
+			//l'utilisateur appartient au bureau ou est administrateur
+			if($role_tmp!=WPLAZARE_ROLE_DONATEUR || (array_key_exists(WPLAZARE_UAM_GROUP_BUREAU, $aUserGroupsForObject) || $oUserAccessManager->getAccessHandler()->userIsAdmin(wp_get_current_user()->get('ID')))){
 				$roles_link .= ' | ';
 				$roles_link .= '<li>' . '<a href="'
 						. admin_url(
