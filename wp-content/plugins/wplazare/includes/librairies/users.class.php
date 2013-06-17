@@ -340,6 +340,8 @@ class wplazare_users {
 		$tableTitles[] = 'Role';
 
 		$tableTitles[] = 'Liens';
+		
+		$tableTitles[] = 'Groupe(s)';
 
 		$tableClasses = array();
 
@@ -361,6 +363,9 @@ class wplazare_users {
 		$tableClasses[] = 'wplazare' . wplazare_users::getCurrentPageCode()
 				. '_lien_column filter-false';
 
+		$tableClasses[] = 'wplazare' . wplazare_users::getCurrentPageCode()
+				. '_groupes_column filter-false';
+
 		$line = 0;
 
 		$elementList = wplazare_users::getElement('', $role);
@@ -368,94 +373,112 @@ class wplazare_users {
 		if (count($elementList) > 0) {
 
 			foreach ($elementList as $element) {
+			
+			$bUserGroupsForObject = $oUserAccessManager->getAccessHandler()->getUserGroupsForObject(
+				'user',
+				$element['id']
+			);
+			//si l'utilisateur connecté appartient a au moins un groupe de l'utilisateur courant
+			//ou que l'utilisateur est admin ou membre du bureau
+			$diff = array_intersect_key($aUserGroupsForObject, $bUserGroupsForObject);
+			if(!empty($diff) || $oUserAccessManager->getAccessHandler()->userIsAdmin(wp_get_current_user()->get('ID'))
+							 || array_key_exists(WPLAZARE_UAM_GROUP_BUREAU, $aUserGroupsForObject)){
 
-				$tableRowsId[$line] = wplazare_users::getCurrentPageCode()
-						. '_' . $line;
+					$tableRowsId[$line] = wplazare_users::getCurrentPageCode()
+							. '_' . $line;
 
-				$subRowActions = '';
+					$subRowActions = '';
 
-				if (current_user_can('wplazare_view_user_details')) {
+					if (current_user_can('wplazare_view_user_details')) {
 
-					$id = $element['id'];
+						$id = $element['id'];
 
-					if ($element['role'] == WPLAZARE_ROLE_DONATEUR)
-						$id = $element['email'];
+						if ($element['role'] == WPLAZARE_ROLE_DONATEUR)
+							$id = $element['email'];
 
-					$editAction = admin_url(
-							'admin.php?page='
-									. wplazare_users::getEditionSlug()
-									. '&amp;action=edit&amp;id=' . $id);
+						$editAction = admin_url(
+								'admin.php?page='
+										. wplazare_users::getEditionSlug()
+										. '&amp;action=edit&amp;id=' . $id);
 
-					$subRowActions .= '
+						$subRowActions .= '
 
-					<a href="' . $editAction . '" >'
-							. __('Modifier', 'wplazare') . '</a>';
-
-				}
-
-				if (current_user_can('wplazare_edit_user')
-						&& $element['role'] != WPLAZARE_ROLE_DONATEUR) {
-
-					if ($subRowActions != '') {
-
-						$subRowActions .= '&nbsp;|&nbsp;';
+						<a href="' . $editAction . '" >'
+								. __('Modifier', 'wplazare') . '</a>';
 
 					}
 
-					$url = add_query_arg(
-							array('user_id' => $id,
-									wplazare_users::getCurrentPageCode()
-											. '_action' => 'delete'));
+					if (current_user_can('wplazare_edit_user')
+							&& $element['role'] != WPLAZARE_ROLE_DONATEUR) {
 
-					$subRowActions .= '
+						if ($subRowActions != '') {
 
-		<a href="' . $url . '" >' . __('Supprimer', 'wplazare') . '</a>';
+							$subRowActions .= '&nbsp;|&nbsp;';
 
+						}
+
+						$url = add_query_arg(
+								array('user_id' => $id,
+										wplazare_users::getCurrentPageCode()
+												. '_action' => 'delete'));
+
+						$subRowActions .= '
+
+			<a href="' . $url . '" >' . __('Supprimer', 'wplazare') . '</a>';
+
+					}
+
+					$rowActions = '
+
+		<div id="rowAction' . $element['id'] . '" class="wplazareRowAction" >'
+							. $subRowActions . '
+
+		</div>';
+
+					unset($tableRowValue);
+
+					$tableRowValue[] = array(
+							'class' => wplazare_users::getCurrentPageCode()
+									. '_nom_cell',
+							'value' => $element['nom'] . ' ' . $element['prenom']
+									. $rowActions);
+
+					$tableRowValue[] = array(
+							'class' => wplazare_users::getCurrentPageCode()
+									. '_email_cell', 'value' => $element['email']);
+
+					$tableRowValue[] = array(
+							'class' => wplazare_users::getCurrentPageCode()
+									. '_adresse_cell',
+							'value' => $element['adresse_complete']);
+
+					$tableRowValue[] = array(
+							'class' => wplazare_users::getCurrentPageCode()
+									. '_tel_cell', 'value' => $element['tel']);
+
+					$tableRowValue[] = array(
+							'class' => wplazare_users::getCurrentPageCode()
+									. '_role_cell',
+							'value' => __($element['role'], 'wplazare'));
+
+					$liens = wplazare_users::generateLinksByRole($element['id'],
+							$element['role'], ' | ');
+
+					$tableRowValue[] = array(
+							'class' => wplazare_users::getCurrentPageCode()
+									. '_lien_cell', 'value' => $liens);
+					$groupes=NULL;
+					foreach($bUserGroupsForObject as $groupe)
+						$groupes .= $groupe->getGroupName().'<br />';
+					
+					$tableRowValue[] = array(
+							'class' => wplazare_users::getCurrentPageCode()
+									. '_groupes_cell', 'value' => $groupes);
+					
+					$tableRows[] = $tableRowValue;
+
+					$line++;
 				}
-
-				$rowActions = '
-
-	<div id="rowAction' . $element['id'] . '" class="wplazareRowAction" >'
-						. $subRowActions . '
-
-	</div>';
-
-				unset($tableRowValue);
-
-				$tableRowValue[] = array(
-						'class' => wplazare_users::getCurrentPageCode()
-								. '_nom_cell',
-						'value' => $element['nom'] . ' ' . $element['prenom']
-								. $rowActions);
-
-				$tableRowValue[] = array(
-						'class' => wplazare_users::getCurrentPageCode()
-								. '_email_cell', 'value' => $element['email']);
-
-				$tableRowValue[] = array(
-						'class' => wplazare_users::getCurrentPageCode()
-								. '_adresse_cell',
-						'value' => $element['adresse_complete']);
-
-				$tableRowValue[] = array(
-						'class' => wplazare_users::getCurrentPageCode()
-								. '_tel_cell', 'value' => $element['tel']);
-
-				$tableRowValue[] = array(
-						'class' => wplazare_users::getCurrentPageCode()
-								. '_role_cell',
-						'value' => __($element['role'], 'wplazare'));
-
-				$liens = wplazare_users::generateLinksByRole($element['id'],
-						$element['role'], ' | ');
-
-				$tableRowValue[] = array(
-						'class' => wplazare_users::getCurrentPageCode()
-								. '_lien_cell', 'value' => $liens);
-
-				$tableRows[] = $tableRowValue;
-
-				$line++;
 
 			}
 
