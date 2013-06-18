@@ -255,12 +255,21 @@ class wplazare_users {
 	 */
 
 	function elementList() {
+		//groupes de l'utilsateur
+		global $oUserAccessManager;
+		$aUserGroupsForObject = $oUserAccessManager->getAccessHandler()->getUserGroupsForObject(
+			'user',
+			wp_get_current_user()->get('ID')
+		);
 
-		$annuaire_link = '<div class="alignright"><a href="'
+
+		//si l'utilisateur est admin ou bureau il peut exporter
+		$annuaire_link = (array_key_exists(WPLAZARE_UAM_GROUP_BUREAU, $aUserGroupsForObject) || $oUserAccessManager->getAccessHandler()->userIsAdmin(wp_get_current_user()->get('ID')))?
+				'<div class="alignright"><a href="'
 				. admin_url(
 						'admin.php?page=' . WPLAZARE_URL_SLUG_USERS_LISTING
 								. '&amp;action=export', 'http')
-				. '">Annuaire</a></div>';
+				. '">Annuaire</a></div>':NULL;
 
 		$class = '';
 
@@ -276,14 +285,6 @@ class wplazare_users {
 				. admin_url(
 						'admin.php?page=' . WPLAZARE_URL_SLUG_USERS_LISTING,
 						'http') . '" class=' . $class . '>Tous</a>';
-
-		//accès base donateur uniquement admin bureau
-		global $oUserAccessManager;
-		$aUserGroupsForObject = $oUserAccessManager->getAccessHandler()->getUserGroupsForObject(
-			'user',
-			wp_get_current_user()->get('ID')
-		);
-
 		foreach (wplazare_tools::getRoles() as $role_tmp) {
 
 			$class = '';
@@ -291,6 +292,7 @@ class wplazare_users {
 			if (isset($_REQUEST['role']) && $_REQUEST['role'] == $role_tmp)
 				$class = 'current';
 		
+			//accès base donateur uniquement admin bureau
 			//l'utilisateur appartient au bureau ou est administrateur
 			if($role_tmp!=WPLAZARE_ROLE_DONATEUR || (array_key_exists(WPLAZARE_UAM_GROUP_BUREAU, $aUserGroupsForObject) || $oUserAccessManager->getAccessHandler()->userIsAdmin(wp_get_current_user()->get('ID')))){
 				$roles_link .= ' | ';
