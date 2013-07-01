@@ -338,7 +338,9 @@ class wplazare_orders
                             'name'          => __('Nom', 'wplazare'),
                             'city'          => __('Ville', 'wplazare'),
                             'association'   => __('Association', 'wplazare'),
-                            'reason'        => __('Don/Charge', 'wplazare')
+                            'reason'        => __('Don/Charge', 'wplazare'),
+                            'prelevement_date' => __('Jour de prélèvement', 'wplazare'),
+                            'ref_ediweb'    => __('Référence EDIWEB', 'wplazare'),
         );
         $classes_list = array(
                             'reference'     => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_reference_column',
@@ -349,7 +351,9 @@ class wplazare_orders
                             'name'          => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_name_column filter-select',
                             'city'          => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_city_column filter-select',
                             'association'   => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_asso_column filter-select',
-                            'reason'        => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_reason_column filter-select'
+                            'reason'        => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_reason_column filter-select',
+                            'prelevement_date'  => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_prelevement_date_column filter-select',
+                            'ref_ediweb'    => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_ref_ediweb_column filter-select'
         );
 
 		$tableTitles = array();
@@ -459,6 +463,16 @@ class wplazare_orders
                     {
                         $reason = is_null($element->location_id) ? __('Don', 'wplazare') : __('Charge', 'wplazare');
                         $tableRowValue[] = array('class' => $boldClass.' '.wplazare_orders::getCurrentPageCode() . '_type_cell', 'value' => $reason);
+                    }
+                    if($column == 'prelevement_date')
+                    {
+                        $prelevement_date = ($element->payment_recurrent_day_of_month != '') ? $element->payment_recurrent_day_of_month : __('Non renseigné', 'wplazare');
+                        $tableRowValue[] = array('class' => $boldClass.' '.wplazare_orders::getCurrentPageCode() . '_type_cell', 'value' => $prelevement_date);
+                    }
+                    if($column == 'ref_ediweb')
+                    {
+                        $ref_ediweb = ($element->order_transaction != '') ? $element->order_transaction : __('Non renseigné', 'wplazare');
+                        $tableRowValue[] = array('class' => $boldClass.' '.wplazare_orders::getCurrentPageCode() . '_type_cell', 'value' => $ref_ediweb);
                     }
                 }
 				$tableRows[] = $tableRowValue;
@@ -1500,4 +1514,24 @@ class wplazare_orders
 		$res = $wpdb->get_results($query);
 		return count($res);	
 	}
+
+    function prepareEDIWEB(){
+        global $wpdb;
+
+        $elementStatus = "'valid', 'moderated'";
+
+        $query = $wpdb->prepare(
+            "SELECT O.*
+            FROM " . wplazare_orders::getDbTable() . " AS O
+		WHERE O.status IN (".$elementStatus.") " . "
+		" . $orderByStatement
+        );
+
+        /*	Get the query result regarding on the function parameters. If there must be only one result or a collection	*/
+        if($elementId == '')
+        {
+            $elements = $wpdb->get_results($query);
+        }
+
+    }
 }

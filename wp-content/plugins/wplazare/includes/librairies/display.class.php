@@ -174,7 +174,7 @@ class wplazare_display
 
             case WPLAZARE_URL_SLUG_M_ORDERS_LISTING:
             case WPLAZARE_URL_SLUG_M_ORDERS_EDITION:
-                $columns_to_show = array('reference', 'reason', 'amount', 'status', 'name', 'city', 'association');
+                $columns_to_show = array('reference', 'reason', 'amount', 'prelevement_date', 'name', 'city', 'ref_ediweb');
                 $forced_filters = array( 'payment_type' => 'multiple_payment' );
                 $objectType = new wplazare_orders($columns_to_show, $forced_filters, TRUE, TRUE, WPLAZARE_URL_SLUG_M_ORDERS_LISTING, WPLAZARE_URL_SLUG_M_ORDERS_EDITION);
                 break;
