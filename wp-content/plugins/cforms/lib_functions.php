@@ -66,7 +66,7 @@ function download_cforms(){
 		header('Content-Type: application/download;');
 		header('Content-Disposition: attachment; filename="'.$filename.'";');
 		header('Content-Transfer-Encoding: binary;');
-		header('Content-Length: ' .(string)(strlen($buffer)) . ';' );
+		//header('Content-Length: ' .(string)(strlen($buffer)) . ';' );
         flush();
 		print $buffer;
 		exit(0);
@@ -396,17 +396,49 @@ function check_erased() {
 }
 
 ### add menu items to admin bar
+/*
 function addAdminBar_root($id, $ti){
 	global $wp_admin_bar;
-	$wp_admin_bar->add_menu( array('id' => $id, 'title' => $ti, 'href'  => false) );
+		$arr = array(	'id' => $id, 
+					'title' => $ti, 
+					'href'  => false 
+				);
+	$wp_admin_bar->add_node( $arr );
 }
 
 function addAdminBar_item($id,$ti,$hi,$ev,$p = 'cforms-bar'){
 	global $wp_admin_bar;
-	$wp_admin_bar->add_menu( array('parent' => $p, 'id' => $id, 'title' => $ti, 'href'  => '#', 'meta'  => array('title'  => $hi, 'onclick'  => $ev)) );
+	$arr = array(	'parent' => $p, 
+					'id' => $id, 
+					'title' => $ti, 
+					'href'  => '#', 
+					'meta'  => array(	'title'  => $hi, 
+										'onclick'  => $ev )
+				);
+	
+	$wp_admin_bar->add_node( $arr );
+}
+*/
+### add menu items to admin bar
+function addAdminBar_root($admin_bar, $id, $ti){
+	$arr = array(	'id' => $id, 
+					'title' => $ti, 
+					'href'  => false 
+				);
+	$admin_bar->add_node( $arr );
 }
 
-
+function addAdminBar_item($admin_bar, $id,$ti,$hi,$ev,$p = 'cforms-bar'){
+	$arr = array(	'parent' => $p, 
+					'id' => $id, 
+					'title' => $ti, 
+					'href'  => '#', 
+					'meta'  => array(	'title'  => $hi, 
+										'onclick'  => $ev )
+				);
+	
+	$admin_bar->add_node( $arr );
+}
 ### get_magic_quotes_gpc() workaround
 if ( !function_exists('get_magic_quotes_gpc') ) {
 	function get_magic_quotes_gpc(){

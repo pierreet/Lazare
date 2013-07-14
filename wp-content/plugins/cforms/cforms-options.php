@@ -929,24 +929,6 @@ if ( ($userconfirm & 64) == 0 ){	### 64 = upgrade to 13.0
 </div>
 
 <?php
-add_action('admin_bar_menu', 'add_items');
-function add_items($admin_bar){
-	$cfo = get_option('cforms_settings');
-
-	addAdminBar_root('cforms-bar', 'Inscription Admin');
-	
-	addAdminBar_item('cforms-addbutton', __('Ajouter un nouveau formulaire', 'cforms'), __('Adds a new form with default values', 'cforms'), 'jQuery("#cfbar-addbutton").trigger("click"); return false;');
-	addAdminBar_item('cforms-dupbutton', __('Dupliquer le formulaire courant', 'cforms'), __('Clones the current form', 'cforms'), 'jQuery("#cfbar-dupbutton").trigger("click"); return false;');
-	if ( (int)$cfo['global']['cforms_formcount'] > 1)
-		addAdminBar_item('cforms-delbutton', __('Supprimer le formulaire courrant (!)', 'cforms'), __('Clicking this button WILL delete this form', 'cforms'), 'if ( confirm("'.__('This will delete the current form!', 'cforms').'")) jQuery("#cfbar-delbutton").trigger("click"); return false;');
-
-	addAdminBar_item('cforms-preset', __('Install a form preset', 'cforms'), __('Pick a form preset from the repository', 'cforms'), 'jQuery("#preset").trigger("click"); return false;');
-	addAdminBar_item('cforms-backup', __('Restaurer ce formulaire', 'cforms'), __('Better safe than sorry ;)', 'cforms'), 'jQuery("#backup").trigger("click"); return false;');
-
-	addAdminBar_item('cforms-SubmitOptions', __('Sauvegarder les modifications', 'cforms'), '', 'document.mainform.action="#"+getFieldset(focusedFormControl); jQuery("#cfbar-SubmitOptions").trigger("click"); return false;', 'root-default');
-
-}
-
 
 add_action('admin_footer', 'insert_cfmodal');
 function insert_cfmodal(){

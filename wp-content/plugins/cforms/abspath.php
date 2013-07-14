@@ -1,1 +1,1 @@
-<?php $abspath = '/home/ftp/foyersaintphilippe/com/www/wp/'; ?>
+<?php $abspath = 'C:\\wamp\\www\\lazare\\maisonlazare/'; ?>

@@ -1777,6 +1777,7 @@ if (function_exists('add_action')){
 }
 
 ### cforms runtime JS scripts
+/*
 function cforms_runtime_scripts() {
 	global $wp_scripts, $localversion;
 
@@ -1802,10 +1803,66 @@ function cforms_runtime_scripts() {
 	  	wp_enqueue_script('jquery-ui-datepicker');
 	 }
 
+}*/
+function cforms_adminstyle() {
+	global $wp_query, $wp_scripts, $localversion;
+	wp_enqueue_script('jquery',false,false,false,false);
+	wp_enqueue_script('jquery-ui-core',false,false,false,false);
+	wp_enqueue_script('jquery-ui-datepicker',false,false,false,false);
 }
 
+
+### admin bar
+if ( isset($_GET['page']) ) {
+	$plugin_page = stripslashes($_GET['page']);
+	$plugin_page = plugin_basename($plugin_page);
+	if( strpos($plugin_page, 'cforms-options.php') )
+		add_action('admin_bar_menu', 'add_items_options',999);
+	else if( strpos($plugin_page, 'cforms-global-settings.php') )
+		add_action('admin_bar_menu', 'add_items_global',999);	
+}
+
+function add_items_global( $admin_bar ){
+	
+	global $wpdb;
+
+	addAdminBar_root($admin_bar, 'cforms-bar', 'cforms Admin');
+	
+	addAdminBar_item($admin_bar, 'cforms-showinfo', __('Produce debug output', 'cforms'), __('Outputs -for debug purposes- all cforms settings', 'cforms'), 'jQuery("#cfbar-showinfo").trigger("click"); return false;');
+	addAdminBar_item($admin_bar, 'cforms-dellAllButton', __('Uninstalling / removing cforms', 'cforms'), __('Be careful here...', 'cforms'), 'jQuery("#cfbar-deleteall").trigger("click"); return false;');
+
+	if ( $wpdb->get_var("show tables like '$wpdb->cformssubmissions'") == $wpdb->cformssubmissions ) 
+		addAdminBar_item($admin_bar, 'cforms-deletetables', __('Delete cforms tracking tables', 'cforms'), __('Be careful here...', 'cforms'), 'if ( confirm("'.__('Do you really want to erase all collected data?', 'cforms').'") ) jQuery("#deletetables").trigger("click"); return false;');
+
+	addAdminBar_item($admin_bar, 'cforms-backup', __('Backup / restore all settings', 'cforms'), __('Better safe than sorry ;)', 'cforms'), 'jQuery("#backup").trigger("click"); return false;');
+	
+	addAdminBar_item($admin_bar, 'cforms-SubmitOptions', __('Save & update form settings', 'cforms'), '', 'document.mainform.action="#"+getFieldset(focusedFormControl); jQuery("#cfbar-SubmitOptions").trigger("click"); return false;', 'root-default');
+
+}
+
+function add_items_options( $admin_bar ){
+
+	$cfo = get_option('cforms_settings');
+
+	addAdminBar_root($admin_bar,'cforms-bar', 'cforms Admin');
+	
+	addAdminBar_item($admin_bar,'cforms-addbutton', __('Add new form', 'cforms'), __('Adds a new form with default values', 'cforms'), 'jQuery("#cfbar-addbutton").trigger("click"); return false;');
+	addAdminBar_item($admin_bar,'cforms-dupbutton', __('Duplicate current form', 'cforms'), __('Clones the current form', 'cforms'), 'jQuery("#cfbar-dupbutton").trigger("click"); return false;');
+	if ( (int)$cfo['global']['cforms_formcount'] > 1)
+		addAdminBar_item($admin_bar,'cforms-delbutton', __('Delete current form (!)', 'cforms'), __('Clicking this button WILL delete this form', 'cforms'), 'if ( confirm("'.__('This will delete the current form!', 'cforms').'")) jQuery("#cfbar-delbutton").trigger("click"); return false;');
+
+	addAdminBar_item($admin_bar,'cforms-preset', __('Install a form preset', 'cforms'), __('Pick a form preset from the repository', 'cforms'), 'jQuery("#preset").trigger("click"); return false;');
+	addAdminBar_item($admin_bar,'cforms-backup', __('Backup / restore this form only', 'cforms'), __('Better safe than sorry ;)', 'cforms'), 'jQuery("#backup").trigger("click"); return false;');
+
+	addAdminBar_item($admin_bar,'cforms-SubmitOptions', __('Save & update form settings', 'cforms'), '', 'document.mainform.action="#"+getFieldset(focusedFormControl); jQuery("#cfbar-SubmitOptions").trigger("click"); return false;', 'root-default');
+
+}
+
+
 ### attaching to filters
-add_filter('init', 'cforms_runtime_scripts');
+//add_filter('init', 'cforms_runtime_scripts');
 add_filter('wp_head', 'cforms_style');
-add_filter('the_content', 'cforms_insert',10);
+add_action('admin_init', 'cforms_adminstyle');
+add_filter('the_content', 'cforms_insert',101);
+add_filter('wp_footer', 'cforms_script',99);
 ?>
