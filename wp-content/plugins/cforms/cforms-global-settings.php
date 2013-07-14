@@ -919,7 +919,7 @@ function add_items($admin_bar){
 	
 	global $wpdb;
 
-	addAdminBar_root('cforms-bar', 'Inscription Admin');
+	addAdminBar_root($admin_bar, 'cforms-bar', 'Inscription Admin');
 	
 	//addAdminBar_item('cforms-showinfo', __('Produce debug output', 'cforms'), __('Outputs -for debug purposes- all cforms settings', 'cforms'), 'jQuery("#cfbar-showinfo").trigger("click"); return false;');
 	//addAdminBar_item('cforms-dellAllButton', __('Uninstalling / removing cforms', 'cforms'), __('Be careful here...', 'cforms'), 'jQuery("#cfbar-deleteall").trigger("click"); return false;');
@@ -929,7 +929,7 @@ function add_items($admin_bar){
 
 	// addAdminBar_item('cforms-backup', __('Backup / restore all settings', 'cforms'), __('Better safe than sorry ;)', 'cforms'), 'jQuery("#backup").trigger("click"); return false;');
 	
-	addAdminBar_item('cforms-SubmitOptions', __('Sauvegarder les modifications', 'cforms'), '', 'document.mainform.action="#"+getFieldset(focusedFormControl); jQuery("#cfbar-SubmitOptions").trigger("click"); return false;', 'root-default');
+	addAdminBar_item($admin_bar, 'cforms-SubmitOptions', __('Sauvegarder les modifications', 'cforms'), '', 'document.mainform.action="#"+getFieldset(focusedFormControl); jQuery("#cfbar-SubmitOptions").trigger("click"); return false;', 'root-default');
 
 }
 

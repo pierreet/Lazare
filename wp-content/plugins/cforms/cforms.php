@@ -1826,17 +1826,17 @@ function add_items_global( $admin_bar ){
 	
 	global $wpdb;
 
-	addAdminBar_root($admin_bar, 'cforms-bar', 'cforms Admin');
+	addAdminBar_root($admin_bar, 'cforms-bar', 'Admin Formulaire');
 	
-	addAdminBar_item($admin_bar, 'cforms-showinfo', __('Produce debug output', 'cforms'), __('Outputs -for debug purposes- all cforms settings', 'cforms'), 'jQuery("#cfbar-showinfo").trigger("click"); return false;');
-	addAdminBar_item($admin_bar, 'cforms-dellAllButton', __('Uninstalling / removing cforms', 'cforms'), __('Be careful here...', 'cforms'), 'jQuery("#cfbar-deleteall").trigger("click"); return false;');
+	//addAdminBar_item($admin_bar, 'cforms-showinfo', __('Produce debug output', 'cforms'), __('Outputs -for debug purposes- all cforms settings', 'cforms'), 'jQuery("#cfbar-showinfo").trigger("click"); return false;');
+	//addAdminBar_item($admin_bar, 'cforms-dellAllButton', __('Uninstalling / removing cforms', 'cforms'), __('Be careful here...', 'cforms'), 'jQuery("#cfbar-deleteall").trigger("click"); return false;');
 
 	if ( $wpdb->get_var("show tables like '$wpdb->cformssubmissions'") == $wpdb->cformssubmissions ) 
-		addAdminBar_item($admin_bar, 'cforms-deletetables', __('Delete cforms tracking tables', 'cforms'), __('Be careful here...', 'cforms'), 'if ( confirm("'.__('Do you really want to erase all collected data?', 'cforms').'") ) jQuery("#deletetables").trigger("click"); return false;');
+		//addAdminBar_item($admin_bar, 'cforms-deletetables', __('Delete cforms tracking tables', 'cforms'), __('Be careful here...', 'cforms'), 'if ( confirm("'.__('Do you really want to erase all collected data?', 'cforms').'") ) jQuery("#deletetables").trigger("click"); return false;');
 
-	addAdminBar_item($admin_bar, 'cforms-backup', __('Backup / restore all settings', 'cforms'), __('Better safe than sorry ;)', 'cforms'), 'jQuery("#backup").trigger("click"); return false;');
+	addAdminBar_item($admin_bar, 'cforms-backup', __('Backup paramètres', 'cforms'), __('Better safe than sorry ;)', 'cforms'), 'jQuery("#backup").trigger("click"); return false;');
 	
-	addAdminBar_item($admin_bar, 'cforms-SubmitOptions', __('Save & update form settings', 'cforms'), '', 'document.mainform.action="#"+getFieldset(focusedFormControl); jQuery("#cfbar-SubmitOptions").trigger("click"); return false;', 'root-default');
+	addAdminBar_item($admin_bar, 'cforms-SubmitOptions', __('Sauvegarder les modifications', 'cforms'), '', 'document.mainform.action="#"+getFieldset(focusedFormControl); jQuery("#cfbar-SubmitOptions").trigger("click"); return false;', 'root-default');
 
 }
 
@@ -1844,17 +1844,17 @@ function add_items_options( $admin_bar ){
 
 	$cfo = get_option('cforms_settings');
 
-	addAdminBar_root($admin_bar,'cforms-bar', 'cforms Admin');
+	addAdminBar_root($admin_bar,'cforms-bar', 'Admin Formulaire');
 	
-	addAdminBar_item($admin_bar,'cforms-addbutton', __('Add new form', 'cforms'), __('Adds a new form with default values', 'cforms'), 'jQuery("#cfbar-addbutton").trigger("click"); return false;');
-	addAdminBar_item($admin_bar,'cforms-dupbutton', __('Duplicate current form', 'cforms'), __('Clones the current form', 'cforms'), 'jQuery("#cfbar-dupbutton").trigger("click"); return false;');
+	addAdminBar_item($admin_bar,'cforms-addbutton', __('Nouveau', 'cforms'), __('Adds a new form with default values', 'cforms'), 'jQuery("#cfbar-addbutton").trigger("click"); return false;');
+	//addAdminBar_item($admin_bar,'cforms-dupbutton', __('Duplicate current form', 'cforms'), __('Clones the current form', 'cforms'), 'jQuery("#cfbar-dupbutton").trigger("click"); return false;');
 	if ( (int)$cfo['global']['cforms_formcount'] > 1)
-		addAdminBar_item($admin_bar,'cforms-delbutton', __('Delete current form (!)', 'cforms'), __('Clicking this button WILL delete this form', 'cforms'), 'if ( confirm("'.__('This will delete the current form!', 'cforms').'")) jQuery("#cfbar-delbutton").trigger("click"); return false;');
+		addAdminBar_item($admin_bar,'cforms-delbutton', __('Supprimer (!)', 'cforms'), __('Attention le formulaire va être SUPPRIMÉ', 'cforms'), 'if ( confirm("'.__('This will delete the current form!', 'cforms').'")) jQuery("#cfbar-delbutton").trigger("click"); return false;');
 
-	addAdminBar_item($admin_bar,'cforms-preset', __('Install a form preset', 'cforms'), __('Pick a form preset from the repository', 'cforms'), 'jQuery("#preset").trigger("click"); return false;');
-	addAdminBar_item($admin_bar,'cforms-backup', __('Backup / restore this form only', 'cforms'), __('Better safe than sorry ;)', 'cforms'), 'jQuery("#backup").trigger("click"); return false;');
+	//addAdminBar_item($admin_bar,'cforms-preset', __('Install a form preset', 'cforms'), __('Pick a form preset from the repository', 'cforms'), 'jQuery("#preset").trigger("click"); return false;');
+	addAdminBar_item($admin_bar,'cforms-backup', __('Backup du formulaire', 'cforms'), __('Better safe than sorry ;)', 'cforms'), 'jQuery("#backup").trigger("click"); return false;');
 
-	addAdminBar_item($admin_bar,'cforms-SubmitOptions', __('Save & update form settings', 'cforms'), '', 'document.mainform.action="#"+getFieldset(focusedFormControl); jQuery("#cfbar-SubmitOptions").trigger("click"); return false;', 'root-default');
+	addAdminBar_item($admin_bar,'cforms-SubmitOptions', __('Sauvegarder les modifications', 'cforms'), '', 'document.mainform.action="#"+getFieldset(focusedFormControl); jQuery("#cfbar-SubmitOptions").trigger("click"); return false;', 'root-default');
 
 }
 
