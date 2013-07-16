@@ -692,7 +692,7 @@ option.disabled {
 color:#999;
 }
 
-.chkno,.fieldisreq,.fieldisemail,.fielddisabled,.fieldreadonly,.fieldclear {
+.chkno,.fieldisreq,.fieldisemail,.fielddisabled,.fieldreadonly,.fieldclear , input[type="checkbox"]{
 margin:0 10px 0 20px;
 width:13px;
 height:13px;
