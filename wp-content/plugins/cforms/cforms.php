@@ -970,6 +970,19 @@ function cforms($args = '',$no = '') {
 				$field.= $nttt . '</select>';
 				break;
 
+			case "maison":
+				$field = '<select' . $readonly.$disabled . ' name="'.$input_name.'" id="'.$input_id.'" class="cformselect' . $field_class . '" '.$fieldTitle.'>';
+				global $oUserAccessManager;
+				$groups = $oUserAccessManager->getAccessHandler()->getUserGroups();
+				//include '../wplazare/includes/configs/config.php';
+				foreach ($groups as $group) {
+					if($group->getId()!=WPLAZARE_UAM_GROUP_BUREAU)
+						$field.= $nttt . $tab . '<option value="'.($group->getGroupName()).'">'.$group->getGroupName().'</option>';
+
+				}
+				$field.= $nttt . '</select>';
+				break;
+				
 			case "send2author":
 				$force_checked = ( strpos($field_stat[0],'|set:')===false )? true:false;
 			case "radiobuttons":
