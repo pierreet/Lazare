@@ -102,22 +102,48 @@ $xml .= "<rows>";
 $xml .= "<page>$page</page>";
 $xml .= "<total>$total</total>";
 
+		//groupes de l'utilsateur
+		global $oUserAccessManager;
+		$aUserGroupsForObject = $oUserAccessManager->getAccessHandler()->getUserGroupsForObject(
+			'user',
+			wp_get_current_user()->get('ID')
+		);
+		$groupes=array();
+		foreach($aUserGroupsForObject as $groupe)
+			$groupes[] = $groupe->getGroupName();
+
 foreach ($result as $entry) {
 	$n = ( $entry->form_id=='' )?'1':$entry->form_id;
+	$cformsSettings = get_option('cforms_settings');
+	$field_count = $cformsSettings['form'.$no]['cforms'.$no.'_count_fields'];
+	for($i = 1; $i <= $field_count; $i++) {
+			$allfields[$i] = $cformsSettings['form'.$no]['cforms'.$no.'_count_field_' . $i];
+	}
+	for($i = 1; $i <= $field_count; $i++) {
+                        $field_stat = explode('$#$', $allfields[$i] );
+                        if(sizeof($field_stat) >= 3) {
+                            $field_name = stripslashes(htmlspecialchars($field_stat[0]));
+                            $field_type = $allfields[$i] = $field_stat[1];
+                        }
+						if($field_type=='maison')
+							break;
+                   }
 	
-	$sql="SELECT * FROM {$wpdb->cformssubmissions} $where $sort $limit";
-	$result = $wpdb->get_results($sql);	
-	$xml .= "<row id='".$entry->id."'>";
-	$xml .= "<cell><![CDATA[".$entry->id."]]></cell>";
-	//$xml .= "<cell><![CDATA[".( $fnames[$n] )."]]></cell>";
-	$xml .= "<cell><![CDATA[".( $entry->last_name )."]]></cell>";
-	$xml .= "<cell><![CDATA[".( $entry->first_name )."]]></cell>";
-	$xml .= "<cell><![CDATA[".( $entry->email )."]]></cell>";
-	$xml .= "<cell><![CDATA[".( $entry->state )."]]></cell>";
-	$xml .= "<cell><![CDATA[".( $entry->note )."]]></cell>";
-	$xml .= "<cell><![CDATA[".( $entry->sub_date )."]]></cell>";
-	//$xml .= "<cell><![CDATA[".( $entry->ip )."]]></cell>";
-	$xml .= "</row>";
+	$sql="SELECT * FROM {$wpdb->cformsdata} WHERE sub_id=".$entry->id." AND field_name='".$field_name."'";
+	$result_m = $wpdb->get_results($sql);	
+	if((in_array($result_m[0]->field_val, $groupes) && $i<=$field_count) || $oUserAccessManager->getAccessHandler()->userIsAdmin(wp_get_current_user()->get('ID'))){
+		$xml .= "<row id='".$entry->id."'>";
+		$xml .= "<cell><![CDATA[".$entry->id."]]></cell>";
+		//$xml .= "<cell><![CDATA[".( $fnames[$n] )."]]></cell>";
+		$xml .= "<cell><![CDATA[".( $entry->last_name )."]]></cell>";
+		$xml .= "<cell><![CDATA[".( $entry->first_name )."]]></cell>";
+		$xml .= "<cell><![CDATA[".( $entry->email )."]]></cell>";
+		$xml .= "<cell><![CDATA[".( $entry->state )."]]></cell>";
+		$xml .= "<cell><![CDATA[".( $entry->note )."]]></cell>";
+		$xml .= "<cell><![CDATA[".( $entry->sub_date )."]]></cell>";
+		//$xml .= "<cell><![CDATA[".( $entry->ip )."]]></cell>";
+		$xml .= "</row>";
+	}
 }
 
 $xml .= "</rows>";
