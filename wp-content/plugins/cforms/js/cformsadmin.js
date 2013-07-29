@@ -878,7 +878,7 @@ function accept_submission(){
 																						data['role'] =  jQuery("#role").val();
 																						jQuery(this).dialog("close");
 																						jQuery.post(window.location.pathname+'?page=wplazare_users&action=add', {wplazare_users: data, wplazare_users_form_has_modification: 'yes', wplazare_users_action: 'add', uam_update_groups: 'true', uam_usergroups: maison}, function(data){ } );
-																						//jQuery.post(jQuery('#geturl').attr('title')+'lib_database_adddata.php', {sub_id: eid, field_name: 'Réponse', field_val: 'Accepté(e)'}, function(data){ document.location.href = window.location.pathname+jQuery(that).attr('href'); } );
+																						jQuery.post(jQuery('#geturl').attr('title')+'lib_database_adddata.php', {sub_id: eid, field_name: 'Réponse', field_val: 'Accepté(e)'}, function(data){ document.location.href = window.location.pathname+jQuery(that).attr('href'); } );
 																					}																					
 							, "Annuler": function() { jQuery(this).dialog("close");} }});
 			
