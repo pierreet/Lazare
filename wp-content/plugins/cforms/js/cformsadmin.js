@@ -816,8 +816,10 @@ function delete_submission(){
 	while(isNaN(eid))
 		eid = this.id.substr(i++,this.id.length);
 	
-	jQuery('#entry'+eid).fadeOut(500, function(){ jQuery(this).remove(); } );
-	jQuery.post(jQuery('#geturl').attr('title')+'lib_database_deleteentry.php', {id: eid}, function(){ jQuery('.pReload').trigger('click'); } );
+	if(confirm('Etes-vous sûre de vouloir supprimer une entrée ?')){
+		jQuery('#entry'+eid).fadeOut(500, function(){ jQuery(this).remove(); } );
+		jQuery.post(jQuery('#geturl').attr('title')+'lib_database_deleteentry.php', {id: eid}, function(){ jQuery('.pReload').trigger('click'); } );
+	}
 	return false;
 }
 function close_submission(){	
@@ -835,9 +837,51 @@ function accept_submission(){
 	eid = this.id.substr(i,this.id.length);
 	while(isNaN(eid))
 		eid = this.id.substr(i++,this.id.length);
-	
+
 	var that = this;
-	jQuery.post(jQuery('#geturl').attr('title')+'lib_database_adddata.php', {sub_id: eid, field_name: 'Réponse', field_val: 'Accepté(e)'}, function(data){ document.location.href = window.location.pathname+jQuery(that).attr('href'); } );
+	
+	var data = jQuery(this).attr('data').split('|');
+	var first = data[0];
+	var last = data[1];
+	var mail = data[2];
+	
+	var data = jQuery('#acceptbutton3').attr('data').split('|');
+	var first = data[0];
+	var last = data[1];
+	var mail = data[2];
+
+	var data = {
+					prenom : first,
+					nom : last,
+					email : mail
+			};
+
+	var maisons = jQuery(this).attr('maisons').split('|');
+	var options ='';
+	jQuery.each(maisons, function(key, value){
+							options = options+'<option value="'+value.split('#')[1]+'">'+value.split('#')[0]+'</option>';
+						}
+				);
+	var roles = jQuery(this).attr('roles').split('|');
+	var options_roles ='';
+	jQuery.each(roles, function(key, value){
+							options_roles = options_roles+'<option value="'+value.split('#')[0]+'">'+value.split('#')[1]+'</option>';
+						}
+				);				
+	jQuery('#dialog').html('Veuillez confirmer le role et la maison :<br />'+
+							'Maison : <select id="maison" name="maison">'+options+'</select><br />'+
+							'Rôle : <select id="role" name="roles">'+options_roles+'</select><br />'
+							);
+							
+	jQuery('#dialog').dialog({ autoOpen: true, title: "Accepter", buttons: { "Ok": function() { 
+																						var maison = new Array(jQuery("#maison").val());
+																						data['role'] =  jQuery("#role").val();
+																						jQuery(this).dialog("close");
+																						jQuery.post(window.location.pathname+'?page=wplazare_users&action=add', {wplazare_users: data, wplazare_users_form_has_modification: 'yes', wplazare_users_action: 'add', uam_update_groups: 'true', uam_usergroups: maison}, function(data){ } );
+																						//jQuery.post(jQuery('#geturl').attr('title')+'lib_database_adddata.php', {sub_id: eid, field_name: 'Réponse', field_val: 'Accepté(e)'}, function(data){ document.location.href = window.location.pathname+jQuery(that).attr('href'); } );
+																					}																					
+							, "Annuler": function() { jQuery(this).dialog("close");} }});
+			
 	return false;
 }
 function deny_submission(){

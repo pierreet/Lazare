@@ -57,6 +57,8 @@ elseif ( $query<>'' )
 else
 	$where = '';
 
+$where .= (empty($where))?'WHERE (state <> \'Accepté(e)\' AND state <> \'Refusé(e)\')':' AND (state <> \'Accepté(e)\' AND state <> \'Refusé(e)\')';
+
 if (!$sortname)
 	$sortname = 'id';
 if (!$sortorder) $sortorder = 'desc';
@@ -102,6 +104,9 @@ $xml .= "<total>$total</total>";
 
 foreach ($result as $entry) {
 	$n = ( $entry->form_id=='' )?'1':$entry->form_id;
+	
+	$sql="SELECT * FROM {$wpdb->cformssubmissions} $where $sort $limit";
+	$result = $wpdb->get_results($sql);	
 	$xml .= "<row id='".$entry->id."'>";
 	$xml .= "<cell><![CDATA[".$entry->id."]]></cell>";
 	//$xml .= "<cell><![CDATA[".( $fnames[$n] )."]]></cell>";

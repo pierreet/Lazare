@@ -233,8 +233,21 @@ if ($showIDs<>'') {
 			 
 		if(!$rep && !$desist){
 			echo 'Réponse définitive: ';
+			
+			//groupes de l'utilsateur
+			global $oUserAccessManager;
+			$aUserGroupsForObject = $oUserAccessManager->getAccessHandler()->getUserGroupsForObject(
+				'user',
+				wp_get_current_user()->get('ID')
+			);
+			$maisons="";
+			foreach($aUserGroupsForObject as $group)
+				$maisons .="|".$group->getGroupName()."#".$group->getId();
+			//roles
+			$roles=WPLAZARE_ROLE_BENEVOLE."#".__(WPLAZARE_ROLE_BENEVOLE, 'wplazare')."|".WPLAZARE_ROLE_PERSONNE_ACCUEILLIE."#".__(WPLAZARE_ROLE_PERSONNE_ACCUEILLIE,'wplazare');
+				
 			//accepter
-			echo '<a href="?page='.$plugindir.'/cforms-mail.php&mail='.$entry->email.'&body='.$msg_accept.'&obj='.$cformsSettings['global']['cforms_register_accept_obj'].'" class="allbuttons accept" id="acceptbutton'.$entry->sub_id.'">'.__('Accepter la candidature', 'cforms').'</a>'.$e;
+			echo '<a data="'.$entry->first_name.'|'.$entry->last_name.'|'.$entry->email.'" maisons="'.$maisons.'" roles="'.$roles.'" href="?page='.$plugindir.'/cforms-mail.php&mail='.$entry->email.'&body='.$msg_accept.'&obj='.$cformsSettings['global']['cforms_register_accept_obj'].'" class="allbuttons accept" id="acceptbutton'.$entry->sub_id.'">'.__('Accepter la candidature', 'cforms').'</a>'.$e;
 			//refuser
 			echo '<a href="?page='.$plugindir.'/cforms-mail.php&mail='.$entry->email.'&body='.$msg_deny.'&obj='.$cformsSettings['global']['cforms_register_deny_obj'].'" class="allbuttons deleteall deny" id="denybutton'.$entry->sub_id.'">'.__('Refuser la candidature', 'cforms').'</a>'.$e;
 		}
