@@ -1990,6 +1990,9 @@ VALUES ('" . str_replace(array("'", ' '), '',wplazare_tools::varSanitizer(ucfirs
 						$post_data['date_de_naissance']);
 
 				set_cimyFieldValue($user_id, 'TEL', $post_data['tel']);
+				
+				global $oUserAccessManager;
+				$oUserAccessManager->getAccessHandler()->savePlObjectData('user', $user_id, $post_data['uam_usergroups']);
 
 			}
 
