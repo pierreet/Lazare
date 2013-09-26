@@ -694,7 +694,8 @@ if ( ($userconfirm & 64) == 0 ){	### 64 = upgrade to 13.0
 
 				<tr class="ob space15">
 					<td class="obL"><label for="cforms_email"><strong><?php _e('Adresse e-mail de l\'administrateur', 'cforms') ?></strong></label></td>
-					<td class="obR"><input type="text" name="cforms_email" id="cforms_email" value="<?php echo stripslashes(htmlspecialchars($cformsSettings['form'.$no]['cforms'.$no.'_email'])); ?>" /></td>
+					<!--<td class="obR"><input type="text" name="cforms_email" id="cforms_email" value="<?php echo stripslashes(htmlspecialchars($cformsSettings['form'.$no]['cforms'.$no.'_email'])); ?>" /></td>-->
+					<td class="obR">Les emails seront envoyés aux responsables des maisons concernées.</td>
 				</tr>
 
 				<tr class="ob">

@@ -358,6 +358,8 @@ if( isset($_POST['sendbutton'.$no]) && $all_valid ) {
     ### logic: dynamic admin email address
     if ( function_exists('my_cforms_logic') )
         $to = my_cforms_logic($trackf, $to,'adminTO');  ### use trackf!
+	if(isset($mail_resp))
+		$to = $mail_resp;
 
 	### either use configured subject or user determined
 	### now replace the left over {xyz} variables with the input data

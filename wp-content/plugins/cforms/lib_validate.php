@@ -43,6 +43,20 @@ for($i = 1; $i <= $field_count; $i++) {
 		$field_telcheck = $field_stat[7];
 
 
+		//recupere l'adresse mail du responsable de la maison choisie
+		if($field_type=="maison"){
+
+			global $oUserAccessManager;
+			$aUamUserGroups = $oUserAccessManager->getAccessHandler()->getUserGroups();
+			
+			if (isset($aUamUserGroups)) {
+				foreach ($aUamUserGroups as $uamUserGroup) {
+						if($uamUserGroup->getGroupName()==$_REQUEST['cf'.$no.'_field_' . ((int)$i+(int)$off)])
+							$mail_resp = $uamUserGroup->getGroupMail();
+				}
+			}		
+		}
+
 		### ommit certain fields; validation only!
 		if( in_array($field_type,array('cauthor','url','email')) ){
 			if ( $user->ID ){
