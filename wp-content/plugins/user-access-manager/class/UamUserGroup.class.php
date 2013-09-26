@@ -31,6 +31,7 @@ class UamUserGroup
     protected $_iId = null;
     protected $_sGroupName = null;
     protected $_sGroupDesc = null;
+	protected $_sGroupMail = null;
     protected $_sReadAccess = null;
     protected $_sWriteAccess = null;
     protected $_sIpRange = null;
@@ -78,6 +79,7 @@ class UamUserGroup
             
             $this->_sGroupName = $aDbUserGroup['groupname'];
             $this->_sGroupDesc = $aDbUserGroup['groupdesc'];
+            $this->_sGroupMail = $aDbUserGroup['groupmail'];
             $this->_sReadAccess = $aDbUserGroup['read_access'];
             $this->_sWriteAccess = $aDbUserGroup['write_access'];
             $this->_sIpRange = $aDbUserGroup['ip_range'];
@@ -140,6 +142,7 @@ class UamUserGroup
             		ID, 
             		groupname, 
             		groupdesc, 
+            		groupmail, 
             		read_access, 
             		write_access, 
             		ip_range
@@ -148,6 +151,7 @@ class UamUserGroup
             		NULL, 
             		'" . $this->_sGroupName . "',
             		'" . $this->_sGroupDesc . "',
+            		'" . $this->_sGroupMail . "',
             		'" . $this->_sReadAccess . "',
             		'" . $this->_sWriteAccess . "',
             		'" . $this->_sIpRange . "'
@@ -160,6 +164,7 @@ class UamUserGroup
             	"UPDATE " . DB_ACCESSGROUP . "
     			SET groupname = '" . $this->_sGroupName . "',
     				groupdesc = '" . $this->_sGroupDesc . "',
+    				groupmail = '" . $this->_sGroupMail . "',
     				read_access = '" . $this->_sReadAccess . "',
     				write_access = '" . $this->_sWriteAccess . "',
     				ip_range = '" . $this->_sIpRange . "'
@@ -242,7 +247,28 @@ class UamUserGroup
     {
         $this->_sGroupDesc = $sGroupDesc;
     }
+     
+	 /**
+     * Returns the group mail.
+     * 
+     * @return string
+     */
+    public function getGroupMail()
+    {
+        return $this->_sGroupMail;
+    }
     
+    /**
+     * Sets the group description.
+     * 
+     * @param string $sGroupDesc The new group description.
+     * 
+     * @return null
+     */
+    public function setGroupMail($sGroupMail)
+    {
+        $this->_sGroupMail = $sGroupMail;
+    } 
     /**
      * Returns the read access.
      * 
