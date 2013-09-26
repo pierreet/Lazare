@@ -294,6 +294,11 @@ if (isset($oUserAccessManager)) {
     //Redirect
     $aUamOptions = $oUserAccessManager->getAdminOptions();
     
+	$result = mysql_query('SHOW COLUMNS FROM  `'.$wpdb->prefix.'uam_accessgroups` LIKE  \'groupmail\'');
+	$exists = (mysql_num_rows($result))?TRUE:FALSE;
+	if(!$exists)
+		mysql_query('ALTER TABLE `'.$wpdb->prefix.'uam_accessgroups` ADD groupmail VARCHAR(150) AFTER groupdesc');
+	
     if ($aUamOptions['redirect'] != 'false' || isset($_GET['uamgetfile'])) {
         add_filter('wp_headers', array($oUserAccessManager, 'redirect'), 10, 2);
     }

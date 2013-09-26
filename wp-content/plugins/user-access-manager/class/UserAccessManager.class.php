@@ -132,6 +132,7 @@ class UserAccessManager
 					ID int(11) NOT NULL auto_increment,
 					groupname tinytext NOT NULL,
 					groupdesc text NOT NULL,
+					groupmail text NOT NULL,
 					read_access tinytext NOT NULL,
 					write_access tinytext NOT NULL,
 					ip_range mediumtext NULL,

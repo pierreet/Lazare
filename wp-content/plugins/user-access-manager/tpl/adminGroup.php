@@ -38,6 +38,7 @@ function insertUpdateGroup($iUserGroupId)
 
     $uamUserGroup->setGroupName($_POST['userGroupName']);
 	$uamUserGroup->setGroupDesc($_POST['userGroupDescription']);
+	$uamUserGroup->setGroupMail($_POST['userGroupMail']);
 	$uamUserGroup->setReadAccess($_POST['readAccess']);
 	$uamUserGroup->setWriteAccess($_POST['writeAccess']);
 	$uamUserGroup->setIpRange($_POST['ipRange']);
@@ -114,6 +115,17 @@ function getPrintEditGroup($groupId = null)
     } 
                         ?>" id="userGroupDescription" name="userGroupDescription" /><br />
             		    <?php echo TXT_UAM_GROUP_DESC_DESC; ?>
+            		</td>
+            	</tr>
+				<tr class="form-field form-required">
+            		<th valign="top" scope="row">Adresse mail du responsable :</th>
+            		<td>
+            			<input type="text" size="40" value="<?php 
+    if (isset($groupId)) { 
+        echo $uamUserGroup->getGroupMail(); 
+    } 
+                        ?>" id="userGroupMail" name="userGroupMail" /><br />
+            		    Adresse à laquelle les inscriptions seront envoyées
             		</td>
             	</tr>
 				<tr class="form-field form-required">
@@ -330,6 +342,7 @@ if (!$editGroup) {
             			<th scope="col"></th>
             			<th scope="col"><?php echo TXT_UAM_NAME; ?></th>
             			<th scope="col"><?php echo TXT_UAM_DESCRIPTION; ?></th>
+            			<th scope="col">Mail du responsable</th>
             			<th scope="col"><?php echo TXT_UAM_READ_ACCESS; ?></th>
             			<th scope="col"><?php echo TXT_UAM_WRITE_ACCESS; ?></th>
             			<th scope="col"><?php echo TXT_UAM_GROUP_ROLE; ?></th>
@@ -360,6 +373,7 @@ if (!$editGroup) {
         				</strong>
         			</td>
         			<td><?php echo $uamUserGroup->getGroupDesc() ?></td>
+        			<td><?php echo $uamUserGroup->getGroupMail() ?></td>
         			<td>
             <?php 
             if ($uamUserGroup->getReadAccess() == "all") {
