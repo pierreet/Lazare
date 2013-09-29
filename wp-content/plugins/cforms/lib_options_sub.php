@@ -123,6 +123,7 @@
     $cformsSettings['form'.$no]['cforms'.$no.'_notracking'] =    $_REQUEST['cforms_notracking']?true:false;
 	$cformsSettings['form'.$no]['cforms'.$no.'_customnames'] =	 $_REQUEST['cforms_customnames']?'1':'0';
 	$cformsSettings['form'.$no]['cforms'.$no.'_hide'] =			 $_REQUEST['cforms_hide']?true:false;
+	$cformsSettings['form'.$no]['cforms'.$no.'_detail'] =			 $_REQUEST['cforms_detail']?true:false;
 
 	$cformsSettings['form'.$no]['cforms'.$no.'_limitagemin'] =	 				$_REQUEST['cforms_limitagemin'];
 	$cformsSettings['form'.$no]['cforms'.$no.'_limitagemax'] =	 				$_REQUEST['cforms_limitagemax'];

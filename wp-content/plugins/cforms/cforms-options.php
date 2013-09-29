@@ -585,8 +585,15 @@ if ( ($userconfirm & 64) == 0 ){	### 64 = upgrade to 13.0
 						<input class="allchk" type="checkbox" id="cforms_hide" name="cforms_hide" <?php if($cformsSettings['form'.$no]['cforms'.$no.'_hide']) echo "checked=\"checked\""; ?>/><label for="cforms_hide"><?php echo sprintf(__('%sCacher le formulaire%s après la validation', 'cforms'),'<strong>','</strong>'); ?></label>
 		 			</td>
 				</tr>
-
+				<tr class="ob">
+					<td class="obL"></td>
+					<td class="obR">
+						<input class="allchk" type="checkbox" id="cforms_detail" name="cforms_detail" <?php if($cformsSettings['form'.$no]['cforms'.$no.'_detail']) echo "checked=\"checked\""; ?>/><label for="cforms_detail"><?php echo __('Formulaire détaillé', 'cforms'); ?></label>
+		 			</td>
+				</tr>
 				<tr class="obSEP"><td colspan="2"></td></tr>
+				
+
 
 				<tr class="ob">
 					<td class="obL"><strong><?php _e('Limite d\'inscription', 'cforms'); ?></strong></td>

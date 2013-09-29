@@ -55,6 +55,7 @@
 	$cformsSettings['form'.$no]['cforms'.$no.'_showpos'] = 'ynyyy';
 
 	$cformsSettings['form'.$no]['cforms'.$no.'_hide'] = false;
+	$cformsSettings['form'.$no]['cforms'.$no.'_detail'] = false;
 	$cformsSettings['form'.$no]['cforms'.$no.'_redirect'] = false;
 	$cformsSettings['form'.$no]['cforms'.$no.'_redirect_page'] = __('http://redirect.to.this.page', 'cforms');
 
