@@ -271,18 +271,20 @@ function write_tracking_record($no,$field_email,$field_fname,$field_lname,$c='')
 
 			### good to go:
 			$page = (substr($cformsSettings['form'.$no]['cforms'.$no.'_tellafriend'],0,1)=='2')?$_POST['cforms_pl'.$no]:get_current_page(); // WP comment fix
+			if($cformsSettings['form'.$no]['cforms'.$no.'_detail']){
+					$subID = $_REQUEST['sub_id'];
+					$sql = "INSERT INTO $wpdb->cformsdata (sub_id,field_name,field_val) VALUES ".$sql;
+			}else{
+				$wpdb->query("INSERT INTO $wpdb->cformssubmissions (form_id,email,first_name,last_name,ip,sub_date) VALUES ".
+							 "('" . $no . "', '" . $field_email . "', '".$field_fname."', '".$field_lname."','" . cf_getip() . "', '".gmdate('Y-m-d H:i:s', current_time('timestamp'))."');");
 
-			$wpdb->query("INSERT INTO $wpdb->cformssubmissions (form_id,email,first_name,last_name,ip,sub_date) VALUES ".
-						 "('" . $no . "', '" . $field_email . "', '".$field_fname."', '".$field_lname."','" . cf_getip() . "', '".gmdate('Y-m-d H:i:s', current_time('timestamp'))."');");
-
-    		$subID = $wpdb->get_row("select LAST_INSERT_ID() as number from $wpdb->cformssubmissions;");
-    		$subID = ($subID->number=='')?'1':$subID->number;
-
+				$subID = $wpdb->get_row("select LAST_INSERT_ID() as number from $wpdb->cformssubmissions;");
+				$subID = ($subID->number=='')?'1':$subID->number;
 			if( $c <> '' )
 				$sql = "INSERT INTO $wpdb->cformsdata (sub_id,field_name,field_val) VALUES ('$subID','commentID','$c'),('$subID','email','$field_email'),".$sql;
             else
 				$sql = "INSERT INTO $wpdb->cformsdata (sub_id,field_name,field_val) VALUES ('$subID','page','$page'),".$sql;
-
+			}
 			$wpdb->query( substr(str_replace('-XXX-',$subID,$sql) ,0,-1));
 		}
 		else
@@ -509,6 +511,11 @@ function check_cust_vars($m,$t,$no, $html=false) {
 				}
 				$m = str_replace('{_documents}', $ged, $m);
 			}
+			### hash sid
+			if ( strpos($fvar,'_hash_sid')!==false ){
+				$m = str_replace('{_hash_sid}', $no, $m);
+			}
+			
 
 		}
 	}

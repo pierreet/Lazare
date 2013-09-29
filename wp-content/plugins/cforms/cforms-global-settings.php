@@ -291,7 +291,7 @@ abspath_check();
             </div>
 			<div class="cf-content" id="o13"><p>
 			<?php
-			echo sprintf(__('Vous pouvez ici pre-remplir les messages à envoyer dans certain cas. Dans tous les messages, vous pouvez utiliser les <a href="%s">variables autorisées</a> ( {<em>label du champ</em>} ).'),'?page='. $plugindir.'/cforms-help.php#variables','onclick="setshow(23)"');
+			echo sprintf(__('Vous pouvez ici pre-remplir les messages à envoyer dans certain cas. Dans tous les messages, vous pouvez utiliser les <a href="%s">variables autorisées</a> ( {<em>label du champ</em>} ).<br />Utilisez {_hash_sid} pour inclure l\'identifiant sécurisé.'),'?page='. $plugindir.'/cforms-help.php#variables','onclick="setshow(23)"');
 			?></p>
 			
 			<table class="form-table">

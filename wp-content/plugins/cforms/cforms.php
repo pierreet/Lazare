@@ -1100,7 +1100,19 @@ function cforms($args = '',$no = '') {
 	$back='';
     if( $cformsSettings['form'.$no]['cforms'.$no.'_mp']['mp_form'] && $cformsSettings['form'.$no]['cforms'.$no.'_mp']['mp_back'] )
 		$back = '<input type="submit" name="backbutton'.$no.'" id="backbutton'.$no.'" class="backbutton" value="' . $cformsSettings['form'.$no]['cforms'.$no.'_mp']['mp_backtext'] . '">';
-
+	
+	if($cformsSettings['form'.$no]['cforms'.$no.'_detail']){
+		if(!isset($_GET['sub_id']) || empty($_GET['sub_id']))//pas de param id
+			return $content = '<div id="usermessage'.$no.'b" class="cf_info failure" >URL non valide</div>';
+		else {
+			$result = mysql_query('SELECT * FROM '.$wpdb->cformssubmissions.' WHERE id = '.$_GET['sub_id']);
+			$exists = (mysql_num_rows($result)>0)?TRUE:FALSE;
+			if(!$exists)
+					return $content = '<div id="usermessage'.$no.'b" class="cf_info failure" >URL non valide</div>';
+			else
+					$content .= '<input type="hidden" name="sub_id" id="sub_id" value="'.$_GET['sub_id'].'">';			
+		}
+	}
 
 	$content .= $ntt . '<p class="cf-sb">'.$reset.$back.'<input type="submit" name="sendbutton'.$no.'" id="sendbutton'.$no.'" class="sendbutton" value="' . stripslashes(htmlspecialchars($cformsSettings['form'.$no]['cforms'.$no.'_submit_text'])) . '"'.$ajaxenabled.'/></p></form>';
 
@@ -1110,6 +1122,8 @@ function cforms($args = '',$no = '') {
 
 	if( substr($cformsSettings['form'.$no]['cforms'.$no.'_showpos'],1,1)=='y' && !($success&&$cformsSettings['form'.$no]['cforms'.$no.'_hide']))
 		$content .= $tt . '<div id="usermessage'.$no.'b" class="cf_info ' . $usermessage_class . $umc . '" >' . $usermessage_text . '</div>' . $nl;
+		
+
 
 	### flush debug messages
 	dbflush();
