@@ -1105,7 +1105,7 @@ function cforms($args = '',$no = '') {
 		if(!isset($_GET['sub_id']) || empty($_GET['sub_id']))//pas de param id
 			return $content = '<div id="usermessage'.$no.'b" class="cf_info failure" >URL non valide</div>';
 		else {
-			$result = mysql_query('SELECT * FROM '.$wpdb->cformssubmissions.' WHERE id = '.base64_decode$_GET['sub_id']));
+			$result = mysql_query('SELECT * FROM '.$wpdb->cformssubmissions.' WHERE id = '.str_replace('xP312qNW', '', substr($_GET['sub_id'], 8)));
 			$exists = (mysql_num_rows($result)>0)?TRUE:FALSE;
 			if(!$exists)
 					return $content = '<div id="usermessage'.$no.'b" class="cf_info failure" >URL non valide</div>';
