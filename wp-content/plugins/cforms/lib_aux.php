@@ -272,7 +272,7 @@ function write_tracking_record($no,$field_email,$field_fname,$field_lname,$c='')
 			### good to go:
 			$page = (substr($cformsSettings['form'.$no]['cforms'.$no.'_tellafriend'],0,1)=='2')?$_POST['cforms_pl'.$no]:get_current_page(); // WP comment fix
 			if($cformsSettings['form'.$no]['cforms'.$no.'_detail']){
-					$subID = $_REQUEST['sub_id'];
+					$subID = base64_decode($_REQUEST['sub_id']);
 					$sql = "INSERT INTO $wpdb->cformsdata (sub_id,field_name,field_val) VALUES ".$sql;
 			}else{
 				$wpdb->query("INSERT INTO $wpdb->cformssubmissions (form_id,email,first_name,last_name,ip,sub_date) VALUES ".
@@ -513,7 +513,7 @@ function check_cust_vars($m,$t,$no, $html=false) {
 			}
 			### hash sid
 			if ( strpos($fvar,'_hash_sid')!==false ){
-				$m = str_replace('{_hash_sid}', $no, $m);
+				$m = str_replace('{_hash_sid}', base64_encode($no), $m);
 			}
 			
 
