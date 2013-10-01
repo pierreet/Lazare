@@ -115,7 +115,7 @@ class wplazare_excelator {
 
         $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A1', 'Date')
             ->setCellValue('B1', 'Nom')->setCellValue('C1', 'Montant')
-            ->setCellValue('D1', 'Type')->setCellValue('E1', 'Recu fiscal')
+            ->setCellValue('D1', 'Type')->setCellValue('E1', 'Numero recu fiscal')
             ->setCellValue('F1', 'Don/Charge')->setCellValue('G1', 'Statut')
             ->setCellValue('H1', 'Ville');
 
@@ -142,7 +142,7 @@ class wplazare_excelator {
                 ($element->order_amount / 100));
 
             $sheet->setCellValue('D' . $i,
-                __($element->payment_type, 'wplazare'));
+                utf8_encode(html_entity_decode(__($element->payment_type, 'wplazare'))));
             $sheet->setCellValue('E' . $i,
                 $element->order_reference);
 
@@ -151,7 +151,7 @@ class wplazare_excelator {
                 $reason);
 
             $sheet->setCellValue('G' . $i,
-                __($element->order_status, 'wplazare'));
+                utf8_encode(html_entity_decode(__($element->order_status, 'wplazare'))));
 
             if($element->location_id)
             {
