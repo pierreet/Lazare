@@ -350,7 +350,7 @@ class wplazare_orders
                             'reason'        => __('Don/Charge', 'wplazare'),
                             'prelevement_date' => __('Jour de prélèvement', 'wplazare'),
                             'ref_ediweb'    => __('Référence EDIWEB', 'wplazare'),
-                            'fiscal'        => 'Recu fiscal'
+                            'fiscal'        => 'Numéro recu fiscal'
         );
         $classes_list = array(
                             'reference'     => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_reference_column',
