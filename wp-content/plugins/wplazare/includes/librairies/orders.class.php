@@ -1537,24 +1537,4 @@ class wplazare_orders
 		$res = $wpdb->get_results($query);
 		return count($res);	
 	}
-
-    function prepareEDIWEB(){
-        global $wpdb;
-
-        $elementStatus = "'valid', 'moderated'";
-
-        $query = $wpdb->prepare(
-            "SELECT O.*
-            FROM " . wplazare_orders::getDbTable() . " AS O
-		WHERE O.status IN (".$elementStatus.") " . "
-		" . $orderByStatement
-        );
-
-        /*	Get the query result regarding on the function parameters. If there must be only one result or a collection	*/
-        if($elementId == '')
-        {
-            $elements = $wpdb->get_results($query);
-        }
-
-    }
 }
