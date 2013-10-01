@@ -418,7 +418,9 @@ class wplazare_orders
                         $tableRowValue[] = array('class' => $boldClass.' '.wplazare_orders::getCurrentPageCode() . '_date_cell', 'value' => mysql2date('d M Y H:i:s', $element->creation_date, true));
                     if($column == 'amount'){
                         $tableRowValue[] = array('class' => $boldClass.' '.wplazare_orders::getCurrentPageCode() . '_amount_cell', 'value' => $orderAmount . '&nbsp;' . $currencyIconList[$element->order_currency]);
-                        $total_sum += $orderAmount;
+                        if($element->order_status == "closed"){
+                            $total_sum += $orderAmount;
+                        }
                     }
 
                     if($column == 'status')
@@ -493,7 +495,7 @@ class wplazare_orders
 		}
 		$listItemOutput = wplazare_display::getTable($tableId, $tableTitles, $tableRows, $tableClasses, $tableRowsId, $tableSummary, true);
 
-		return $selectForm.$listItemOutput."<br/><h2>Montant total du mois: ".$total_sum.$currencyIconList[$element->order_currency]."</h2>";
+		return $selectForm.$listItemOutput."<br/><h2>Montant total du mois (statut = Terminé): ".$total_sum.$currencyIconList[$element->order_currency]."</h2>";
 	}
 	/*
 	*	Return the page content to add a new item
