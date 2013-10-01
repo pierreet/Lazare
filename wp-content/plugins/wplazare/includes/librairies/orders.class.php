@@ -368,6 +368,7 @@ class wplazare_orders
 		$line = 0;
 		if(empty($filter)) $filter = '';
 		$elementList = wplazare_orders::getElement('', "'valid', 'moderated'", '', " ORDER BY O.creation_date DESC",$filter);
+        $total_sum = 0;
 		if(count($elementList) > 0)
 		{
 			foreach($elementList as $element)
@@ -415,8 +416,11 @@ class wplazare_orders
                         $tableRowValue[] = array('class' => wplazare_orders::getCurrentPageCode() . '_reference_cell', 'value' => $elementLabel . $rowActions);
                     if($column == 'date')
                         $tableRowValue[] = array('class' => $boldClass.' '.wplazare_orders::getCurrentPageCode() . '_date_cell', 'value' => mysql2date('d M Y H:i:s', $element->creation_date, true));
-                    if($column == 'amount')
+                    if($column == 'amount'){
                         $tableRowValue[] = array('class' => $boldClass.' '.wplazare_orders::getCurrentPageCode() . '_amount_cell', 'value' => $orderAmount . '&nbsp;' . $currencyIconList[$element->order_currency]);
+                        $total_sum += $orderAmount;
+                    }
+
                     if($column == 'status')
                         $tableRowValue[] = array('class' => $boldClass.' '.wplazare_orders::getCurrentPageCode() . '_order_status_cell', 'value' => __($element->order_status, 'wplazare'));
                     if($column == 'type')
@@ -489,7 +493,7 @@ class wplazare_orders
 		}
 		$listItemOutput = wplazare_display::getTable($tableId, $tableTitles, $tableRows, $tableClasses, $tableRowsId, $tableSummary, true);
 
-		return $selectForm.$listItemOutput;
+		return $selectForm.$listItemOutput."<br/><h2>Montant total du mois: ".$total_sum.$currencyIconList[$element->order_currency]."</h2>";
 	}
 	/*
 	*	Return the page content to add a new item
