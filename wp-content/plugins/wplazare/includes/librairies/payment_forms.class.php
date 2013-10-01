@@ -21,7 +21,7 @@ class wplazare_payment_form
 	*
 	*	@return string The table of the class
 	*/
-	function getCurrentPageCode()
+    public static function getCurrentPageCode()
 	{
 		return 'payment_form';
 	}	
@@ -30,7 +30,7 @@ class wplazare_payment_form
 	*
 	*	@return string The table of the class
 	*/
-	function getPageIcon()
+    public static function getPageIcon()
 	{
 		return '';
 	}	
@@ -39,7 +39,7 @@ class wplazare_payment_form
 	*
 	*	@return string The table of the class
 	*/
-	function getListingSlug()
+    public static function getListingSlug()
 	{
 		return WPLAZARE_URL_SLUG_FORMS_LISTING;
 	}
@@ -48,7 +48,7 @@ class wplazare_payment_form
 	*
 	*	@return string The table of the class
 	*/
-	function getEditionSlug()
+    public static function getEditionSlug()
 	{
 		return WPLAZARE_URL_SLUG_FORMS_EDITION;
 	}
@@ -57,7 +57,7 @@ class wplazare_payment_form
 	*
 	*	@return string The table of the class
 	*/
-	function getDbTable()
+    public static function getDbTable()
 	{
 		return WPLAZARE_DBT_FORMS;
 	}
@@ -67,7 +67,7 @@ class wplazare_payment_form
 	*
 	*	@return string $title The title of the page looking at the environnement
 	*/
-	function pageTitle()
+    public static function pageTitle()
 	{
 		$action = isset($_REQUEST['action']) ? wplazare_tools::varSanitizer($_REQUEST['action']) : '';
 		$objectInEdition = isset($_REQUEST['id']) ? wplazare_tools::varSanitizer($_REQUEST['id']) : '';
@@ -324,7 +324,7 @@ class wplazare_payment_form
 	<a href="' . admin_url('admin.php?page=' . wplazare_payment_form::getEditionSlug() . '&amp;action=add') . '" >' . __('Ajouter', 'wplazare') . '</a>';
 			}
 			$rowActions = '
-	<div id="rowAction' . $element->id . '" class="wplazareRowAction" >' . $subRowActions . '
+	<div id="rowAction" class="wplazareRowAction" >' . $subRowActions . '
 	</div>';
 			$tableRowsId[] = wplazare_payment_form::getDbTable() . '_noResult';
 			unset($tableRowValue);
@@ -822,17 +822,17 @@ class wplazare_payment_form
 		extract(shortcode_atts(array('id' => ''), $atts));
 
 		/*	Get the current form informations	*/
-		$currentForm = wplazare_payment_form::getElement($id);
+		$currentForm = wplazare_payment_form::getElement($formIdentifier);
 		if($currentForm->status == 'valid')
 		{
 			ob_start();
-			wplazare_payment_form::getInitPaymentForm($id);
+			wplazare_payment_form::getInitPaymentForm($formIdentifier);
 			$formContent .= ob_get_contents();
 			ob_end_clean();
 		}
 		else
 		{/*	If the current form is no longer valid we output a message	*/
-			$formContent .= sprintf(__('Une erreur est survenue. Merci de nous contacter en pr&eacute;cisant le code d\'erreur suivant: Form%dInvalid', 'wplazare'), $id);
+			$formContent .= sprintf(__('Une erreur est survenue. Merci de nous contacter en pr&eacute;cisant le code d\'erreur suivant: Form%dInvalid', 'wplazare'), $formIdentifier);
 		}
 
 		return $formContent;

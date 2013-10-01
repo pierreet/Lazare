@@ -503,7 +503,7 @@ function elementEdition($itemToEdit = '')
 	*
 	*	@return object $elements A wordpress database object containing the element list
 	*/
-	function getElement($elementId = '',$filters = '')
+	public static function getElement($elementId = '',$filters = '')
 	{
 		global $wpdb;
 		$elements = array();

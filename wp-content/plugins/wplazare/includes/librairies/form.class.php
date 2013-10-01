@@ -70,7 +70,7 @@ class wplazare_form
 	*
 	*	@return string $the_input
 	*/
-	function check_input_type($input_def, $input_domain = '')
+	public static function check_input_type($input_def, $input_domain = '')
 	{
 		$input_option = '';
 		if(isset($input_def['option']) && $input_def['option'])

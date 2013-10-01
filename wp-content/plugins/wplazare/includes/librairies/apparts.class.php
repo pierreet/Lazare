@@ -20,7 +20,7 @@ class wplazare_apparts
 	*
 	*	@return string The table of the class
 	*/
-	function getCurrentPageCode()
+    public static function getCurrentPageCode()
 	{
 		return 'wplazare_apparts';
 	}	
@@ -29,7 +29,7 @@ class wplazare_apparts
 	*
 	*	@return string The table of the class
 	*/
-	function getPageIcon()
+    public static function getPageIcon()
 	{
 		return '';
 	}	
@@ -38,7 +38,7 @@ class wplazare_apparts
 	*
 	*	@return string The table of the class
 	*/
-	function getListingSlug()
+    public static function getListingSlug()
 	{
 		return WPLAZARE_URL_SLUG_APPARTS_LISTING;
 	}
@@ -47,7 +47,7 @@ class wplazare_apparts
 	*
 	*	@return string The table of the class
 	*/
-	function getEditionSlug()
+    public static function getEditionSlug()
 	{
 		return WPLAZARE_URL_SLUG_APPARTS_EDITION;
 	}
@@ -57,7 +57,7 @@ class wplazare_apparts
 	*
 	*	@return string The table of the class
 	*/
-	function getDbTable()
+	public static function getDbTable()
 	{
 		return WPLAZARE_DBT_APPARTS;
 	}
@@ -67,7 +67,7 @@ class wplazare_apparts
 	*
 	*	@return string $title The title of the page looking at the environnement
 	*/
-	function pageTitle()
+    public static function pageTitle()
 	{
 		return 'Gestion des appartements';
 	}
@@ -509,7 +509,7 @@ function elementEdition($itemToEdit = '')
 	*
 	*	@return object $elements A wordpress database object containing the element list
 	*/
-	function getElement($elementId = '',$filters = '')
+	public static function getElement($elementId = '',$filters = '')
 	{
 		global $wpdb;
 		$elements = array();

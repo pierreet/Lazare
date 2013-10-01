@@ -54,7 +54,7 @@ class wplazare_orders
 	*
 	*	@return string The table of the class
 	*/
-	function getCurrentPageCode()
+	public static function getCurrentPageCode()
 	{
 		return 'wplazare_orders';
 	}	
@@ -96,7 +96,7 @@ class wplazare_orders
 	*
 	*	@return string The table of the class
 	*/
-	function getDbTable()
+	public static function getDbTable()
 	{
 		return WPLAZARE_DBT_ORDERS;
 	}
@@ -137,6 +137,8 @@ class wplazare_orders
 		/****************************************************************************/
 		$action = isset($_REQUEST['action']) ? wplazare_tools::varSanitizer($_REQUEST['action']) : '';
 		$saveditem = isset($_REQUEST['saveditem']) ? wplazare_tools::varSanitizer($_REQUEST['saveditem']) : '';
+        $actionResult= "";
+        $pageMessage = "";
 		if(($action != '') && ($action == 'deleteok') && ($saveditem > 0))
 		{
 			$editedElement = wplazare_orders::getElement($saveditem, "'deleted'");
@@ -210,10 +212,12 @@ class wplazare_orders
 		/************		CHANGE THE FIELD NAME TO TAKE TO DISPLAY				*************/
 		/************		CHANGE ERROR MESSAGE FOR SPECIFIC CASE					*************/
 		/****************************************************************************/
+
 		if($actionResult != '')
 		{
 			//$elementIdentifierForMessage = '<span class="bold" >' . $_REQUEST[wplazare_orders::getDbTable()]['name'] . '</span>';
             $elementIdentifierForMessage = "";
+
 			if($actionResult == 'error')
 			{/*	CHANGE HERE FOR SPECIFIC CASE	*/
 				$pageMessage .= '<img src="' . WPLAZARE_ERROR_ICON . '" alt="action error" class="wplazarePageMessage_Icon" />' . sprintf(__('Une erreur est survenue lors de la suppression de %s', 'wplazare'), $elementIdentifierForMessage);
@@ -240,9 +244,9 @@ class wplazare_orders
             {
                 $pageMessage = '<img src="' . WPLAZARE_SUCCES_ICON
                     . '" alt="action success" class="wplazarePageMessage_Icon" />'
-                    . $message;
+                    ;
 
-            } elseif (actionResult == 'error_validate')
+            } elseif ($actionResult == 'error_validate')
             {
                 $pageMessage = '<img src="' . WPLAZARE_ERROR_ICON
                     . '" alt="action error" class="wplazarePageMessage_Icon" />'
@@ -314,6 +318,17 @@ class wplazare_orders
 
             $formAction = admin_url('admin.php?page=' . wplazare_orders::getEditionSlug());
 
+            $mois = date("n", (current_time("timestamp", 0)));
+            $annee =  date("Y", (current_time("timestamp", 0)));
+            if(isset($_REQUEST['search2']) && isset($_REQUEST[$_REQUEST['search2']]) )
+            {
+                $mois = $_REQUEST[$_REQUEST['search2']];
+            }
+            if(isset($_REQUEST['search3']) && isset($_REQUEST[$_REQUEST['search3']]) )
+            {
+                $annee = $_REQUEST[$_REQUEST['search3']];
+            }
+
             $selectForm='<form  method="post" action="' . $formAction . '" enctype="multipart/form-data">
                             <select name="mois" id="mois">'.$options_mois.'</select>
                             <select name="annee" id="annee" class="'.wplazare_loyers::getCurrentPageCode().'_annee">'.$options_annee.'</select>
@@ -321,6 +336,9 @@ class wplazare_orders
                             <input type="hidden" name="search2" value="mois"/>
                             <input type="hidden" name="search3" value="annee"/>
                         </form>
+                        <div class="alignright">
+                            <a href="'.admin_url('admin.php?page=wplazare_orders&amp;action=export&year='.$annee.'&month='.$mois).'">Export vers Excel</a>
+                        </div>
             ';
         }
 		/*	Start the table definition	*/
@@ -884,7 +902,6 @@ class wplazare_orders
 	function getElement($elementId = '', $elementStatus = "'valid', 'moderated'", $whatToGet = 'id', $orderByStatement = '',$filters = '')
 	{
 		global $wpdb;
-		$elements = array();
 		$moreQuery_filters = "";
 
 		if($elementId != '')
@@ -940,25 +957,61 @@ class wplazare_orders
 	 * Edite le re�u de la commande en parametre.
 	 */
 	function export($itemToEdit){
+
+        $return = "";
+
+        if($itemToEdit && is_int($itemToEdit) && $itemToEdit != 0){
+            $template_name ="recu_fiscal";
+            $pdfator = new wplazare_pdfator();
+
+            $currentOrder = wplazare_orders::getElement($itemToEdit, "'valid'", 'order_reference');
+
+            $balises_replace = wplazare_orders::prepareBalisesReplace($currentOrder);
+
+            $file_path = $pdfator->getPdf($template_name, $balises_replace);
+
+            if($file_path != ''){
+                $return = '<h3>Re&ccedil;u fiscal</h3>';
+                $return .= '<div>'.'Le re&ccedil;u a bien &eacute;t&eacute; g&eacute;n&eacute;r&eacute;:<br/>'.
+                    '<a href="'.plugins_url( '/wplazare/includes/librairies/html2pdf/output/'. basename($file_path)).'"><img src="'.get_theme_root_uri().'/lazare/images/download.jpg" alt="T&eacute;l&eacutecharger" /></a>'.
+                    '</div>';
+            }
+            else {
+                $return = wplazare_orders::elementEdition($itemToEdit);
+            }
+        }
+        else{
+            $excelator = new wplazare_excelator();
+
+            $year = intval(wplazare_tools::varSanitizer($_GET['year']));
+            $month = intval(wplazare_tools::varSanitizer($_GET['month']));
+
+            if($year >0 && month >=0 ){
+                $results = wplazare_orders::getDonsByMonth($year, $month, 'closed');
+
+                unlink(WPLAZARE_EXCEL_PLUGIN_DIR . '/don_lazare.xlsx');
+
+                $excelator->getDons($results,$month." ".$year);
+
+                $return .= '<h3>Export dons du mois.</h3>';
+
+                $return .= '<div>'
+                    . 'Le fichier xls &eacute;t&eacute; g&eacute;n&eacute;r&eacute;:<br/>'
+                    . '<a class="excel" href="'
+                    . plugins_url(
+                        '/wplazare/includes/librairies/excel/don_lazare.xlsx')
+                    . '">Dons du mois</a>';
+
+                '</div>';
+            }
+            else{
+                $return = "Erreur, veuillez faire précédent sur votre navigateur.";
+            }
+
+            return $return;
+        }
 		
-		$template_name ="recu_fiscal";
-		$pdfator = new wplazare_pdfator();
-		
-		$currentOrder = wplazare_orders::getElement($itemToEdit, "'valid'", 'order_reference');
-		
-		$balises_replace = wplazare_orders::prepareBalisesReplace($currentOrder);
-		
-		$file_path = $pdfator->getPdf($template_name, $balises_replace);	
-		
-		if($file_path != ''){
-			$return = '<h3>Re&ccedil;u fiscal</h3>';
-			$return .= '<div>'.'Le re&ccedil;u a bien &eacute;t&eacute; g&eacute;n&eacute;r&eacute;:<br/>'.
-				'<a href="'.plugins_url( '/wplazare/includes/librairies/html2pdf/output/'. basename($file_path)).'"><img src="'.get_theme_root_uri().'/lazare/images/download.jpg" alt="T&eacute;l&eacutecharger" /></a>'.
-				'</div>';
-		}
-		else {
-			$return = wplazare_orders::elementEdition($itemToEdit);
-		}
+
 		return $return	;
 	}
 
@@ -1034,7 +1087,7 @@ class wplazare_orders
 			/*	Update the new order reference	*/
 			$orderMoreInformations['last_update_date'] = date('Y-m-d H:i:s');
 			$orderMoreInformations['order_reference'] = $offer->payment_reference_prefix . $orderReference;
-			$actionResult = wplazare_database::update($orderMoreInformations, $orderReference, wplazare_orders::getDbTable());
+			wplazare_database::update($orderMoreInformations, $orderReference, wplazare_orders::getDbTable());
 		}
 		
 
@@ -1104,7 +1157,6 @@ class wplazare_orders
 				$outputMessage = wplazare_orders::buildChequeReturn($currentOrder);
 			}
 			elseif ($currentOrder->payment_type == 'single_payment'){
-				$url = '';
 				switch($error)
 				{
 					case '00000':
@@ -1138,7 +1190,7 @@ class wplazare_orders
 	
 				$orderMoreInformations['order_status'] = $order_status;
 			}
-			$actionResult = wplazare_database::update($orderMoreInformations, $currentOrder->id, wplazare_orders::getDbTable());
+			wplazare_database::update($orderMoreInformations, $currentOrder->id, wplazare_orders::getDbTable());
 		}
 		else
 		{
@@ -1156,7 +1208,6 @@ class wplazare_orders
 		$error = isset($_REQUEST['error']) ? wplazare_tools::varSanitizer($_REQUEST['error']) : '';
 		$outputMessage = '';
 
-        $currentOrder = '';
 		if($formIdentifier != '')
 		{
 			$orderIdentifier = wplazare_orders::saveNewOrder($_POST);
@@ -1169,7 +1220,7 @@ class wplazare_orders
 		$orderMoreInformations['order_transaction'] = $transaction;
 		$orderMoreInformations['order_error'] = $error;
 			
-		if( $currentOrder!='' && $currentOrder->payment_type == 'multiple_payment' ){
+		if( $currentOrder && $currentOrder->payment_type == 'multiple_payment' ){
             $return = $_REQUEST[wplazare_payment_form::getDbTable()];
 
 			$orderMoreInformations['banque_code'] = wplazare_tools::varSanitizer($return['banque_code']);
@@ -1209,10 +1260,9 @@ class wplazare_orders
 
 			if(wplazare_tools::check_iban($orderMoreInformations['banque_iban'])){
 				$outputMessage = wplazare_orders::buildPrelevementReturn($currentOrder,$orderMoreInformations);
-                $actionResult = wplazare_database::update($orderMoreInformations, $currentOrder->id, wplazare_orders::getDbTable());
+                wplazare_database::update($orderMoreInformations, $currentOrder->id, wplazare_orders::getDbTable());
 			}
 			else{
-				$order_status = 'error';
 				$outputMessage = wplazare_payment_form::chooseLocation($orderMoreInformations,__('L\'IBAN n\'est pas valide. Veuillez vérifier votre saisie.', 'wplazare'));
 			}
 		}
@@ -1221,7 +1271,6 @@ class wplazare_orders
 	}
 	
 	function sendRecu($currentOrder){
-		$amout = $currentOrder->order_amount / 100;
 		
 		$headers = "From: ".get_option('blogname')." <".get_option('admin_email').">\r\n";
 		$headers .= "MIME-Version: 1.0\r\n";
@@ -1335,11 +1384,13 @@ class wplazare_orders
 	}
 	
 	function getDons($user_email,$order_status = ""){
+        global $wpdb;
+
 		$order_status_filter = '';
 		if($order_status != ''){
 			$order_status_filter = " AND WPORDERS.order_status LIKE '" . $order_status . "' ";
 		}
-		global $wpdb;
+
 		$query = $wpdb->prepare(
 		"SELECT * ".
 		"FROM ".wplazare_orders::getDbTable()." AS WPORDERS WHERE WPORDERS.user_email LIKE '$user_email' ". $order_status_filter .
@@ -1348,6 +1399,26 @@ class wplazare_orders
 		
 		return $wpdb->get_results($query);
 	}
+
+    function getDonsByMonth($year, $month, $order_status = ""){
+        global $wpdb;
+
+        $order_status_filter = '';
+        if($order_status != ''){
+            $order_status_filter = " AND WPORDERS.order_status LIKE '" . $order_status . "' ";
+        }
+
+        $query = $wpdb->prepare(
+            "SELECT * ".
+                "FROM ".wplazare_orders::getDbTable()." AS WPORDERS WHERE ".
+                "YEAR(WPORDERS.creation_date) ='$year' ".
+                "AND MONTH(WPORDERS.creation_date) ='$month' ".
+                $order_status_filter .
+                " ORDER BY WPORDERS.last_update_date"
+        );
+
+        return $wpdb->get_results($query);
+    }
 	
 	function buildChequeReturn($currentOrder){
 		$return = "<p>Nous avons bien enregistr&eacute; votre promesse de don en faveur de l'association $currentOrder->user_association.</p>";
@@ -1494,8 +1565,7 @@ class wplazare_orders
 		    $elements[] = $year;
 		    $year++;
 		} while ($year <= $current_year);
-		
-		$elements_sorted = arsort($elements);
+
 		return $elements;		
 	}
 
