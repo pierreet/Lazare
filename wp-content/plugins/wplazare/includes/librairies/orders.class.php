@@ -17,11 +17,13 @@
 class wplazare_orders
 {
     protected $columns_to_show = array();
+    protected $columns_data_value = array();
     protected $forced_filters = array();
     protected $disable_search_form = FALSE;
     protected $editable_elements = FALSE;
     protected $custom_listing_slug = NULL;
     protected $custom_editing_slug = NULL;
+    protected $hide_total = FALSE;
 
     /*
      * _construct
@@ -35,14 +37,16 @@ class wplazare_orders
      * @param array $custom_listing_slug    If the slug is not the default one (see getListingSlug())
      * @param array $custom_editing_slug    If the slug is not the default one (see getEditionSlug())
      */
-    function __construct($columns_to_show=array(), $forced_filters=array(), $disable_search_form=FALSE, $editable_elements=FALSE, $custom_listing_slug=NULL, $custom_editing_slug=NULL)
+    function __construct($columns_to_show=array(), $columns_data_value = array(), $forced_filters=array(), $disable_search_form=FALSE, $editable_elements=FALSE, $custom_listing_slug=NULL, $custom_editing_slug=NULL, $hide_total=FALSE)
     {
         $this->columns_to_show = $columns_to_show;
+        $this->columns_data_value = $columns_data_value;
         $this->forced_filters = $forced_filters;
         $this->disable_search_form = $disable_search_form;
         $this->editable_elements = $editable_elements;
         $this->custom_listing_slug = $custom_listing_slug;
         $this->custom_editing_slug = $custom_editing_slug;
+        $this->hide_total = $hide_total;
     }
 
 	/**
@@ -328,6 +332,11 @@ class wplazare_orders
         else
             $column_list = array('reference', 'date', 'amount', 'status', 'type');
 
+        if($this->columns_data_value)
+            $tableDataValues = $this->columns_data_value;
+        else
+            $tableDataValues = array('', '', '', '', '');
+
 
         $titles_list = array(
                             'reference'     => __('R&eacute;f&eacute;rence', 'wplazare'),
@@ -341,6 +350,7 @@ class wplazare_orders
                             'reason'        => __('Don/Charge', 'wplazare'),
                             'prelevement_date' => __('Jour de prélèvement', 'wplazare'),
                             'ref_ediweb'    => __('Référence EDIWEB', 'wplazare'),
+                            'fiscal'        => 'Recu fiscal'
         );
         $classes_list = array(
                             'reference'     => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_reference_column',
@@ -353,7 +363,8 @@ class wplazare_orders
                             'association'   => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_asso_column filter-select',
                             'reason'        => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_reason_column filter-select',
                             'prelevement_date'  => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_prelevement_date_column filter-select',
-                            'ref_ediweb'    => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_ref_ediweb_column filter-select'
+                            'ref_ediweb'    => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_ref_ediweb_column filter-select',
+                            'fiscal'        => 'wplazare_' . wplazare_orders::getCurrentPageCode() . '_ref_fiscal_column'
         );
 
 		$tableTitles = array();
@@ -377,6 +388,7 @@ class wplazare_orders
 
 				$elementLabel = $element->order_reference;
 				$subRowActions = '';
+                $editAction = "";
 				if(current_user_can('wplazare_view_orders_details'))
 				{
                     if($this->editable_elements)
@@ -412,10 +424,10 @@ class wplazare_orders
                 $tableRowValue = array();
                 foreach( $column_list as $column)
                 {
-                    if($column == 'reference')
-                        $tableRowValue[] = array('class' => wplazare_orders::getCurrentPageCode() . '_reference_cell', 'value' => $elementLabel . $rowActions);
+                    if($column == 'reference' || $column == 'fiscal')
+                        $tableRowValue[] = array('class' => wplazare_orders::getCurrentPageCode() . '_reference_cell', 'value' => $elementLabel);
                     if($column == 'date')
-                        $tableRowValue[] = array('class' => $boldClass.' '.wplazare_orders::getCurrentPageCode() . '_date_cell', 'value' => mysql2date('d M Y H:i:s', $element->creation_date, true));
+                        $tableRowValue[] = array('class' => $boldClass.' '.wplazare_orders::getCurrentPageCode() . '_date_cell', 'value' => '<a href="' . $editAction . '" >' . mysql2date('d M Y H:i:s', $element->creation_date  . '</a>'. $rowActions, true));
                     if($column == 'amount'){
                         $tableRowValue[] = array('class' => $boldClass.' '.wplazare_orders::getCurrentPageCode() . '_amount_cell', 'value' => $orderAmount . '&nbsp;' . $currencyIconList[$element->order_currency]);
                         if($element->order_status == "closed"){
@@ -493,9 +505,14 @@ class wplazare_orders
 			$tableRowValue[] = array('class' => wplazare_orders::getCurrentPageCode() . '_label_cell', 'value' => __('Aucun don', 'wplazare'));
 			$tableRows[] = $tableRowValue;
 		}
-		$listItemOutput = wplazare_display::getTable($tableId, $tableTitles, $tableRows, $tableClasses, $tableRowsId, $tableSummary, true);
+		$listItemOutput = wplazare_display::getTable($tableId, $tableTitles, $tableRows, $tableClasses , $tableRowsId, $tableSummary, true, $tableDataValues);
 
-		return $selectForm.$listItemOutput."<br/><h2>Montant total du mois (statut = Terminé): ".$total_sum.$currencyIconList[$element->order_currency]."</h2>";
+        $total_line = "";
+        if(!$this->hide_total){
+            $total_line = "<h2>Montant total du mois (Don avec statut = \"Terminé\"): ".$total_sum.$currencyIconList[$element->order_currency]."</h2>";
+        }
+
+		return $selectForm.$listItemOutput."<br/>".$total_line;
 	}
 	/*
 	*	Return the page content to add a new item
