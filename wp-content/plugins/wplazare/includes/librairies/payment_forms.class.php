@@ -822,11 +822,11 @@ class wplazare_payment_form
 		extract(shortcode_atts(array('id' => ''), $atts));
 
 		/*	Get the current form informations	*/
-		$currentForm = wplazare_payment_form::getElement($formIdentifier);
+		$currentForm = wplazare_payment_form::getElement($id);
 		if($currentForm->status == 'valid')
 		{
 			ob_start();
-			wplazare_payment_form::getInitPaymentForm($formIdentifier);
+			wplazare_payment_form::getInitPaymentForm($id);
 			$formContent .= ob_get_contents();
 			ob_end_clean();
 		}
