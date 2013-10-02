@@ -965,7 +965,7 @@ class wplazare_orders
 
         $return = "";
 
-        if($itemToEdit && is_int($itemToEdit) && $itemToEdit != 0){
+        if($itemToEdit && $itemToEdit != 0){
             $template_name ="recu_fiscal";
             $pdfator = new wplazare_pdfator();
 
