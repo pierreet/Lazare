@@ -20,7 +20,7 @@ class wplazare_loyers
 	*
 	*	@return string The table of the class
 	*/
-	function getCurrentPageCode()
+	public static function getCurrentPageCode()
 	{
 		return 'wplazare_loyers';
 	}	

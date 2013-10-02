@@ -25,7 +25,7 @@ class wplazare_tools
 	*
 	*	@return mixed $sanitizedVar The var after treatment
 	*/
-	function varSanitizer($varToSanitize, $varDefaultValue = '', $varType = '')
+	public static function varSanitizer($varToSanitize, $varDefaultValue = '', $varType = '')
 	{
 		$sanitizedVar = (trim(strip_tags(stripslashes($varToSanitize))) != '') ? trim(strip_tags(stripslashes(($varToSanitize)))) : $varDefaultValue ;
 
@@ -38,7 +38,7 @@ class wplazare_tools
 	*	@see changeAccesAuthorisation
 	*	@param string $directory The complete path we want to create
 	*/
-	function createDirectory($directory)
+    public static function createDirectory($directory)
 	{
 		$directoryComponent = explode('/',$directory);
 		$str = '';
@@ -72,7 +72,7 @@ class wplazare_tools
 	*	@param string $directory The complete path we want to change authorisation
 	*
 	*/
-	function changeAccesAuthorisation($directory)
+    public static function changeAccesAuthorisation($directory)
 	{
 		$tab=explode('/',$directory);
 		$str='';
@@ -100,7 +100,7 @@ class wplazare_tools
 	*	@param string $destinationDirectory The destination path that will receive the cpied content
 	*
 	*/
-	function copyEntireDirectory($sourceDirectory, $destinationDirectory)
+    public static function copyEntireDirectory($sourceDirectory, $destinationDirectory)
 	{
 		if(is_dir($sourceDirectory))
 		{
@@ -131,7 +131,7 @@ class wplazare_tools
 	*
 	*	@return string $type The form input type to use for the given field
 	*/
-	function defineFieldType($dataFieldType)
+    public static function defineFieldType($dataFieldType)
 	{
 		$type = 'text';
 		if(($dataFieldType == 'char') || ($dataFieldType == 'varchar') || ($dataFieldType == 'int'))
@@ -158,7 +158,7 @@ class wplazare_tools
 	*
 	*	@return string $slugified The input string that was slugified with the selected method
 	*/
-	function slugify($toSlugify, $slugifyType)
+    public static function slugify($toSlugify, $slugifyType)
 	{
 		$slugified = '';
 
@@ -200,7 +200,7 @@ class wplazare_tools
 	* $habitant_id may be a integer or an array or false
 	* if false -> return all the responsables of appart that are occupied
 	*/
-	function getResponsables($locataire_id)
+    public static function getResponsables($locataire_id)
 	{
 		global $wpdb;
 
@@ -241,7 +241,7 @@ class wplazare_tools
 	* return les id et nom des utilisateurs avec le rôle responsables, utilisables dans un select
 	* 
 	*/
-	function getResponsablesForSelect(){		
+    public static function getResponsablesForSelect(){
 		$elements = array(); 
 		$elements['0'] = '- Pas de responsable -';
 		$blogusers = get_users('role=Benevole');
@@ -266,7 +266,7 @@ class wplazare_tools
 	* return les id et nom des utilisateurs avec le role tresorier, utilisables dans un select
 	* 
 	*/
-	function getTresoriersForSelect(){		
+    public static function getTresoriersForSelect(){
 		$elements = array(); 
 		$elements['0'] = '- Pas de tr&eacute;sorier -';
 		$blogusers = get_users('role=Benevole');
@@ -291,7 +291,7 @@ class wplazare_tools
 	* return les id et nom des associations, utilisables dans un select
 	* 
 	*/
-	function getAssociationsForSelect(){		
+    public static function getAssociationsForSelect(){
 		$elements = array(); 
 		$elements['0'] = '- Pas d\'association -';
 		
@@ -312,7 +312,7 @@ class wplazare_tools
 	* return les id et nom des maisons, utilisables dans un select
 	* 
 	*/
-	function getMaisonsForSelect(){		
+    public static function getMaisonsForSelect(){
 		$elements = array(); 
 		$elements['0'] = '- Pas d\'association -';
 		
@@ -333,7 +333,7 @@ class wplazare_tools
 	* return le nom d'un user en fonction de son id
 	* 
 	*/
-	function getUserName($id){	
+    public static function getUserName($id){
 		if($id<=0) return '';
 		
 		$name = ucfirst(get_user_meta($id,'first_name',true))." ".ucfirst(get_user_meta($id,'last_name',true));
@@ -347,7 +347,7 @@ class wplazare_tools
 	* return le nom d'un user en fonction de son id
 	* 
 	*/
-	function getFirstName($id){	
+    public static function getFirstName($id){
 		if($id<0) return '';
 		
 		$first_name = get_user_meta($id,'first_name',true);
@@ -361,7 +361,7 @@ class wplazare_tools
 	* return les différentes locataires I.E. users de role benevole ou personne_accueillie
 	* 
 	*/
-	function getLocataires(){
+    public static function getLocataires(){
 		$locataires = array();
 		$benevoles = get_users('role='.WPLAZARE_ROLE_BENEVOLE);
 	    foreach ($benevoles as $locataire) {
@@ -388,7 +388,7 @@ class wplazare_tools
 	* return le role de l'utilisateur dont l'id est en paramètre
 	* 
 	*/
-	function getRole($user_id){
+    public static function getRole($user_id){
 		$user = new WP_User( $user_id );
 		$user_roles = $user->roles;
 
@@ -402,7 +402,7 @@ class wplazare_tools
 	* return tous les roles
 	* 
 	*/
-	function getRoles(){
+    public static function getRoles(){
 		return array(WPLAZARE_ROLE_PERSONNE_ACCUEILLIE
 		,WPLAZARE_ROLE_BENEVOLE,WPLAZARE_ROLE_PARTENAIRE_SOCIAL
 		,WPLAZARE_ROLE_POSTULANT,WPLAZARE_ROLE_DONATEUR,WPLAZARE_ROLE_EVENT
@@ -414,7 +414,7 @@ class wplazare_tools
 	* return Le nombre d'utilisateur ayant le role en parametre.
 	* 
 	*/
-	function getUserCountByRole($role){
+    public static function getUserCountByRole($role){
 		$results = '';
 		if($role == WPLAZARE_ROLE_DONATEUR){
 			global $wpdb;
@@ -448,7 +448,7 @@ class wplazare_tools
 	* return l'id de l'appartement de l'utilisateur si il en a un
 	* 
 	*/
-	function getAppartement($user_id){
+    public static function getAppartement($user_id){
 		global $wpdb;
 		
 		$query = 	"SELECT WPLOCATIONS.appartement ".
@@ -467,7 +467,7 @@ class wplazare_tools
      * return l'id de la location de l'utilisateur si il en a un
      *
      */
-    function getLocation($user_id){
+    public static function getLocation($user_id){
         global $wpdb;
 
         $query = 	"SELECT * ".
@@ -487,7 +487,7 @@ class wplazare_tools
 	* 
 	* $appart_id l'id de l'appart
 	*/
-	function getLocationByAppart($appart_id)
+    public static function getLocationByAppart($appart_id)
 	{
 		global $wpdb;
 
@@ -499,8 +499,8 @@ class wplazare_tools
 
 		return $res;
 	}
-    
-	function getAdresseAssociation($asso){
+
+    public static function getAdresseAssociation($asso){
 		if(strtolower($asso) == 'lazare'){
 			return '1 rue du Pl&acirc;tre, 75004 PARIS';
 		}
@@ -514,7 +514,7 @@ class wplazare_tools
 	* return l'id de l'appartement de l'utilisateur si il en est responsable, '' sinon
 	* 
 	*/
-	function isResponsable($user_id){
+    public static function isResponsable($user_id){
 		global $wpdb;
 		
 		$query = 	"SELECT WPAPPARTS.id ".
@@ -533,7 +533,7 @@ class wplazare_tools
 	* 
 	* $appart_id l'id de l'appart
 	*/
-	function getLocatairesByAppart($appart_id)
+    public static function getLocatairesByAppart($appart_id)
 	{
 		global $wpdb;
 
@@ -552,7 +552,7 @@ class wplazare_tools
 	* return une balise <a> vers les informations de l'utilisateur dont l'id est en param�tre.
 	* 
 	*/
-	function getUserLink($user_id, $label){
+    public static function getUserLink($user_id, $label){
 		return '<a href="'.admin_url('admin.php?page=' . wplazare_users::getEditionSlug() . '&amp;action=edit&amp;id=' . $user_id).'">'.$label.'</a>';
 	}
 	
@@ -563,7 +563,7 @@ class wplazare_tools
 	 * @param string $key cl� de recherche
 	 * @param boolean $asc ordre croissant ou d�croissant
 	 */
-	function sortByOneKey(array $array, $key, $asc = true) {
+    public static function sortByOneKey(array $array, $key, $asc = true) {
 	    $result = array();
 	        
 	    $values = array();
@@ -589,7 +589,7 @@ class wplazare_tools
 	 * 
 	 * getLocatairesEtAppartsOccupes() retourne tous les apparts occup�s
 	 */
-	function getLocatairesEtAppartsOccupes()
+    public static function getLocatairesEtAppartsOccupes()
 	{
 		global $wpdb;
 
@@ -603,8 +603,8 @@ class wplazare_tools
 					
 		return $res;
 	}
-	
-	function subscribeNewsletter($role,$firstname,$lastname,$email,$user_id = ''){
+
+    public static function subscribeNewsletter($role,$firstname,$lastname,$email,$user_id = ''){
 		global $wpdb;
 		
 		if($email == '') return '';
@@ -647,8 +647,8 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
 		
 		return $requestResponse;
 	}
-	
-	function unSubscribeNewsletter($user_id){
+
+    public static function unSubscribeNewsletter($user_id){
 		global $wpdb;
 		
 		$query = $wpdb->prepare( "SELECT user_id FROM `wp_wysija_user` WHERE   `wp_wysija_user`.`wpuser_id` =  '$user_id'");
@@ -685,8 +685,8 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
 		return $requestResponse;
 		
 	}
-	
-	function synchroList(){
+
+    public static function synchroList(){
 		$mktime=time();
 		
 		global $wpdb;
@@ -718,34 +718,34 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
 			}
 		} 
 	}
-	
-	function lastLogin($user_login) {
+
+    public static function lastLogin($user_login) {
 		$user = get_user_by('login', $user_login);
 	    $last_login = get_user_meta( $user->ID, 'last_login', true ); 
 	    if($last_login != '') update_user_meta($user->ID, 'last_login', current_time('mysql'));
 	    else add_user_meta($user->ID, 'last_login', date('Y-m-d H:i:s'),true);
 	}
-	
-	function getLastLogin($user_id = '') {
+
+    public static function getLastLogin($user_id = '') {
 		if($user_id == '') $user_id = get_current_user_id();
 	    $last_login = get_user_meta($user_id, 'last_login', true);
 	    /*$date_format = get_option('date_format') . ' ' . get_option('time_format');
 	    $the_last_login = mysql2date($date_format, $last_login, false);*/
 	    return $last_login;
 	}
-	
-	function my_profile_update( $user_id ) {
+
+    public static function my_profile_update( $user_id ) {
         wplazare_tools::unSubscribeNewsletter($user_id);
         //wplazare_tools::subscribeNewsletter($_POST['role'], $_POST['first_name'], $_POST['last_name'], $_POST['email'],$user_id);        
     }
-    
-	function prepareForListName($string){
+
+    public static function prepareForListName($string){
 		if($string == 'subscriber') return 'abonne';
 		return strtr($string,'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ_',
 	'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY-');
 	}
-	
-	function check_rib($cbanque, $cguichet, $nocompte, $clerib) {
+
+    public static function check_rib($cbanque, $cguichet, $nocompte, $clerib) {
         $tabcompte = "";
         $len = strlen($nocompte);
         if ($len != 11) {
@@ -765,8 +765,8 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
         $int = $cbanque . $cguichet . $tabcompte . $clerib;
         return (strlen($int) >= 21 && bcmod($int, 97) == 0);
 	}
-	
-	function check_iban($iban){
+
+    public static function check_iban($iban){
 	 
 	        $charConversion = array("A" => "10","B" => "11","C" => "12","D" => "13","E" => "14","F" => "15","G" => "16","H" => "17",
 	"I" => "18","J" => "19","K" => "20","L" => "21","M" => "22","N" => "23","O" => "24","P" => "25","Q" => "26","R" => "27",
@@ -778,14 +778,13 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
 	        // Calcul du Modulo 97 par la fonction bcmod et comparaison du reste à 1
 	        return (intval(bcmod($tmpiban,"97")) == 1);
 	}
-	
-	function addSpaceOnPhone($phone_number){
+
+    public static function addSpaceOnPhone($phone_number){
 		return chunk_split (str_replace(" ", "", $phone_number), 2, "&nbsp;");
 	}
-	
-	function updateAttendeeRole(){
+
+    public static function updateAttendeeRole(){
 		$people = array();
-		echo 'past<br/>';
 		$EM_Events = EM_Events::get(array('scope'=>'past' ));
 		foreach ( $EM_Events as $EM_Event ) {
 			$lister = $EM_Event->get_bookings();
@@ -801,7 +800,6 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
 				wp_update_user($userdata);;
 			}
 		}
-		echo 'future<br/>';
 	$EM_Events = EM_Events::get(array('scope'=>'future' ));
 		foreach ( $EM_Events as $EM_Event ) {
 			$lister = $EM_Event->get_bookings();
@@ -817,6 +815,5 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
 				wp_update_user($userdata);;
 			}
 		}
-	echo 'biouh';
 	}
 }

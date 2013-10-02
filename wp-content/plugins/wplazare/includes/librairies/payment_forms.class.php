@@ -21,7 +21,7 @@ class wplazare_payment_form
 	*
 	*	@return string The table of the class
 	*/
-	function getCurrentPageCode()
+    public static function getCurrentPageCode()
 	{
 		return 'payment_form';
 	}	
@@ -30,7 +30,7 @@ class wplazare_payment_form
 	*
 	*	@return string The table of the class
 	*/
-	function getPageIcon()
+    public static function getPageIcon()
 	{
 		return '';
 	}	
@@ -39,7 +39,7 @@ class wplazare_payment_form
 	*
 	*	@return string The table of the class
 	*/
-	function getListingSlug()
+    public static function getListingSlug()
 	{
 		return WPLAZARE_URL_SLUG_FORMS_LISTING;
 	}
@@ -48,7 +48,7 @@ class wplazare_payment_form
 	*
 	*	@return string The table of the class
 	*/
-	function getEditionSlug()
+    public static function getEditionSlug()
 	{
 		return WPLAZARE_URL_SLUG_FORMS_EDITION;
 	}
@@ -57,7 +57,7 @@ class wplazare_payment_form
 	*
 	*	@return string The table of the class
 	*/
-	function getDbTable()
+    public static function getDbTable()
 	{
 		return WPLAZARE_DBT_FORMS;
 	}
@@ -67,7 +67,7 @@ class wplazare_payment_form
 	*
 	*	@return string $title The title of the page looking at the environnement
 	*/
-	function pageTitle()
+    public static function pageTitle()
 	{
 		$action = isset($_REQUEST['action']) ? wplazare_tools::varSanitizer($_REQUEST['action']) : '';
 		$objectInEdition = isset($_REQUEST['id']) ? wplazare_tools::varSanitizer($_REQUEST['id']) : '';
@@ -324,7 +324,7 @@ class wplazare_payment_form
 	<a href="' . admin_url('admin.php?page=' . wplazare_payment_form::getEditionSlug() . '&amp;action=add') . '" >' . __('Ajouter', 'wplazare') . '</a>';
 			}
 			$rowActions = '
-	<div id="rowAction' . $element->id . '" class="wplazareRowAction" >' . $subRowActions . '
+	<div id="rowAction" class="wplazareRowAction" >' . $subRowActions . '
 	</div>';
 			$tableRowsId[] = wplazare_payment_form::getDbTable() . '_noResult';
 			unset($tableRowValue);
@@ -1243,7 +1243,7 @@ jQuery(document).ready(function(){
 			$orderMoreInformations['banque_code_postal'] = '';
 			$orderMoreInformations['banque_ville'] = '';	
 		}
-		$currentOrder = wplazare_orders::getElement($orderIdentifier, "'valid'", 'order_reference');
+		$currentOrder = wplazare_orders::getElement($orderIdentifier, "'valid'", 'id');
 		$return = '';
 		if($error != '') $return .= '<p class="error">'.$error.'</p>';
 		$return .= '<div id="prelevement_div"><form action="'. wplazare_option::getStoreConfigOption('wplazare_store_urloption', 'urlSuccess').'" method="post" name="prelevement_form" id="prelevement_form" >';

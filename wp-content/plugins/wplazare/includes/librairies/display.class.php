@@ -168,15 +168,17 @@ class wplazare_display
 			
 			case WPLAZARE_URL_SLUG_ORDERS_LISTING:
 			case WPLAZARE_URL_SLUG_ORDERS_EDITION:
-                $columns_to_show = array('reference', 'date', 'reason', 'amount', 'status', 'name', 'city', 'association');
-				$objectType = new wplazare_orders($columns_to_show);
+                $columns_to_show = array('date', 'name', 'amount', 'type', 'fiscal','reason', 'status', 'city');
+                $columns_data_value = array('', '', '', '','', 'data-value="Don"', 'data-value="Terminé"', '');
+				$objectType = new wplazare_orders($columns_to_show,$columns_data_value);
 			break;
 
             case WPLAZARE_URL_SLUG_M_ORDERS_LISTING:
             case WPLAZARE_URL_SLUG_M_ORDERS_EDITION:
                 $columns_to_show = array('reference', 'reason', 'amount', 'prelevement_date', 'name', 'city', 'ref_ediweb');
+                $columns_data_value = array('', '', '', '', '', '', '');
                 $forced_filters = array( 'payment_type' => 'multiple_payment' );
-                $objectType = new wplazare_orders($columns_to_show, $forced_filters, TRUE, TRUE, WPLAZARE_URL_SLUG_M_ORDERS_LISTING, WPLAZARE_URL_SLUG_M_ORDERS_EDITION);
+                $objectType = new wplazare_orders($columns_to_show, $columns_data_value , $forced_filters, TRUE, TRUE, WPLAZARE_URL_SLUG_M_ORDERS_LISTING, WPLAZARE_URL_SLUG_M_ORDERS_EDITION, TRUE);
                 break;
 
 			case WPLAZARE_URL_SLUG_FORMS_LISTING:
@@ -312,15 +314,19 @@ class wplazare_display
 	*
 	*	@return string $table The html code of the table to output
 	*/
-	function getTable($tableId, $tableTitles, $tableRows, $tableClasses, $tableRowsId, $tableSummary, $withFooter = true)
+	function getTable($tableId, $tableTitles, $tableRows, $tableClasses, $tableRowsId, $tableSummary, $withFooter = true, $tableDataValues = array())
 	{
 		$tableTitleBar = $tableBody = '';
 
 		/*	Create the header and footer row	*/
 		for($i=0; $i<count($tableTitles); $i++)
 		{
+            $data_values = '';
+            if ($i < count($tableDataValues)) {
+                $data_values = $tableDataValues[$i];
+            }
 			$tableTitleBar .= '
-				<th class="' . $tableClasses[$i] . '" scope="col" >' . $tableTitles[$i] . '</th>';
+				<th class="' . $tableClasses[$i] . '" scope="col" '.$data_values.' >' . $tableTitles[$i] . '</th>';
 		}
 		
 		/*	Create each table row	*/
