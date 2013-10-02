@@ -1243,7 +1243,7 @@ jQuery(document).ready(function(){
 			$orderMoreInformations['banque_code_postal'] = '';
 			$orderMoreInformations['banque_ville'] = '';	
 		}
-		$currentOrder = wplazare_orders::getElement($orderIdentifier, "'valid'", 'order_reference');
+		$currentOrder = wplazare_orders::getElement($orderIdentifier, "'valid'", 'id');
 		$return = '';
 		if($error != '') $return .= '<p class="error">'.$error.'</p>';
 		$return .= '<div id="prelevement_div"><form action="'. wplazare_option::getStoreConfigOption('wplazare_store_urloption', 'urlSuccess').'" method="post" name="prelevement_form" id="prelevement_form" >';

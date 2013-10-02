@@ -142,7 +142,7 @@ class wplazare_excelator {
                 ($element->order_amount / 100));
 
             $sheet->setCellValue('D' . $i,
-                utf8_encode(html_entity_decode(__($element->payment_type, 'wplazare'))));
+                (html_entity_decode(__($element->payment_type, 'wplazare'))));
             $sheet->setCellValue('E' . $i,
                 $element->order_reference);
 
@@ -151,7 +151,7 @@ class wplazare_excelator {
                 $reason);
 
             $sheet->setCellValue('G' . $i,
-                utf8_encode(html_entity_decode(__($element->order_status, 'wplazare'))));
+                (html_entity_decode(__($element->order_status, 'wplazare'))));
 
             if($element->location_id)
             {

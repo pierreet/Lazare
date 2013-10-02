@@ -785,7 +785,6 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
 
     public static function updateAttendeeRole(){
 		$people = array();
-		echo 'past<br/>';
 		$EM_Events = EM_Events::get(array('scope'=>'past' ));
 		foreach ( $EM_Events as $EM_Event ) {
 			$lister = $EM_Event->get_bookings();
@@ -801,7 +800,6 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
 				wp_update_user($userdata);;
 			}
 		}
-		echo 'future<br/>';
 	$EM_Events = EM_Events::get(array('scope'=>'future' ));
 		foreach ( $EM_Events as $EM_Event ) {
 			$lister = $EM_Event->get_bookings();
@@ -817,6 +815,5 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
 				wp_update_user($userdata);;
 			}
 		}
-	echo 'biouh';
 	}
 }
