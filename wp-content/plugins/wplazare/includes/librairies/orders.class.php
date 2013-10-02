@@ -1166,6 +1166,10 @@ class wplazare_orders
                 {
                     case '00000':
                         $order_status = 'closed';
+                        $last_numero_fiscal = wplazare_orders::getLastNumeroFiscal(date('Y'));
+                        $last_id = ($last_numero_fiscal % 1000000) +1;
+
+                        $orderMoreInformations['order_reference'] = date('Y').substr_replace("000000",$last_id, -strlen($last_id));
                         /*	Get the orders informations to update with the lazare return infos	*/
                         $currentOrder = wplazare_orders::getElement($reference, "'valid'", 'id');
                         $amout = $currentOrder->order_amount / 100;

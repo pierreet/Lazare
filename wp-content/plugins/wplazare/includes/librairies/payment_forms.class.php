@@ -832,7 +832,7 @@ class wplazare_payment_form
 		}
 		else
 		{/*	If the current form is no longer valid we output a message	*/
-			$formContent .= sprintf(__('Une erreur est survenue. Merci de nous contacter en pr&eacute;cisant le code d\'erreur suivant: Form%dInvalid', 'wplazare'), $formIdentifier);
+			$formContent .= sprintf(__('Une erreur est survenue. Merci de nous contacter en pr&eacute;cisant le code d\'erreur suivant: Form%dInvalid', 'wplazare'), $id);
 		}
 
 		return $formContent;
