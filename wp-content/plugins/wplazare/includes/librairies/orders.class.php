@@ -447,8 +447,10 @@ class wplazare_orders
                 $tableRowValue = array();
                 foreach( $column_list as $column)
                 {
-                    if($column == 'reference' || $column == 'fiscal')
+                    if($column == 'reference')
                         $tableRowValue[] = array('class' => wplazare_orders::getCurrentPageCode() . '_reference_cell', 'value' => $elementLabel);
+                    if($column == 'fiscal')
+                        $tableRowValue[] = array('class' => wplazare_orders::getCurrentPageCode() . '_reference_cell', 'value' => '<a href="' . $editAction . '" >' .$element->order_reference. '</a>');
                     if($column == 'date')
                         $tableRowValue[] = array('class' => $boldClass.' '.wplazare_orders::getCurrentPageCode() . '_date_cell', 'value' => '<a href="' . $editAction . '" >' . mysql2date('d M Y H:i:s', $element->creation_date  . '</a>'. $rowActions, true));
                     if($column == 'amount'){
