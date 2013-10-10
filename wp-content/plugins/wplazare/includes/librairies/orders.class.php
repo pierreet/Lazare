@@ -1172,10 +1172,12 @@ class wplazare_orders
                         $last_id = ($last_numero_fiscal % 1000000) +1;
 
                         $orderMoreInformations['order_reference'] = date('Y').substr_replace("000000",$last_id, -strlen($last_id));
+
                         /*	Get the orders informations to update with the lazare return infos	*/
                         $currentOrder = wplazare_orders::getElement($reference, "'valid'", 'id');
-                        $amout = $currentOrder->order_amount / 100;
-                        $outputMessage = sprintf(__('Votre paiement de %s a bien &eacute;t&eacute; effectu&eacute;', 'wplazare'), $amout . '&nbsp;' . $currencyIconList[$currentOrder->order_currency]);
+                        $currentOrder->order_reference = $orderMoreInformations['order_reference'];
+                        $amount = $currentOrder->order_amount / 100;
+                        $outputMessage = sprintf(__('Votre paiement de %s a bien &eacute;t&eacute; effectu&eacute;', 'wplazare'), $amount . '&nbsp;' . $currencyIconList[$currentOrder->order_currency]);
                         if($currentOrder->user_recu > 0) wplazare_orders::sendRecu($currentOrder);
                         break;
                     case '00001':
