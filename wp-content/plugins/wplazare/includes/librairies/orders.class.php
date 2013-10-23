@@ -452,7 +452,7 @@ class wplazare_orders
                     if($column == 'fiscal')
                         $tableRowValue[] = array('class' => wplazare_orders::getCurrentPageCode() . '_reference_cell', 'value' => '<a href="' . $editAction . '" >' .$element->order_reference. '</a>');
                     if($column == 'date')
-                        $tableRowValue[] = array('class' => $boldClass.' '.wplazare_orders::getCurrentPageCode() . '_date_cell', 'value' => '<a href="' . $editAction . '" >' . mysql2date('d M Y H:i:s', $element->creation_date  . '</a>'. $rowActions, true));
+                        $tableRowValue[] = array('class' => $boldClass.' '.wplazare_orders::getCurrentPageCode() . '_date_cell', 'value' => '<a href="' . $editAction . '" >' . mysql2date('d M Y H:i:s', $element->creation_date)  . '</a>'. $rowActions, true);
                     if($column == 'amount'){
                         $tableRowValue[] = array('class' => $boldClass.' '.wplazare_orders::getCurrentPageCode() . '_amount_cell', 'value' => $orderAmount . '&nbsp;' . $currencyIconList[$element->order_currency]);
                         if($element->order_status == "closed"){

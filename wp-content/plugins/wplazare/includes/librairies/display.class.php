@@ -169,7 +169,7 @@ class wplazare_display
 			case WPLAZARE_URL_SLUG_ORDERS_LISTING:
 			case WPLAZARE_URL_SLUG_ORDERS_EDITION:
                 $columns_to_show = array('date', 'name', 'amount', 'type', 'fiscal','reason', 'status', 'city');
-                $columns_data_value = array('', '', '', '','', 'data-value="Don"', 'data-value="Terminé"', '');
+                $columns_data_value = array('', '', '', '','', 'data-value="Don"', '', '');
 				$objectType = new wplazare_orders($columns_to_show,$columns_data_value);
 			break;
 
