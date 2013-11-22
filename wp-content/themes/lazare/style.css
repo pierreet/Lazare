@@ -6,6 +6,7 @@ Template: twentyeleven
 */
 @import url("../twentyeleven/style.css");
 
+
 a {
 	cursor: pointer;
 }
@@ -972,3 +973,36 @@ img.btn_close {
 * html .popup_block {
 	position: absolute;
 }
+
+
+/****************************************/
+
+/* #Media Queries
+================================================== */
+	
+/* All Mobile Sizes (devices and browser) */
+	@media only screen and (max-width: 767px) {
+		/* Navigation */
+		#branding #bandeau-lazare, .cycle-container , #branding img.lignes{
+			display:none;
+		}
+		#site-title a {
+			height: 91px;
+			display: block;
+			width:auto;
+			text-indent: -5000px;
+			background: url("images/lazare.png") no-repeat scroll 0 0	#fff;
+		}
+		#main #content {
+			margin: 0 2.6%;
+			width: auto;
+			background: #fff;
+		}
+		#page  {
+			background: #fff;
+		}
+		.access li {
+			margin-left: 12px;
+		}
+	}
+/****************************************/
