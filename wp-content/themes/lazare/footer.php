@@ -23,6 +23,7 @@
 			?>
 
 			<div id="site-generator">
+				<img src="<?php echo get_theme_root_uri(); ?>/lazare/images/fondation-nd.jpg" height="100px" width="214px" alt="Fondation Notre-Dame" />
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>mentions-legales" class="mentionslegales">Mentions Légales</a> - Lazare - 1 rue du Plâtre - 75004 Paris – <a href="<?php echo esc_url( home_url( '/' ) ); ?>contactez-nous" class="mentionslegales">Contact</a> - <a href="<?php echo esc_url( home_url( '/' ) ); ?>newsletter" class="newsletter"><img src="<?php echo get_theme_root_uri(); ?>/lazare/images/newsletter.png" alt="Newsletter" /></a> 
 			</div>
 	</footer><!-- #colophon -->
