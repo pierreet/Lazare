@@ -66,6 +66,7 @@ __('payment_form_cgv_url', 'wplazare');
 __('single_payment', 'wplazare');
 __('multiple_payment', 'wplazare');
 __('cheque_payment', 'wplazare');
+__('virement_payment', 'wplazare');
 __('payment_amount', 'wplazare');
 __('payment_currency', 'wplazare');
 __('payment_type', 'wplazare');

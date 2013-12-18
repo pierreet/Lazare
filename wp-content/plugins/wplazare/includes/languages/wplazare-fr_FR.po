@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Wp-Paybox\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-09 23:59+0100\n"
-"PO-Revision-Date: 2013-01-10 00:00+0100\n"
-"Last-Translator: charles dupoiron <charlesdupoiron@yahoo.fr>\n"
+"PO-Revision-Date: 2013-12-18 17:58+0100\n"
+"Last-Translator: Charles Dupoiron <charlesdupoiron@yahoo.fr>\n"
 "Language-Team: développement eoxia <dev@eoxia.com>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
@@ -12,10 +12,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
 "X-Poedit-Basepath: ../includes\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.3\n"
 "X-Poedit-SearchPath-0: ../../includes\n"
 "X-Poedit-SearchPath-1: ../includes\n"
-"X-Poedit-SearchPath-2: C:\\php\\Workspace\\lazare\\wp-content\\plugins"
+"X-Poedit-SearchPath-2: C:\\php\\Workspace\\Lazare_crepy\\wp-content\\plugins"
 "\\wplazare\\includes\\languages\n"
 
 #: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:12
@@ -217,6 +217,9 @@ msgstr "Virement"
 #: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:68
 msgid "cheque_payment"
 msgstr "Paiement par ch&egrave;que"
+
+msgid "virement_payment"
+msgstr "Paiement par virement"
 
 #: C:\php\Workspace\lazare\wp-content\plugins\wplazare\includes\languages/db_filed_list.php:69
 msgid "payment_amount"

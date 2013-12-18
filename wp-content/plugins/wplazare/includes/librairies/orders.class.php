@@ -175,6 +175,17 @@ class wplazare_orders
                 $actionResult = 'error_validate';
         }
 
+        if( isset($_REQUEST['rf_don_prelevement']) )
+        {
+            $reference = $_REQUEST['generate'];
+            $message = wplazare_orders::getRecuFiscalDonPrelevement($reference);
+
+            if ($message != "error")
+                $actionResult = 'done_validate';
+            else
+                $actionResult = 'error_validate';
+        }
+
         if($pageAction == 'delete')
         {
             if(current_user_can('wplazare_delete_orders'))
@@ -195,6 +206,31 @@ class wplazare_orders
             {
                 $_REQUEST[wplazare_orders::getDbTable()]['last_update_date'] = date('Y-m-d H:i:s');
                 $_REQUEST[wplazare_orders::getDbTable()]['order_status'] = 'closed';
+                $_REQUEST[wplazare_orders::getDbTable()]['status'] = 'valid';
+                // 2013 1000000
+                $last_numero_fiscal = wplazare_orders::getLastNumeroFiscal(date('Y'));
+                $last_id = ($last_numero_fiscal % 1000000) +1;
+
+                $_REQUEST[wplazare_orders::getDbTable()]['order_reference'] = date('Y').substr_replace("000000",$last_id, -strlen($last_id));
+                $actionResult = wplazare_database::update($_REQUEST[wplazare_orders::getDbTable()], $id, wplazare_orders::getDbTable());
+
+                $currentOrder = wplazare_orders::getElement($id, "'valid'", 'id');
+                if($currentOrder->user_recu > 0) wplazare_orders::sendRecu($currentOrder);
+
+            }
+            else
+            {
+                $actionResult = 'userNotAllowedForActionDelete';
+            }
+        }
+
+        if($pageAction == 'changePaiementToVirement')
+        {
+            if(current_user_can('wplazare_delete_orders'))
+            {
+                $_REQUEST[wplazare_orders::getDbTable()]['last_update_date'] = date('Y-m-d H:i:s');
+                $_REQUEST[wplazare_orders::getDbTable()]['order_status'] = 'closed';
+                $_REQUEST[wplazare_orders::getDbTable()]['payment_type'] = 'virement_payment';
                 $_REQUEST[wplazare_orders::getDbTable()]['status'] = 'valid';
                 // 2013 1000000
                 $last_numero_fiscal = wplazare_orders::getLastNumeroFiscal(date('Y'));
@@ -696,12 +732,12 @@ class wplazare_orders
                     $current_appartement = wplazare_apparts::getElement($current_location->appartement);
                     $editUserAction = admin_url(
                         'admin.php?page='
-                            . wplazare_users::getEditionSlug()
-                            . '&amp;action=edit&amp;id=' . $current_user_id);
+                        . wplazare_users::getEditionSlug()
+                        . '&amp;action=edit&amp;id=' . $current_user_id);
                     $editLocationAction = admin_url(
                         'admin.php?page='
-                            . wplazare_locations::getEditionSlug()
-                            . '&amp;action=edit&amp;id=' . $current_location->id);
+                        . wplazare_locations::getEditionSlug()
+                        . '&amp;action=edit&amp;id=' . $current_location->id);
                     $the_form_charge_content .= '
 		<div class="clear" >
 			<div class="wplazare_form_label wplazare_' . wplazare_orders::getCurrentPageCode() . '_' . $input_name . '_label alignleft" >
@@ -797,7 +833,66 @@ class wplazare_orders
 			<div>' . $the_form_charge_content	. '</div>
 		</fieldset>';
 
-        if($isChequePayment && $orderStatus != __('closed', 'wplazare')) $the_form_general_content .= '<br/><input type="button" class="button-primary" id="validatePaiement" name="validatePaiement" value="D&eacute;clar&eacute; Pay&eacute; et envoyer le re&ccedil;u">';
+        if($isChequePayment && $orderStatus != __('closed', 'wplazare')){
+            $the_form_general_content .= '<br/><input type="button" class="button-primary" id="validatePaiement" name="validatePaiement" value="D&eacute;clar&eacute; Pay&eacute; et envoyer le re&ccedil;u"><br/>';
+            $the_form_general_content .= '<br/><input type="button" class="button-primary" id="changePaiementToVirement" name="changePaiementToVirement" value="Changer le type de paiement en virement et envoyer le re&ccedil;u">';
+        }
+
+        if($editedItem->payment_type == "multiple_payment" && $editedItem->location_id == NULL){
+            $formEditRecuAction = admin_url('admin.php?page=' . wplazare_orders::getEditionSlug() . '&amp;action=edit&amp;id=' . $itemToEdit);
+            $recu_form = '
+ <fieldset class="clear orderSection">
+			<legend class="orderSectionMainTitle">Edition reçu</legend>
+            <div class="clear" >
+				<div class="wplazare_form_label alignleft" >
+					Nombre de mois pay&eacute;s
+				</div>
+				<div class="wplazare_form_input alignleft" >
+					<input type="number" name="nbr_mois" min="1" max="12"/>
+				</div>
+			</div>
+			<div class="clear" >
+				<div class="wplazare_form_label alignleft" >
+					Premier mois de pr&eacute;l&egrave;vement
+				</div>
+				<div class="wplazare_form_input alignleft" >
+					<input type="text" name="premier_mois"/>
+				</div>
+			</div>
+			<div class="clear" >
+				<div class="wplazare_form_label alignleft" >
+					Ann&eacute;e premier mois
+				</div>
+				<div class="wplazare_form_input alignleft" >
+					<input type="number" name="premier_mois_annee"/>
+				</div>
+			</div>
+			<div class="clear" >
+				<div class="wplazare_form_label alignleft" >
+					Dernier mois de pr&eacute;l&egrave;vement
+				</div>
+				<div class="wplazare_form_input alignleft" >
+					<input type="text" name="dernier_mois"/>
+				</div>
+			</div>
+			<div class="clear" >
+				<div class="wplazare_form_label alignleft" >
+					Ann&eacute;e dernier mois
+				</div>
+				<div class="wplazare_form_input alignleft" >
+					<input type="number" name="dernier_mois_annee"/>
+				</div>
+			</div>
+			<div class="clear" >
+				<div class="wplazare_form_label alignleft" >
+					<input type="button" class="button-primary" value="Editer le recu" id="editRecuDonMensuel" />
+				</div>
+			</div>
+		</fieldset>
+            ';
+            $the_form_general_content .= $recu_form;
+        }
+
 
         if($orderStatus == __('closed', 'wplazare')) $the_form_general_content .= '<br/><br/><input type="button" class="button-primary" id="editRecu" name="editRecu" value="Editer le re&ccedil;u">';
 
@@ -847,7 +942,7 @@ class wplazare_orders
 				wplazare("#' . wplazare_orders::getDbTable() . '_action").val("edit");
 			}
 		}
-		
+
 		wplazare("#validatePaiement").click(function(){
 			wplazare("#' . wplazare_orders::getDbTable() . '_action").val("validatePaiement");
 			validatePaiement();
@@ -863,7 +958,39 @@ class wplazare_orders
 				wplazare("#' . wplazare_orders::getDbTable() . '_action").val("edit");
 			}
 		}
-		
+
+		wplazare("#changePaiementToVirement").click(function(){
+			wplazare("#' . wplazare_orders::getDbTable() . '_action").val("changePaiementToVirement");
+			changePaiementToVirement();
+		});
+		if(wplazare("#' . wplazare_orders::getDbTable() . '_action").val() == "changePaiementToVirement"){
+			changePaiementToVirement();
+		}
+		function changePaiementToVirement(){
+			if(confirm(wplazareConvertAccentTojs("' . __('&Ecirc;tes vous s&ucirc;r de vouloir changer le type de paiement en virement?', 'wplazare') . '"))){
+				wplazare("#' . wplazare_orders::getDbTable() . '_form").submit();
+			}
+			else{
+				wplazare("#' . wplazare_orders::getDbTable() . '_action").val("edit");
+			}
+		}
+
+		wplazare("#editRecuDonMensuel").click(function(){
+			wplazare("#' . wplazare_orders::getDbTable() . '_action").val("export");
+			editRecuDonMensuel();
+		});
+		if(wplazare("#' . wplazare_orders::getDbTable() . '_action").val() == "export"){
+			editRecuDonMensuel();
+		}
+		function editRecuDonMensuel(){
+			if(confirm(wplazareConvertAccentTojs("' . __('&Ecirc;tes vous s&ucirc;r de vouloir &eacute;diter le re&ccedil;u avec les param&egrave;tres actuels?', 'wplazare') . '"))){
+				wplazare("#' . wplazare_orders::getDbTable() . '_form").submit();
+			}
+			else{
+				wplazare("#' . wplazare_orders::getDbTable() . '_action").val("edit");
+			}
+		}
+
 		wplazare("#editRecu").click(function(){
 			wplazare("#' . wplazare_orders::getDbTable() . '_action").val("export");
 			wplazare("#' . wplazare_orders::getDbTable() . '_form").submit();
@@ -961,7 +1088,7 @@ class wplazare_orders
     }
 
     /*
-     * Edite le re�u de la commande en parametre.
+     * Edite le re?u de la commande en parametre.
      */
     function export($itemToEdit){
 
@@ -973,8 +1100,31 @@ class wplazare_orders
 
             $currentOrder = wplazare_orders::getElement($itemToEdit, "'valid'", 'id');
 
+            /* TODO faire test si paiement multiple => récuperer année mois, préparer les balises, changer le remplate name
+            ET BIM
+             */
+
             $balises_replace = wplazare_orders::prepareBalisesReplace($currentOrder);
 
+            if($currentOrder->payment_type == "multiple_payment" && $currentOrder->location_id == NULL){
+                $template_name="recu_fiscal_don_mensuel";
+                $premier_mois = (wplazare_tools::varSanitizer($_POST['premier_mois']));
+                $premier_mois_annee = intval(wplazare_tools::varSanitizer($_POST['premier_mois_annee']));
+                $dernier_mois = (wplazare_tools::varSanitizer($_POST['dernier_mois']));
+                $dernier_mois_annee = intval(wplazare_tools::varSanitizer($_POST['dernier_mois_annee']));
+
+                $nbr_mois = intval(wplazare_tools::varSanitizer($_POST['nbr_mois']));
+                $somme_dons_mensuels = $nbr_mois * $currentOrder->order_amount / 100 ;
+                $balises_replace[] = array( "balise" => "{PREMIER_MOIS}", "new_text" => $premier_mois );
+                $balises_replace[] = array( "balise" => "{PREMIER_MOIS_ANNEE}", "new_text" => $premier_mois_annee );
+                $balises_replace[] = array( "balise" => "{DERNIER_MOIS}", "new_text" => $dernier_mois );
+                $balises_replace[] = array( "balise" => "{DERNIER_MOIS_ANNEE}", "new_text" => $dernier_mois_annee );
+                $balises_replace[] = array( "balise" => "{SOMME_DONS_MENSUELS}", "new_text" => $somme_dons_mensuels );
+                $balises_replace[] = array( "balise" => "{DEDUCTION_DONS_MENSUELS}", "new_text" => wplazare_orders::prepareDeductionDonsMensuels($currentOrder, $somme_dons_mensuels) );
+            }
+
+
+            /* TODO donner l'id de l'utilisateur en paramètre pour sauvegarder sous ID/ANNEE MOIS */
             $file_path = $pdfator->getPdf($template_name, $balises_replace);
 
             if($file_path != ''){
@@ -1329,6 +1479,8 @@ class wplazare_orders
                 break;
             case 'cheque_payment' : $paiement_type = 'Ch&egrave;que';
                 break;
+            case 'virement_payment' : $paiement_type = 'Virement';
+                break;
         }
 
         $balises_replace = array(
@@ -1355,7 +1507,38 @@ class wplazare_orders
     function prepareDeduction($currentOrder){
         $deduction_max = 521;
         $last_don = intval($currentOrder->order_amount / 100);
+
         $total_don = intval(wplazare_orders::getDonTotalFrom($currentOrder->user_firstname, $currentOrder->user_lastname, $currentOrder->last_update_date) / 100);
+
+        $return = '';
+
+        if($total_don < $deduction_max){
+            $return = 'Votre don de <b>'.$last_don.' &euro;</b> est d&eacute;ductible &agrave; <b>75 %.</b><br/>';
+            $cout_reel = round($last_don * 0.25,2);
+        }
+        else{
+            if( ($total_don-$last_don) > $deduction_max){
+                $return = 'Votre don de <b>'.$last_don.' &euro;</b> est d&eacute;ductible &agrave; <b>66 %.</b><br/>';
+                $cout_reel = round($last_don * 0.34,2);
+            }
+            else{
+                $part75 = $deduction_max - ($total_don-$last_don);
+                $part66 = $last_don - $part75;
+                $return .= 'De votre don, <b>'.$part75.' &euro;</b> sont d&eacute;ductibles &agrave; <b>75 %</b>.<br/>';
+                $return .= 'Les <b>'.$part66.' &euro;</b> restants sont d&eacute;ductibles &agrave; <b>66 %</b>.<br/>';
+                $cout_reel = round(($part75 * 0.25) + ($part66 * 0.34),2);
+            }
+        }
+        $return .= '(le co&ucirc;t r&eacute;el de votre don est de '.$cout_reel.' &euro; )';
+        return $return;
+    }
+
+    function prepareDeductionDonsMensuels($currentOrder,$somme){
+        $deduction_max = 521;
+        $last_don = intval($somme);
+
+        $total_don = intval(wplazare_orders::getDonTotalFrom($currentOrder->user_firstname, $currentOrder->user_lastname, $currentOrder->last_update_date) / 100)
+        + $last_don;
 
         $return = '';
 
@@ -1384,11 +1567,12 @@ class wplazare_orders
         global $wpdb;
         $query = $wpdb->prepare(
             "SELECT SUM(WPORDERS.order_amount) AS somme ".
-                "FROM ".wplazare_orders::getDbTable()." AS WPORDERS WHERE WPORDERS.user_firstname LIKE '$firstname' ".
-                "AND WPORDERS.user_lastname LIKE '$lastname' ".
-                "AND YEAR(WPORDERS.last_update_date) = '".date('Y',strtotime($last_update_date))."' ".
-                "AND WPORDERS.last_update_date <= '$last_update_date' ".
-                "AND WPORDERS.order_status LIKE 'closed' "
+            "FROM ".wplazare_orders::getDbTable()." AS WPORDERS WHERE WPORDERS.user_firstname LIKE '$firstname' ".
+            "AND WPORDERS.user_lastname LIKE '$lastname' ".
+            "AND YEAR(WPORDERS.last_update_date) = '".date('Y',strtotime($last_update_date))."' ".
+            "AND WPORDERS.last_update_date <= '$last_update_date' ".
+            "AND WPORDERS.order_status LIKE 'closed' ".
+            "AND WPORDERS.payment_type != 'multiple_payment' "
         );
 
         $res = $wpdb->get_row($query);
@@ -1406,8 +1590,8 @@ class wplazare_orders
 
         $query = $wpdb->prepare(
             "SELECT * ".
-                "FROM ".wplazare_orders::getDbTable()." AS WPORDERS WHERE WPORDERS.user_email LIKE '$user_email' ". $order_status_filter .
-                "ORDER BY WPORDERS.last_update_date"
+            "FROM ".wplazare_orders::getDbTable()." AS WPORDERS WHERE WPORDERS.user_email LIKE '$user_email' ". $order_status_filter .
+            "ORDER BY WPORDERS.last_update_date"
         );
 
         return $wpdb->get_results($query);
@@ -1423,11 +1607,11 @@ class wplazare_orders
 
         $query = $wpdb->prepare(
             "SELECT * ".
-                "FROM ".wplazare_orders::getDbTable()." AS WPORDERS WHERE ".
-                "YEAR(WPORDERS.creation_date) ='$year' ".
-                "AND MONTH(WPORDERS.creation_date) ='$month' ".
-                $order_status_filter .
-                " ORDER BY WPORDERS.last_update_date"
+            "FROM ".wplazare_orders::getDbTable()." AS WPORDERS WHERE ".
+            "YEAR(WPORDERS.creation_date) ='$year' ".
+            "AND MONTH(WPORDERS.creation_date) ='$month' ".
+            $order_status_filter .
+            " ORDER BY WPORDERS.last_update_date"
         );
 
         return $wpdb->get_results($query);
@@ -1560,16 +1744,17 @@ class wplazare_orders
 
         return $message;
     }
+
     function getAnnees()
     {
         global $wpdb;
 
         $query = $wpdb->prepare(
             "SELECT MIN(YEAR(".wplazare_orders::getDbTable().".creation_date)) AS first_year ".
-                "FROM ".wplazare_orders::getDbTable()
+            "FROM ".wplazare_orders::getDbTable()
         );
 
-        // ajoute l'ann�e actuelle si elle n'est pas dedans
+        // ajoute l'ann?e actuelle si elle n'est pas dedans
         $res = $wpdb->get_row($query);
         $year = $res->first_year;
         $current_year = date("Y", (current_time("timestamp", 0)));
@@ -1613,7 +1798,7 @@ class wplazare_orders
 
         $query = $wpdb->prepare(
             "SELECT * ".
-                "FROM ".wplazare_orders::getDbTable(). " WHERE creation_date > '$date' AND order_status='closed'".$where_clause
+            "FROM ".wplazare_orders::getDbTable(). " WHERE creation_date > '$date' AND order_status='closed'".$where_clause
         );
 
         // ajoute l'année actuelle si elle n'est pas dedans
@@ -1626,9 +1811,9 @@ class wplazare_orders
         global $wpdb;
         $query = $wpdb->prepare(
             "SELECT MAX(order_reference) AS last_id ".
-                "FROM ".wplazare_orders::getDbTable()." AS WPORDERS WHERE ".
-                "YEAR(WPORDERS.last_update_date) = '".$date."' ".
-                "AND WPORDERS.order_status LIKE 'closed' "
+            "FROM ".wplazare_orders::getDbTable()." AS WPORDERS WHERE ".
+            "YEAR(WPORDERS.last_update_date) = '".$date."' ".
+            "AND WPORDERS.order_status LIKE 'closed' "
         );
 
         $res = $wpdb->get_row($query);
