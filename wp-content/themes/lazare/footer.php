@@ -22,8 +22,8 @@
 					get_sidebar( 'footer' );
 			?>
 
+			<span style="float:left;color: #666;font-size: 12px;text-align:center;margin-left: 80px;height: 1px;padding-top: 5px;">avec le soutien de <br /><a href="http://www.fondationnotredame.fr/" title="Fondation Notre-Dame"><img src="<?php echo get_theme_root_uri(); ?>/lazare/images/fondation-nd.jpg" height="70px" width="150px" alt="Fondation Notre-Dame" /></a></span>
 			<div id="site-generator">
-				<img src="<?php echo get_theme_root_uri(); ?>/lazare/images/fondation-nd.jpg" height="100px" width="214px" alt="Fondation Notre-Dame" />
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>mentions-legales" class="mentionslegales">Mentions Légales</a> - Lazare - 1 rue du Plâtre - 75004 Paris – <a href="<?php echo esc_url( home_url( '/' ) ); ?>contactez-nous" class="mentionslegales">Contact</a> - <a href="<?php echo esc_url( home_url( '/' ) ); ?>newsletter" class="newsletter"><img src="<?php echo get_theme_root_uri(); ?>/lazare/images/newsletter.png" alt="Newsletter" /></a> 
 			</div>
 	</footer><!-- #colophon -->
