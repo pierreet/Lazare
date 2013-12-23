@@ -30,7 +30,7 @@ class wplazare_pdfator
 		//$template_name ="attestation_domicile";
 		$return_value = "";
 
-        $filename = $reference!=""?$template_name."-".$reference:$template_name;
+        $filename = $reference!=""?$reference:$template_name;
 		
 		$html_template = WPLAZARE_HTML2PDF_PLUGIN_DIR."templates/".$template_name.".html";
 		if( @file_exists($html_template) )

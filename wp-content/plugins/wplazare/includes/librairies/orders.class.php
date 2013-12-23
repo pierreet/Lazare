@@ -885,7 +885,7 @@ class wplazare_orders
 			</div>
 			<div class="clear" >
 				<div class="wplazare_form_label alignleft" >
-					<input type="button" class="button-primary" value="Editer le recu" id="editRecuDonMensuel" />
+					<input type="button" class="button-primary" value="G&eacute;n&eacute;rer le recu" id="editRecuDonMensuel" />
 				</div>
 			</div>
 		</fieldset>
@@ -894,7 +894,7 @@ class wplazare_orders
         }
 
 
-        if($orderStatus == __('closed', 'wplazare')) $the_form_general_content .= '<br/><br/><input type="button" class="button-primary" id="editRecu" name="editRecu" value="Editer le re&ccedil;u">';
+        if($orderStatus == __('closed', 'wplazare')) $the_form_general_content .= '<br/><br/><input type="button" class="button-primary" id="editRecu" name="editRecu" value="G&eacute;n&eacute;rer le re&ccedil;u">';
 
         $formEditAction = admin_url('admin.php?page=' . wplazare_orders::getEditionSlug() . '&amp;action=edit&amp;id=' . $itemToEdit);
         $formAction = "";
@@ -983,7 +983,7 @@ class wplazare_orders
 			editRecuDonMensuel();
 		}
 		function editRecuDonMensuel(){
-			if(confirm(wplazareConvertAccentTojs("' . __('&Ecirc;tes vous s&ucirc;r de vouloir &eacute;diter le re&ccedil;u avec les param&egrave;tres actuels?', 'wplazare') . '"))){
+			if(confirm(wplazareConvertAccentTojs("' . __('&Ecirc;tes vous s&ucirc;r de vouloir g&eacute;n&eacute;rer le re&ccedil;u avec les param&egrave;tres actuels?', 'wplazare') . '"))){
 				wplazare("#' . wplazare_orders::getDbTable() . '_form").submit();
 			}
 			else{
@@ -1100,7 +1100,7 @@ class wplazare_orders
 
             $currentOrder = wplazare_orders::getElement($itemToEdit, "'valid'", 'id');
 
-            $balises_replace = wplazare_orders::prepareBalisesReplace($currentOrder);
+
 
             if($currentOrder->payment_type == "multiple_payment" && $currentOrder->location_id == NULL){
                 $template_name="recu_fiscal_don_mensuel";
@@ -1122,6 +1122,7 @@ class wplazare_orders
 
                 $nbr_mois = intval(wplazare_tools::varSanitizer($_POST['nbr_mois']));
                 $somme_dons_mensuels = $nbr_mois * $currentOrder->order_amount / 100 ;
+                $balises_replace = wplazare_orders::prepareBalisesReplace($currentOrder);
                 $balises_replace[] = array( "balise" => "{PREMIER_MOIS}", "new_text" => $premier_mois );
                 $balises_replace[] = array( "balise" => "{PREMIER_MOIS_ANNEE}", "new_text" => $premier_mois_annee );
                 $balises_replace[] = array( "balise" => "{DERNIER_MOIS}", "new_text" => $dernier_mois );
@@ -1129,10 +1130,13 @@ class wplazare_orders
                 $balises_replace[] = array( "balise" => "{SOMME_DONS_MENSUELS}", "new_text" => $somme_dons_mensuels );
                 $balises_replace[] = array( "balise" => "{DEDUCTION_DONS_MENSUELS}", "new_text" => wplazare_orders::prepareDeductionDonsMensuels($currentOrder, $somme_dons_mensuels) );
             }
+            else{
+                $balises_replace = wplazare_orders::prepareBalisesReplace($currentOrder);
+            }
 
 
             /* TODO donner l'id de l'utilisateur en paramètre pour sauvegarder sous ID/ANNEE MOIS */
-            $file_path = $pdfator->getPdf($template_name, $balises_replace, $currentOrder->order_reference);
+            $file_path = $pdfator->getPdf($template_name, $balises_replace, "recu_fiscal-".$currentOrder->order_reference);
 
             if($file_path != ''){
                 $return = '<h3>Re&ccedil;u fiscal</h3>';
