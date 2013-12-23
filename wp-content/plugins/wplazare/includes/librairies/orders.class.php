@@ -1115,7 +1115,9 @@ class wplazare_orders
 
                     $currentOrder->order_reference = date('Y').substr_replace("000000",$last_id, -strlen($last_id));
 
-                    wplazare_database::update((array)$currentOrder, $currentOrder->id, wplazare_orders::getDbTable());
+                    $order['order_reference'] =  $currentOrder->order_reference;
+
+                    wplazare_database::update($order, $currentOrder->id, wplazare_orders::getDbTable());
                 }
 
                 $nbr_mois = intval(wplazare_tools::varSanitizer($_POST['nbr_mois']));
@@ -1130,7 +1132,7 @@ class wplazare_orders
 
 
             /* TODO donner l'id de l'utilisateur en paramètre pour sauvegarder sous ID/ANNEE MOIS */
-            $file_path = $pdfator->getPdf($template_name."-".$currentOrder->order_reference, $balises_replace);
+            $file_path = $pdfator->getPdf($template_name, $balises_replace, $currentOrder->order_reference);
 
             if($file_path != ''){
                 $return = '<h3>Re&ccedil;u fiscal</h3>';
