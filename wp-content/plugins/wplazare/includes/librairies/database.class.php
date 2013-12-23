@@ -43,7 +43,7 @@ class wplazare_database
 						last_update_date datetime,
 						form_id int(10) unsigned NOT NULL,
 						offer_id int(10) unsigned NOT NULL,
-						payment_type enum('single_payment', 'multiple_payment','cheque_payment') collate utf8_unicode_ci NOT NULL default 'single_payment',
+						payment_type enum('single_payment', 'multiple_payment','cheque_payment','virement_payment') collate utf8_unicode_ci NOT NULL default 'single_payment',
 						payment_recurrent_amount char(10) default '0',
 						payment_recurrent_number char(2),
 						payment_recurrent_frequency char(2),

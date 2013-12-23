@@ -25,10 +25,12 @@ class wplazare_pdfator
 	*
 	*	@return string The pdf file path+name
 	*/
-	function getPdf($template_name, $balises_replace)
+	function getPdf($template_name, $balises_replace, $reference = "")
 	{	
 		//$template_name ="attestation_domicile";
 		$return_value = "";
+
+        $filename = $reference!=""?$reference:$template_name;
 		
 		$html_template = WPLAZARE_HTML2PDF_PLUGIN_DIR."templates/".$template_name.".html";
 		if( @file_exists($html_template) )
@@ -42,7 +44,7 @@ class wplazare_pdfator
 					$content = str_replace ( $balise_replace["balise"] , $balise_replace["new_text"] , $content );	
 				}
 			}			
-			$output_filename = WPLAZARE_HTML2PDF_PLUGIN_DIR."output/".$template_name."-".date("Y-m").".pdf";
+			$output_filename = WPLAZARE_HTML2PDF_PLUGIN_DIR."output/".$filename.".pdf";
             if(file_exists($output_filename)){
                 unlink($output_filename);
             }
