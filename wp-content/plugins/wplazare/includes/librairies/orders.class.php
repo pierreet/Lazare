@@ -378,7 +378,8 @@ class wplazare_orders
                             <input type="hidden" name="search3" value="annee"/>
                         </form>
                         <div class="alignright">
-                            <a href="'.admin_url('admin.php?page=wplazare_orders&amp;action=export&year='.$annee.'&month='.$mois).'">Export vers Excel</a>
+                            <a href="'.admin_url('admin.php?page=wplazare_orders&amp;action=export&year='.$annee.'&month='.$mois).'" class="button-primary">Export vers Excel</a>
+                            <br/><br/>
                         </div>
             ';
         }
@@ -570,7 +571,7 @@ class wplazare_orders
 
         $total_line = "";
         if(!$this->hide_total){
-            $total_line = "<h2>Montant total du mois (Don avec statut = \"Terminé\"): ".$total_sum.$currencyIconList[$element->order_currency]."</h2>";
+            $total_line = "<h2>Montant total du mois: ".$total_sum.$currencyIconList[$element->order_currency]."</h2>";
         }
 
         return $selectForm.$listItemOutput."<br/>".$total_line;
@@ -839,6 +840,14 @@ class wplazare_orders
         }
 
         if($editedItem->payment_type == "multiple_payment" && $editedItem->location_id == NULL){
+
+            $voir_le_recu_fiscal="";
+            $pdf = plugins_url( "/html2pdf/output/recu_fiscal-".$editedItem->order_reference.".pdf" , __FILE__ );
+            $server_file = WPLAZARE_HTML2PDF_PLUGIN_DIR."/output/recu_fiscal-".$editedItem->order_reference.".pdf";
+            if( @file_exists($server_file) ){
+                $voir_le_recu_fiscal='<a href="'.$pdf.'" title="Voir le re&ccedil;u fiscal" class="button-primary">Voir le re&ccedil;u</a>';
+            }
+
             $formEditRecuAction = admin_url('admin.php?page=' . wplazare_orders::getEditionSlug() . '&amp;action=edit&amp;id=' . $itemToEdit);
             $recu_form = '
  <fieldset class="clear orderSection">
@@ -886,6 +895,7 @@ class wplazare_orders
 			<div class="clear" >
 				<div class="wplazare_form_label alignleft" >
 					<input type="button" class="button-primary" value="G&eacute;n&eacute;rer le recu" id="editRecuDonMensuel" />
+					'.$voir_le_recu_fiscal.'
 				</div>
 			</div>
 		</fieldset>
@@ -908,7 +918,7 @@ class wplazare_orders
         {
             $link_to_autorisation = '
                 <div class="clear orderSection">
-                    <a href="'.admin_url('admin.php?page=' . wplazare_orders::getEditionSlug() . '&amp;action=edit&amp;id='.$itemToEdit.'&amp;generate='.$itemToEdit).'"> '.__("G&eacute;n&eacute;rer l'autorisation de pr&eacute;l&egrave;vement" , 'wplazare').'</a>
+                    <a class="button-primary" href="'.admin_url('admin.php?page=' . wplazare_orders::getEditionSlug() . '&amp;action=edit&amp;id='.$itemToEdit.'&amp;generate='.$itemToEdit).'"> '.__("G&eacute;n&eacute;rer l'autorisation de pr&eacute;l&egrave;vement" , 'wplazare').'</a>
                 </div>';
         }
 
