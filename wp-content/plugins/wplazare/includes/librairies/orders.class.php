@@ -1100,10 +1100,6 @@ class wplazare_orders
 
             $currentOrder = wplazare_orders::getElement($itemToEdit, "'valid'", 'id');
 
-            /* TODO faire test si paiement multiple => récuperer année mois, préparer les balises, changer le remplate name
-            ET BIM
-             */
-
             $balises_replace = wplazare_orders::prepareBalisesReplace($currentOrder);
 
             if($currentOrder->payment_type == "multiple_payment" && $currentOrder->location_id == NULL){
@@ -1112,6 +1108,15 @@ class wplazare_orders
                 $premier_mois_annee = intval(wplazare_tools::varSanitizer($_POST['premier_mois_annee']));
                 $dernier_mois = (wplazare_tools::varSanitizer($_POST['dernier_mois']));
                 $dernier_mois_annee = intval(wplazare_tools::varSanitizer($_POST['dernier_mois_annee']));
+
+                if($currentOrder->order_reference < date(Y)* 1000000){
+                    $last_numero_fiscal = wplazare_orders::getLastNumeroFiscal(date('Y'));
+                    $last_id = ($last_numero_fiscal % 1000000) +1;
+
+                    $currentOrder->order_reference = date('Y').substr_replace("000000",$last_id, -strlen($last_id));
+
+                    wplazare_database::update((array)$currentOrder, $currentOrder->id, wplazare_orders::getDbTable());
+                }
 
                 $nbr_mois = intval(wplazare_tools::varSanitizer($_POST['nbr_mois']));
                 $somme_dons_mensuels = $nbr_mois * $currentOrder->order_amount / 100 ;
@@ -1125,7 +1130,7 @@ class wplazare_orders
 
 
             /* TODO donner l'id de l'utilisateur en paramètre pour sauvegarder sous ID/ANNEE MOIS */
-            $file_path = $pdfator->getPdf($template_name, $balises_replace);
+            $file_path = $pdfator->getPdf($template_name."-".$currentOrder->order_reference, $balises_replace);
 
             if($file_path != ''){
                 $return = '<h3>Re&ccedil;u fiscal</h3>';
@@ -1454,7 +1459,7 @@ class wplazare_orders
 
         $balises_replace = wplazare_orders::prepareBalisesReplace($currentOrder);
 
-        $attachments = array( $pdfator->getPdf($template_name, $balises_replace) );
+        $attachments = array( $pdfator->getPdf($template_name."-".$currentOrder->order_reference, $balises_replace) );
         $destinataire = get_option('admin_email');
 
         if($currentOrder->user_reception_recu == 'email'){
