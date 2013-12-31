@@ -904,7 +904,14 @@ class wplazare_orders
         }
 
 
-        if($orderStatus == __('closed', 'wplazare')) $the_form_general_content .= '<br/><br/><input type="button" class="button-primary" id="editRecu" name="editRecu" value="G&eacute;n&eacute;rer le re&ccedil;u">';
+        if($orderStatus == __('closed', 'wplazare')){
+            $the_form_general_content .= '<br/><br/><input type="button" class="button-primary" id="editRecu" name="editRecu" value="G&eacute;n&eacute;rer le re&ccedil;u">';
+            $pdf = plugins_url( "/html2pdf/output/recu_fiscal-".$editedItem->order_reference.".pdf" , __FILE__ );
+            $server_file = WPLAZARE_HTML2PDF_PLUGIN_DIR."/output/recu_fiscal-".$editedItem->order_reference.".pdf";
+            if( @file_exists($server_file) ){
+                $the_form_general_content .= ' <a href="'.$pdf.'" title="Voir le re&ccedil;u fiscal" class="button-primary">Voir le re&ccedil;u</a>';
+            }
+        }
 
         $formEditAction = admin_url('admin.php?page=' . wplazare_orders::getEditionSlug() . '&amp;action=edit&amp;id=' . $itemToEdit);
         $formAction = "";
@@ -1475,7 +1482,7 @@ class wplazare_orders
 
         $balises_replace = wplazare_orders::prepareBalisesReplace($currentOrder);
 
-        $attachments = array( $pdfator->getPdf($template_name."-".$currentOrder->order_reference, $balises_replace) );
+        $attachments = array( $pdfator->getPdf($template_name, $balises_replace, "recu_fiscal-".$currentOrder->order_reference) );
         $destinataire = get_option('admin_email');
 
         if($currentOrder->user_reception_recu == 'email'){
