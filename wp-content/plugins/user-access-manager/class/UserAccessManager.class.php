@@ -133,6 +133,7 @@ class UserAccessManager
 					groupname tinytext NOT NULL,
 					groupdesc text NOT NULL,
 					groupmail text NOT NULL,
+					groupaddress text NOT NULL,
 					read_access tinytext NOT NULL,
 					write_access tinytext NOT NULL,
 					ip_range mediumtext NULL,

@@ -39,6 +39,7 @@ function insertUpdateGroup($iUserGroupId)
     $uamUserGroup->setGroupName($_POST['userGroupName']);
 	$uamUserGroup->setGroupDesc($_POST['userGroupDescription']);
 	$uamUserGroup->setGroupMail($_POST['userGroupMail']);
+	$uamUserGroup->setGroupAddress($_POST['userGroupAddress']);
 	$uamUserGroup->setReadAccess($_POST['readAccess']);
 	$uamUserGroup->setWriteAccess($_POST['writeAccess']);
 	$uamUserGroup->setIpRange($_POST['ipRange']);
@@ -126,6 +127,16 @@ function getPrintEditGroup($groupId = null)
     } 
                         ?>" id="userGroupMail" name="userGroupMail" /><br />
             		    Adresse à laquelle les inscriptions seront envoyées
+            		</td>
+            	</tr>
+				<tr class="form-field form-required">
+            		<th valign="top" scope="row">Adresse postale :</th>
+            		<td>
+						<textarea type="text" style="width:auto;" id="userGroupAddress" name="userGroupAddress" cols="54" rows="5"><?php
+						if (isset($groupId)) { 
+							echo $uamUserGroup->getGroupAddress(); 
+						}?></textarea><br />
+            		    Adresse postale de la maison
             		</td>
             	</tr>
 				<tr class="form-field form-required">

@@ -32,6 +32,7 @@ class UamUserGroup
     protected $_sGroupName = null;
     protected $_sGroupDesc = null;
 	protected $_sGroupMail = null;
+	protected $_sGroupAddress = null;
     protected $_sReadAccess = null;
     protected $_sWriteAccess = null;
     protected $_sIpRange = null;
@@ -80,6 +81,7 @@ class UamUserGroup
             $this->_sGroupName = $aDbUserGroup['groupname'];
             $this->_sGroupDesc = $aDbUserGroup['groupdesc'];
             $this->_sGroupMail = $aDbUserGroup['groupmail'];
+            $this->_sGroupAddress = $aDbUserGroup['groupaddress'];
             $this->_sReadAccess = $aDbUserGroup['read_access'];
             $this->_sWriteAccess = $aDbUserGroup['write_access'];
             $this->_sIpRange = $aDbUserGroup['ip_range'];
@@ -143,6 +145,7 @@ class UamUserGroup
             		groupname, 
             		groupdesc, 
             		groupmail, 
+            		groupaddress, 
             		read_access, 
             		write_access, 
             		ip_range
@@ -152,6 +155,7 @@ class UamUserGroup
             		'" . $this->_sGroupName . "',
             		'" . $this->_sGroupDesc . "',
             		'" . $this->_sGroupMail . "',
+            		'" . $this->_sGroupAddress . "',
             		'" . $this->_sReadAccess . "',
             		'" . $this->_sWriteAccess . "',
             		'" . $this->_sIpRange . "'
@@ -165,6 +169,7 @@ class UamUserGroup
     			SET groupname = '" . $this->_sGroupName . "',
     				groupdesc = '" . $this->_sGroupDesc . "',
     				groupmail = '" . $this->_sGroupMail . "',
+    				groupaddress = '" . $this->_sGroupAddress . "',
     				read_access = '" . $this->_sReadAccess . "',
     				write_access = '" . $this->_sWriteAccess . "',
     				ip_range = '" . $this->_sIpRange . "'
@@ -259,9 +264,9 @@ class UamUserGroup
     }
     
     /**
-     * Sets the group description.
+     * Sets the group mail.
      * 
-     * @param string $sGroupDesc The new group description.
+     * @param string $sGroupMail The new group mail.
      * 
      * @return null
      */
@@ -269,6 +274,29 @@ class UamUserGroup
     {
         $this->_sGroupMail = $sGroupMail;
     } 
+	
+		 /**
+     * Returns the group address.
+     * 
+     * @return string
+     */
+    public function getGroupAddress()
+    {
+        return $this->_sGroupAddress;
+    }
+    
+    /**
+     * Sets the group address.
+     * 
+     * @param string $sGroupAddress The new group address.
+     * 
+     * @return null
+     */
+    public function setGroupAddress($sGroupAddress)
+    {
+        $this->_sGroupAddress = $sGroupAddress;
+    }
+	
     /**
      * Returns the read access.
      * 
