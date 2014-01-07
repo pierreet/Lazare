@@ -40,8 +40,10 @@ $wpdb->cformsdata       	= $wpdb->prefix . 'cformsdata';
 					global $oUserAccessManager;
 					$aUserGroupsForObject = $oUserAccessManager->getAccessHandler()->getUserGroups(null);
 					foreach($aUserGroupsForObject as $group){
-						if($group->getGroupName()==$val)
+						if($group->getGroupName()==$val){
 							$balises_replace[] = array( "balise" => "{MAISON}", "new_text" => $val);
+							$balises_replace[] = array( "balise" => "{ADRESSE_MAISON}", "new_text" => nl2br($group->getGroupAddress()));
+						}
 					}
 					
 				}
