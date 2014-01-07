@@ -511,6 +511,11 @@ function check_cust_vars($m,$t,$no, $html=false) {
 				}
 				$m = str_replace('{_documents}', $ged, $m);
 			}
+			### lien convention
+			if ( strpos($fvar,'_convention_volontaire')!==false ){
+				$m = str_replace('{_convention_volontaire}', plugins_url('cforms/pdf/pdf.php?tpl=convention.occupation.volontaire&sub_id=xj7r+VNN'.$no.'xP312qNW'), $m);
+			}			
+			
 			### hash sid
 			if ( strpos($fvar,'_hash_sid')!==false ){
 				$m = str_replace('{_hash_sid}', 'xj7r+VNN'.$no.'xP312qNW', $m);
