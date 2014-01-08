@@ -27,6 +27,7 @@ $wpdb->cformsdata       	= $wpdb->prefix . 'cformsdata';
 					array( "balise" => "{DATE}", "new_text" => date('d/m/Y') ),
 					array( "balise" => "{NOM}", "new_text" => $results[0]->first_name ),
 					array( "balise" => "{PRENOM}", "new_text" => $results[0]->last_name ),
+					array( "balise" => "{NUM}", "new_text" => str_replace('xP312qNW', '', substr($_GET['sub_id'], 8)) ),
 					array( "balise" => "{PATH}", "new_text" => plugins_url( '/wplazare/includes/librairies/html2pdf/templates/') )
 				);
 				foreach($results as $result){	
@@ -35,6 +36,11 @@ $wpdb->cformsdata       	= $wpdb->prefix . 'cformsdata';
 			
 					if(preg_match("#^[0-9]{2}/[0-9]{2}/[0-9]{4}$#", trim($val)) && (strpos($name,'naissance')!==false || strpos($name,'Né')!==false )) //date naiss
 						$balises_replace[] = array( "balise" => "{DATE_NAISS}", "new_text" => $val);					
+						
+					if($name == 'IBAN') //IBAN
+						$balises_replace[] = array( "balise" => "{IBAN}", "new_text" => $val);
+					if($name == 'BIC') //BIC
+						$balises_replace[] = array( "balise" => "{BIC}", "new_text" => $val);
 						
 					//maison
 					global $oUserAccessManager;

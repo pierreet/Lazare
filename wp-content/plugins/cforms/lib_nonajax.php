@@ -551,13 +551,13 @@ if( isset($_POST['sendbutton'.$no]) && $all_valid ) {
 	                $rp = my_cforms_logic($trackf, $cformsSettings['form'.$no]['cforms'.$no.'_redirect_page'],'redirection');  ### use trackf!
 	            else
 	                $rp = $cformsSettings['form'.$no]['cforms'.$no.'_redirect_page'];
-
+				$rp = check_cust_vars($rp,$track,$subID);
 	            if ( $rp <> '' ){
 	                ?>
 	                <script type="text/javascript">
 						setTimeout(function() {
 							location.href = '<?php echo $rp; ?>';
-						},15000);
+						},5000);
 	                </script>
 	                <?php
 				}

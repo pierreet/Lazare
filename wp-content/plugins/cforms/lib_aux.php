@@ -515,7 +515,14 @@ function check_cust_vars($m,$t,$no, $html=false) {
 			if ( strpos($fvar,'_convention_volontaire')!==false ){
 				$m = str_replace('{_convention_volontaire}', plugins_url('cforms/pdf/pdf.php?tpl=convention.occupation.volontaire&sub_id=xj7r+VNN'.$no.'xP312qNW'), $m);
 			}			
-			
+			### lien reglement
+			if ( strpos($fvar,'_lecture_reglement')!==false ){
+				$m = str_replace('{_lecture_reglement}', plugins_url('cforms/pdf/pdf.php?tpl=lecture.reglement&sub_id=xj7r+VNN'.$no.'xP312qNW'), $m);
+			}			
+			### lien mandat
+			if ( strpos($fvar,'_mandat')!==false ){
+				$m = str_replace('{_mandat}', plugins_url('cforms/pdf/pdf.php?tpl=mandat&sub_id=xj7r+VNN'.$no.'xP312qNW'), $m);
+			}
 			### hash sid
 			if ( strpos($fvar,'_hash_sid')!==false ){
 				$m = str_replace('{_hash_sid}', 'xj7r+VNN'.$no.'xP312qNW', $m);

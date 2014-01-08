@@ -142,7 +142,8 @@
 		$cformsSettings['form'.$no]['cforms'.$no.'_limittxt'] =   				magic($_REQUEST['cforms_limittxt']);
 
 	$cformsSettings['form'.$no]['cforms'.$no.'_redirect'] =       $_REQUEST['cforms_redirect']?true:false;
-	$cformsSettings['form'.$no]['cforms'.$no.'_redirect_page'] =  preg_replace("/\\\+/", "\\",$_REQUEST['cforms_redirect_page']);
+	//$cformsSettings['form'.$no]['cforms'.$no.'_redirect_page'] =  preg_replace("/\\\+/", "\\",$_REQUEST['cforms_redirect_page']);
+	$cformsSettings['form'.$no]['cforms'.$no.'_redirect_page'] =  stripslashes($_REQUEST['cforms_redirect_page']);
 	$cformsSettings['form'.$no]['cforms'.$no.'_action'] =         $_REQUEST['cforms_action']?'1':'0';
 	$cformsSettings['form'.$no]['cforms'.$no.'_action_page'] =    preg_replace("/\\\+/", "\\",$_REQUEST['cforms_action_page']);
 	$cformsSettings['form'.$no]['cforms'.$no.'_rss'] =            $_REQUEST['cforms_rss']?true:false;
