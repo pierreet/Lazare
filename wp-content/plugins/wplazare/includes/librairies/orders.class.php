@@ -208,10 +208,11 @@ class wplazare_orders
                 $_REQUEST[wplazare_orders::getDbTable()]['order_status'] = 'closed';
                 $_REQUEST[wplazare_orders::getDbTable()]['status'] = 'valid';
                 // 2013 1000000
-                $last_numero_fiscal = wplazare_orders::getLastNumeroFiscal(date('Y'));
+                $currentOrder = wplazare_orders::getElement($id, "'valid'", 'id');
+                $last_numero_fiscal = wplazare_orders::getLastNumeroFiscal(date('Y',strtotime($currentOrder->creation_date)));
                 $last_id = ($last_numero_fiscal % 1000000) +1;
 
-                $_REQUEST[wplazare_orders::getDbTable()]['order_reference'] = date('Y').substr_replace("000000",$last_id, -strlen($last_id));
+                $_REQUEST[wplazare_orders::getDbTable()]['order_reference'] = date('Y',strtotime($currentOrder->creation_date)).substr_replace("000000",$last_id, -strlen($last_id));
                 $actionResult = wplazare_database::update($_REQUEST[wplazare_orders::getDbTable()], $id, wplazare_orders::getDbTable());
 
                 $currentOrder = wplazare_orders::getElement($id, "'valid'", 'id');
@@ -233,10 +234,10 @@ class wplazare_orders
                 $_REQUEST[wplazare_orders::getDbTable()]['payment_type'] = 'virement_payment';
                 $_REQUEST[wplazare_orders::getDbTable()]['status'] = 'valid';
                 // 2013 1000000
-                $last_numero_fiscal = wplazare_orders::getLastNumeroFiscal(date('Y'));
+                $last_numero_fiscal = wplazare_orders::getLastNumeroFiscal(date('Y',strtotime($currentOrder->creation_date)));
                 $last_id = ($last_numero_fiscal % 1000000) +1;
 
-                $_REQUEST[wplazare_orders::getDbTable()]['order_reference'] = date('Y').substr_replace("000000",$last_id, -strlen($last_id));
+                $_REQUEST[wplazare_orders::getDbTable()]['order_reference'] = date('Y',strtotime($currentOrder->creation_date)).substr_replace("000000",$last_id, -strlen($last_id));
                 $actionResult = wplazare_database::update($_REQUEST[wplazare_orders::getDbTable()], $id, wplazare_orders::getDbTable());
 
                 $currentOrder = wplazare_orders::getElement($id, "'valid'", 'id');
@@ -1126,11 +1127,11 @@ class wplazare_orders
                 $dernier_mois = (wplazare_tools::varSanitizer($_POST['dernier_mois']));
                 $dernier_mois_annee = intval(wplazare_tools::varSanitizer($_POST['dernier_mois_annee']));
 
-                if($currentOrder->order_reference < date(Y)* 1000000){
-                    $last_numero_fiscal = wplazare_orders::getLastNumeroFiscal(date('Y'));
+                if($currentOrder->order_reference < $dernier_mois_annee* 1000000){
+                    $last_numero_fiscal = wplazare_orders::getLastNumeroFiscal($dernier_mois_annee);
                     $last_id = ($last_numero_fiscal % 1000000) +1;
 
-                    $currentOrder->order_reference = date('Y').substr_replace("000000",$last_id, -strlen($last_id));
+                    $currentOrder->order_reference = $dernier_mois_annee.substr_replace("000000",$last_id, -strlen($last_id));
 
                     $order['order_reference'] =  $currentOrder->order_reference;
 
@@ -1511,9 +1512,21 @@ class wplazare_orders
                 break;
         }
 
+        $signature_president = "FCATTA.jpg";
+        $signature_tresorier = "ODEMETZ.jpg";
+        $nom_president="François CATTA";
+        $nom_tresorier="Olivier de METZ";
+
+        if(date('Y',strtotime($currentOrder->creation_date)) == "2013"){
+            $signature_president = "sign1.png";
+            $signature_tresorier = "sign2.png";
+            $nom_president="Guillaume de Chateauvieux";
+            $nom_tresorier="HUBERT DE TORCY";
+        }
+
         $balises_replace = array(
-            array( "balise" => "{YEARPLUSUN}", "new_text" => (date('Y')+1) ),
-            array( "balise" => "{YEAR}", "new_text" => date('Y') ),
+            array( "balise" => "{YEARPLUSUN}", "new_text" => (date('Y',strtotime($currentOrder->creation_date))+1) ),
+            array( "balise" => "{YEAR}", "new_text" => date('Y',strtotime($currentOrder->creation_date)) ),
             array( "balise" => "{NUMERO_RECU}", "new_text" => $currentOrder->order_reference ),
             array( "balise" => "{PRENOM}", "new_text" => $currentOrder->user_firstname ),
             array( "balise" => "{NOM}", "new_text" => $currentOrder->user_lastname ),
@@ -1527,7 +1540,11 @@ class wplazare_orders
             array( "balise" => "{TYPE_PAIEMENT}", "new_text" => $paiement_type ),
             array( "balise" => "{DEDUCTION}", "new_text" => wplazare_orders::prepareDeduction($currentOrder) ),
             array( "balise" => "{ASSOCIATION}", "new_text" => strtoupper($currentOrder->user_association) ),
-            array( "balise" => "{ADRESSE_ASSOCIATION}", "new_text" => wplazare_tools::getAdresseAssociation($currentOrder->user_association) )
+            array( "balise" => "{ADRESSE_ASSOCIATION}", "new_text" => wplazare_tools::getAdresseAssociation($currentOrder->user_association) ),
+            array( "balise" => "{SIGNATURE_PRESIDENT}", "new_text" => $signature_president ),
+            array( "balise" => "{SIGNATURE_TRESORIER}", "new_text" => $signature_tresorier ),
+            array( "balise" => "{NOM_PRESIDENT}", "new_text" => $nom_president ),
+            array( "balise" => "{NOM_TRESORIER}", "new_text" => $nom_tresorier )
         );
         return $balises_replace;
     }
