@@ -66,7 +66,7 @@ class wplazare_documents
      */
     function elementAction()
     {
-        return 'biouh';
+        return ;
     }
 
     function getPageFormButton($export =''){
