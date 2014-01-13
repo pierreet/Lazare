@@ -69,6 +69,9 @@
 
 	DEFINE('WPLAZARE_URL_SLUG_OFFERS_LISTING', 'wplazare_offers');
 	DEFINE('WPLAZARE_URL_SLUG_OFFERS_EDITION', 'wplazare_offers');
+
+    DEFINE('WPLAZARE_URL_SLUG_DOCUMENTS_LISTING', 'wplazare_documents');
+    DEFINE('WPLAZARE_URL_SLUG_DOCUMENTS_EDITION', 'wplazare_documents');
 }
 
 

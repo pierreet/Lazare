@@ -197,9 +197,14 @@ class wplazare_display
 				{
 					$pageAddButton = true;
 				}
-			break;		
-			
-			default:
+			break;
+
+            case WPLAZARE_URL_SLUG_DOCUMENTS_LISTING:
+            case WPLAZARE_URL_SLUG_DOCUMENTS_EDITION:
+                $objectType = new wplazare_documents();
+                break;
+
+            default:
 			{
 				$pageTitle = sprintf(__('Cette page doit &ecirc;tre cr&eacute;&eacute; dans %s &agrave; la ligne %d', 'wplazare'), __FILE__, (__LINE__ - 3));
 			}

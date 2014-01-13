@@ -59,3 +59,4 @@ require_once(WPLAZARE_LIB_PLUGIN_DIR . 'offers.class.php');
 require_once(WPLAZARE_LIB_PLUGIN_DIR . 'orders.class.php');
 require_once(WPLAZARE_LIB_PLUGIN_DIR . 'payment_forms.class.php');
 require_once(WPLAZARE_LIB_PLUGIN_DIR . 'events.class.php');
+require_once(WPLAZARE_LIB_PLUGIN_DIR . 'documents.class.php');
