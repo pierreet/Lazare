@@ -557,7 +557,7 @@ if( isset($_POST['sendbutton'.$no]) && $all_valid ) {
 	                <script type="text/javascript">
 						setTimeout(function() {
 							location.href = '<?php echo $rp; ?>';
-						},5000);
+						},0);
 	                </script>
 	                <?php
 				}
