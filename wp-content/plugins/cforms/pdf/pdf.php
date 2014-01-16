@@ -25,8 +25,8 @@ $wpdb->cformsdata       	= $wpdb->prefix . 'cformsdata';
 			if($results){
 				$balises_replace = array(
 					array( "balise" => "{DATE}", "new_text" => date('d/m/Y') ),
-					array( "balise" => "{NOM}", "new_text" => $results[0]->first_name ),
-					array( "balise" => "{PRENOM}", "new_text" => $results[0]->last_name ),
+					array( "balise" => "{NOM}", "new_text" => $results[0]->last_name ),
+					array( "balise" => "{PRENOM}", "new_text" => $results[0]->first_name ),
 					array( "balise" => "{NUM}", "new_text" => str_replace('xP312qNW', '', substr($_GET['sub_id'], 8)) ),
 					array( "balise" => "{PATH}", "new_text" => plugins_url( '/wplazare/includes/librairies/html2pdf/templates/') )
 				);
