@@ -178,7 +178,6 @@ form p {
 }
 
 #access a,.access a {
-	background: url("images/puce.png") no-repeat scroll 0 5px transparent;
 	color: #666;
 	display: block;
 	line-height: 3.333em;
@@ -314,7 +313,7 @@ form p {
 	padding-left: 0px;
 }
 
-.troisième-colonne {
+.troisieme-colonne {
 	width: 214px;
 	margin-right: 10px;
 }
@@ -544,7 +543,7 @@ ul li.bouton_paiement {
 	list-style: none outside none;
 	position: relative;
 	padding-left: 10px;
-	vertical-align: center;
+	vertical-align: middle;
 	padding-top: 20px;
 	padding-bottom: 30px;
 }
