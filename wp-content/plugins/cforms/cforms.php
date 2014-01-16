@@ -1158,14 +1158,10 @@ function cforms_style() {
 
 			//echo '<script type="text/javascript" src="' . $cforms_root. '/js/cformsadmincal.js"></script>'."\n";
 			### add jQuery script & calendar
-			wp_register_style('calendar-style', $r . '/styling/calendar.css' );
-			wp_enqueue_style('calendar-style'); 
 
 			wp_enqueue_script('jquery');
 			wp_enqueue_script('jquery-ui-core');
 			wp_enqueue_script('jquery-ui-slider');
-			echo '<script type="text/javascript" src="' . $cforms_root. '/js/mobiscroll-1.5.3.min.js"></script>'."\n";
-			echo '<link rel="stylesheet" type="text/css" href="' . $cforms_root . '/js/css/mobiscroll-1.5.3.min.css" />'."\n";
 
 			echo '<script type="text/javascript">'."\n".
 			

@@ -246,8 +246,7 @@ function cforms_scripts() {
 	wp_enqueue_style('cforms-admin-style'); 
 
 	if ( strpos($request_uri,'cforms-options')!==false ){
-		wp_register_style('calendar-style', $r . '/styling/calendar.css' );
-		wp_enqueue_style('calendar-style'); 
+
 		
 		wp_enqueue_script('jquery');
 	    wp_enqueue_script('jquery-ui-core');
