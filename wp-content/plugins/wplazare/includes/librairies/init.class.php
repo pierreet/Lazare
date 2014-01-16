@@ -91,7 +91,7 @@ class wplazare_init
 		add_submenu_page( WPLAZARE_URL_SLUG_ORDERS_LISTING, wplazare_stats::pageTitle(), 'Statistiques', 'wplazare_view_statistiques', WPLAZARE_URL_SLUG_STATS_LISTING, array('wplazare_display','displayPage'));
 		add_submenu_page( WPLAZARE_URL_SLUG_ORDERS_LISTING, wplazare_payment_form::pageTitle(), __('Formulaires', 'wplazare' ), 'wplazare_view_forms', WPLAZARE_URL_SLUG_FORMS_LISTING, array('wplazare_display','displayPage'));
 		add_submenu_page( WPLAZARE_URL_SLUG_ORDERS_LISTING, wplazare_offers::pageTitle(), __('Offres', 'wplazare' ), 'wplazare_view_offers', WPLAZARE_URL_SLUG_OFFERS_LISTING, array('wplazare_display','displayPage'));
-        add_submenu_page( WPLAZARE_URL_SLUG_ORDERS_LISTING, wplazare_documents::pageTitle(), "Documents", 'wplazare_view_offers', WPLAZARE_URL_SLUG_DOCUMENTS_LISTING, array('wplazare_display','displayPage'));
+        add_submenu_page( WPLAZARE_URL_SLUG_ORDERS_LISTING, wplazare_documents::pageTitle(), "Attestation assurance", 'wplazare_view_offers', WPLAZARE_URL_SLUG_DOCUMENTS_LISTING, array('wplazare_display','displayPage'));
 	}
 
 	/**

@@ -82,8 +82,8 @@ class wplazare_documents
     {
         $formAction = admin_url('admin.php?page=' . wplazare_documents::getEditionSlug().'&action=export');
         $selectForm='<form  method="post" enctype="multipart/form-data" action="'.$formAction.'">
-		Partie1:<br/> <textarea rows="4" cols="50" name="ligne1"/></textarea><br/>
-		Partie2:<br/> <textarea rows="4" cols="50" name="ligne2"/></textarea><br/><br/>
+		Civilit&eacute; Pr&eacute;nom Nom:<br/> <textarea rows="4" cols="50" name="ligne1"/></textarea><br/>
+		Adresse :<br/> <textarea rows="4" cols="50" name="ligne2"/></textarea><br/><br/>
 		<input type="submit" class="button-primary" value="Générer PDF"/></form>
 		';
 
