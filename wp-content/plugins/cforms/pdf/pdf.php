@@ -42,6 +42,17 @@ $wpdb->cformsdata       	= $wpdb->prefix . 'cformsdata';
 					if($name == 'BIC') //BIC
 						$balises_replace[] = array( "balise" => "{BIC}", "new_text" => $val);
 						
+					if($name == 'Votre lieu de naissance') //lieu naissance
+						$balises_replace[] = array( "balise" => "{LIEU_NAISS}", "new_text" => $val);
+						
+					//adresse actuelle
+					if($name == 'Votre adresse personnelle actuelle')
+						$balises_replace[] = array( "balise" => "{ADRESSE}", "new_text" => $val);
+					if($name == 'Votre code postal')
+						$balises_replace[] = array( "balise" => "{ADRESSE_CP}", "new_text" => $val);
+					if($name == 'Votre ville')
+						$balises_replace[] = array( "balise" => "{ADRESSE_VILLE}", "new_text" => $val);
+						
 					//maison
 					global $oUserAccessManager;
 					$aUserGroupsForObject = $oUserAccessManager->getAccessHandler()->getUserGroups(null);
