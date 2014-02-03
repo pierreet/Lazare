@@ -223,13 +223,13 @@ class wplazare_tools
 				$matches = implode(',', $locataire_id);				
 				$query .= "AND WPLOCATIONS.user IN ($matches) ";
 				$query_prep = $wpdb->prepare($query);
-				$res = $wpdb->get_results($query_prep);
+				$res = $wpdb->get_results($query);
 			}
 			else
 			{
 				$query .= "AND WPLOCATIONS.user = $locataire_id ";
 				$query_prep = $wpdb->prepare($query);
-				$res = $wpdb->get_row($query_prep);			
+				$res = $wpdb->get_row($query);
 			}
 		}
 
@@ -301,7 +301,7 @@ class wplazare_tools
 					"FROM ".wplazare_associations::getDbTable()." AS WPASSOCIATIONS ";
 		
 		$query_prep = $wpdb->prepare($query);
-		foreach ($wpdb->get_results($query_prep) as $association){
+		foreach ($wpdb->get_results($query) as $association){
 			$elements[$association->id] = $association->nom;
 		}
 		return $elements;
@@ -418,10 +418,10 @@ class wplazare_tools
 		$results = '';
 		if($role == WPLAZARE_ROLE_DONATEUR){
 			global $wpdb;
-			$query = $wpdb->prepare(
+			$query =
 			"SELECT DISTINCT O.user_email,O.user_firstname,O.user_lastname,O.user_phone,O.user_adress,O.user_birthday
 			FROM " . wplazare_users::getOrdersDbTable() . " AS O WHERE O.user_firstname NOT LIKE '' AND O.user_lastname NOT LIKE ''"
-			);
+			;
 	
 			$results = $wpdb->get_results($query);
 		}
@@ -455,9 +455,8 @@ class wplazare_tools
 					"FROM ".wplazare_locations::getDbTable()." AS WPLOCATIONS ".
 					"WHERE (WPLOCATIONS.date_fin IS NULL OR WPLOCATIONS.date_fin LIKE '0000-00-00')".
 					"AND WPLOCATIONS.user=$user_id AND WPLOCATIONS.status LIKE 'valid' ";
-		
-		$query_prep = $wpdb->prepare($query);
-		$res = $wpdb->get_results($query_prep);
+
+		$res = $wpdb->get_results($query);
 		if(count($res)>0) return $res[0]->appartement;
 		else return '';
 	}
@@ -475,8 +474,7 @@ class wplazare_tools
             "WHERE (WPLOCATIONS.date_fin IS NULL OR WPLOCATIONS.date_fin LIKE '0000-00-00')".
             "AND WPLOCATIONS.user=$user_id AND WPLOCATIONS.status LIKE 'valid' ";
 
-        $query_prep = $wpdb->prepare($query);
-        $res = $wpdb->get_results($query_prep);
+        $res = $wpdb->get_results($query);
         if(count($res)>0) return $res[0];
         else return '';
     }
@@ -494,8 +492,7 @@ class wplazare_tools
 		$query = 	"SELECT WPLOCATIONS.id AS id ".
 					"FROM ".wplazare_locations::getDbTable()." AS WPLOCATIONS ".
 					"WHERE WPLOCATIONS.appartement=$appart_id";
-		$query_prep = $wpdb->prepare($query);
-		$res = $wpdb->get_results($query_prep);
+		$res = $wpdb->get_results($query);
 
 		return $res;
 	}
@@ -520,9 +517,8 @@ class wplazare_tools
 		$query = 	"SELECT WPAPPARTS.id ".
 					"FROM ".wplazare_apparts::getDbTable()." AS WPAPPARTS ".
 					"WHERE WPAPPARTS.responsable=$user_id";
-		
-		$query_prep = $wpdb->prepare($query);
-		$res = $wpdb->get_results($query_prep);
+
+		$res = $wpdb->get_results($query);
 		if(count($res)>0) return $res[0]->id;
 		else return '';
 	}
@@ -541,8 +537,7 @@ class wplazare_tools
 					"FROM ".wplazare_locations::getDbTable()." AS WPLOCATIONS ".
 					"WHERE (WPLOCATIONS.date_fin IS NULL OR WPLOCATIONS.date_fin LIKE '0000-00-00') ".
 					"AND WPLOCATIONS.appartement=$appart_id  AND WPLOCATIONS.status LIKE 'valid' ";
-		$query_prep = $wpdb->prepare($query);
-		$res = $wpdb->get_results($query_prep);
+		$res = $wpdb->get_results($query);
 
 		return $res;
 	}
@@ -598,8 +593,7 @@ class wplazare_tools
 		"FROM ".wplazare_locations::getDbTable()." AS WPLOCATIONS ".
 		"LEFT JOIN ".wplazare_apparts::getDbTable()." AS WPAPPARTS ON WPLOCATIONS.appartement=WPAPPARTS.id ".
 		"WHERE (WPLOCATIONS.date_fin IS NULL OR WPLOCATIONS.date_fin LIKE '0000-00-00') AND WPLOCATIONS.status LIKE 'valid' ORDER BY appart_id ";
-		$query_prep = $wpdb->prepare($query);
-		$res = $wpdb->get_results($query_prep);
+		$res = $wpdb->get_results($query);
 					
 		return $res;
 	}
@@ -609,8 +603,8 @@ class wplazare_tools
 		
 		if($email == '') return '';
 		
-		$query = $wpdb->prepare( "INSERT IGNORE INTO `wp_wysija_user` (`user_id` ,`wpuser_id` ,`email` ,`firstname` ,`lastname` ,`ip` ,`keyuser` ,`created_at` ,`status`)
-VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NULL ,  '0')");
+		$query = "INSERT IGNORE INTO `wp_wysija_user` (`user_id` ,`wpuser_id` ,`email` ,`firstname` ,`lastname` ,`ip` ,`keyuser` ,`created_at` ,`status`)
+VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NULL ,  '0')";
 		
 		if( $wpdb->query($query) )
 		{
@@ -623,17 +617,16 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
 		
 		$id = $wpdb->insert_id;
 		
-		$query = $wpdb->prepare( "SELECT list_id FROM `wp_wysija_list` WHERE  `namekey` LIKE  '".wplazare_tools::prepareForListName(strtolower($role))."'");
-		
-		$query_prep = $wpdb->prepare($query);
-		$res = $wpdb->get_row($query_prep);
+		$query =  "SELECT list_id FROM `wp_wysija_list` WHERE  `namekey` LIKE  '".wplazare_tools::prepareForListName(strtolower($role))."'";
+
+		$res = $wpdb->get_row($query);
 		if($res == null)
 			return $requestResponse. ' error';
 		$list_id = $res->list_id;
 		
 		if($list_id != '0'){
-			$query = $wpdb->prepare( "INSERT IGNORE INTO `wp_wysija_user_list` (`list_id` ,`user_id` ,`sub_date` ,`unsub_date`)
-	VALUES ('$list_id',  '$id',  '0',  '0')");
+			$query =  "INSERT IGNORE INTO `wp_wysija_user_list` (`list_id` ,`user_id` ,`sub_date` ,`unsub_date`)
+	VALUES ('$list_id',  '$id',  '0',  '0')";
 			
 			if( $wpdb->query($query) )
 			{
@@ -651,7 +644,7 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
     public static function unSubscribeNewsletter($user_id){
 		global $wpdb;
 		
-		$query = $wpdb->prepare( "SELECT user_id FROM `wp_wysija_user` WHERE   `wp_wysija_user`.`wpuser_id` =  '$user_id'");
+		$query = "SELECT user_id FROM `wp_wysija_user` WHERE   `wp_wysija_user`.`wpuser_id` =  '$user_id'";
 		
 		$user_id = '';
 		$query_prep = $wpdb->prepare($query);
@@ -700,21 +693,17 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
 		
 		$query = "SELECT * FROM wp_wysija_user WHERE created_at IN ('$mktime') ";
 		
-		$prepared_query = $wpdb->prepare($query);
-		
-		$res = $wpdb->get_results($prepared_query);
+		$res = $wpdb->get_results($query);
 		
 		foreach ($res as $result){
 			$role = wplazare_tools::getRole($result->wpuser_id);
 			
 			$query2 = "SELECT list_id FROM wp_wysija_list WHERE name LIKE '".__($role,'wplazare')."'";
-			$prepared_query2 = $wpdb->prepare($query2);
-			$res2 = $wpdb->get_row($prepared_query2);
+			$res2 = $wpdb->get_row($query2);
 			
 			if($res2->list_id != ''){
 				$query3 = "INSERT IGNORE INTO `wp_wysija_user_list` (`user_id`,`list_id`,`sub_date`) VALUES ($result->user_id, $res2->list_id, $mktime)";
-				$prepared_query3 = $wpdb->prepare($query3);
-				$wpdb->query($prepared_query3);
+				$wpdb->query($query3);
 			}
 		} 
 	}

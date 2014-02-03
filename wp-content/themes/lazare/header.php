@@ -126,7 +126,12 @@
 							  	  	    <p class="location"><?php if(count($pieces)>3) echo $pieces[3]; ?></p>
 									</div>                  
 									<div class="img">
-										<img src="<?php echo $imagePost->guid;?>" alt="<?php echo $imagePost->post_content; ?>" >
+                                        <?php
+                                        $image = wp_get_attachment_image_src($imageID, 'two' );
+
+                                        if ($image) : ?>
+                                            <img class="attachment-two" src="<?php echo $image[0]; ?>" width="<?php echo $image[1]; ?>" height="<?php echo $image[2]; ?>" />
+                                        <?php endif; ?>
 									</div>
 								</a>
 							</div> 
