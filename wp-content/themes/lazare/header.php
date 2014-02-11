@@ -92,15 +92,21 @@
 			
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<?php if( get_the_ID() == 14 ):?>
-					<img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-lyon.png" alt="Lazare" id="bandeau-lazare" />
+					<img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-lyon.png" alt="Lazare Lyon" id="bandeau-lazare" />
 				<?php elseif( get_the_ID() == 19 ):?>
-					<img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-toulouse.png" alt="Lazare" id="bandeau-lazare" />
+					<img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-toulouse.png" alt="Lazare Toulouse" id="bandeau-lazare" />
 				<?php elseif( get_the_ID() == 17 ):?>
-					<img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-toulon.png" alt="Lazare" id="bandeau-lazare" />
+					<img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-toulon.png" alt="Lazare Toulon" id="bandeau-lazare" />
 				<?php elseif( get_the_ID() == 21 ):?>
-					<img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-nantes.png" alt="Lazare" id="bandeau-lazare" />
-				<?php elseif( get_the_ID() == 212 ):?>
-					<img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-apa.png" alt="Lazare" id="bandeau-lazare" />
+					<img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-nantes.png" alt="Lazare Nantes" id="bandeau-lazare" />
+                <?php elseif( get_the_ID() == 212 ):?>
+                    <img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-paris.png" alt="Lazare Paris" id="bandeau-lazare" />
+                <?php elseif( get_the_ID() == 1328 ):?>
+                    <img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-lille.png" alt="Lazare Lille" id="bandeau-lazare" />
+                <?php elseif( get_the_ID() == 1540 ):?>
+                    <img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-marseille.png" alt="Lazare Marseille" id="bandeau-lazare" />
+                <?php elseif( get_the_ID() == 180 ):?>
+                    <img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-apa.png" alt="Lazare" id="bandeau-lazare" />
 				<?php else:?>
 				 	<img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header.png" alt="Lazare" id="bandeau-lazare" />	
 				<?php endif;?>			
