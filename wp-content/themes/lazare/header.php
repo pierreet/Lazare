@@ -99,14 +99,12 @@
 					<img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-toulon.png" alt="Lazare Toulon" id="bandeau-lazare" />
 				<?php elseif( get_the_ID() == 21 ):?>
 					<img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-nantes.png" alt="Lazare Nantes" id="bandeau-lazare" />
-                <?php elseif( get_the_ID() == 212 ):?>
+                <?php elseif( get_the_ID() == 180 ):?>
                     <img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-paris.png" alt="Lazare Paris" id="bandeau-lazare" />
                 <?php elseif( get_the_ID() == 1328 ):?>
                     <img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-lille.png" alt="Lazare Lille" id="bandeau-lazare" />
                 <?php elseif( get_the_ID() == 1540 ):?>
                     <img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-marseille.png" alt="Lazare Marseille" id="bandeau-lazare" />
-                <?php elseif( get_the_ID() == 180 ):?>
-                    <img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header-apa.png" alt="Lazare" id="bandeau-lazare" />
 				<?php else:?>
 				 	<img src="<?php echo get_theme_root_uri(); ?>/lazare/images/header.png" alt="Lazare" id="bandeau-lazare" />	
 				<?php endif;?>			
