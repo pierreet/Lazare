@@ -1,23 +1,14 @@
 <?php
 /**
  * Plugin Name: User Access Manager
- * Plugin URI: http://www.gm-alex.de/projects/wordpress/plugins/user-access-manager/
- * Author URI: http://www.gm-alex.de/
- * Version: 1.2.4.3
+ * Version: 999.2.4.3
  * Author: Alexander Schneider
  * Description: Manage the access to your posts, pages, categories and files.
  * 
  * user-access-manager.php
  *
  * PHP versions 5
- * 
- * @category  UserAccessManager
- * @package   UserAccessManager
- * @author    Alexander Schneider <alexanderschneider85@gmail.com>
- * @copyright 2008-2013 Alexander Schneider
- * @license   http://www.gnu.org/licenses/gpl-2.0.html  GNU General Public License, version 2
- * @version   SVN: $Id$
- * @link      http://wordpress.org/extend/plugins/user-access-manager/
+ *  
 */
 
 //Paths
