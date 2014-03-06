@@ -1,4 +1,4 @@
-<?php
+ <?php
 /**
  * UamUserGroup.class.php
  * 

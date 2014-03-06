@@ -1,4 +1,4 @@
-<?php
+  <?php
 /**
  * Plugin Name: User Access Manager
  * Version: 999.2.4.3

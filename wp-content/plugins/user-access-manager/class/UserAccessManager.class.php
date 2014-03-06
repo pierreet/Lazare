@@ -1,4 +1,4 @@
-<?php
+ <?php
 /**
  * UserAccessManager.class.php
  *

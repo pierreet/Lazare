@@ -1,4 +1,4 @@
-<?php
+ <?php
 /**
  * adminSettings.php
  * 
