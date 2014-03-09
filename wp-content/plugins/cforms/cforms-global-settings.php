@@ -347,7 +347,7 @@ abspath_check();
 						Objet : <input type="text" id="cforms_register_accept_rdv_obj" name="cforms_register_accept_rdv_obj" value="<?php echo $cformsSettings['global']['cforms_register_accept_rdv_obj']; ?>">
 						<?php $content = stripslashes($cformsSettings['global']['cforms_register_accept_rdv']);
 						wp_editor( $content,'cforms_register_accept_rdv', $settings = array('editor_class' => 'content resizable processed fldrequired'));  ?>
-                    	<td>utilisez la variable {_documents} pour la liste des documents à fournir et {_convention_volontaire}, {_lecture_reglement}, http://www.maisonlazare.com/coordonnees-bancaires/?sub_id={_hash_sid}  pour inserer les différents liens.</td></tr></table>
+                    	<td>utilisez la variable {_documents} pour la liste des documents à fournir et {_convention_volontaire}, {_lecture_reglement}, http://www.lazare.eu/coordonnees-bancaires/?sub_id={_hash_sid}  pour inserer les différents liens.</td></tr></table>
 					</td>
 				</tr>
 

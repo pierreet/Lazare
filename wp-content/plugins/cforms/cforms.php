@@ -598,7 +598,7 @@ function cforms($args = '',$no = '') {
 			case "url":
 				$input_id = $input_name = $field_type;
 			case "datepicker":
-			case "datetimepicker":
+			case "datepicker":
 			case "agedatepicker":
 			case "yourname":
 			case "youremail":
@@ -753,7 +753,7 @@ function cforms($args = '',$no = '') {
 				$field_value = ( $_COOKIE[$cookieset]<>'' ) ? $_COOKIE[$cookieset] : $field_value;
 			case "datepicker":
 			case "agedatepicker":
-			case "datetimepicker":
+			case "datepicker":
 			case "yourname":
 			case "youremail":
 			case "friendsname":
@@ -764,11 +764,11 @@ function cforms($args = '',$no = '') {
 				$field_value = check_post_vars($field_value);
 
 				$type = ($field_type=='pwfield')?'password':'text';
-				//$field_class = ($field_type=='datepicker')?$field_class.' cf_date':($field_type=='datetimepicker')?$field_class.' cf_datetime':$field_class;
+				//$field_class = ($field_type=='datepicker')?$field_class.' cf_date':($field_type=='datepicker')?$field_class.' cf_datetime':$field_class;
 				
 				if($field_type=='datepicker')
 					$field_class = $field_class.' cf_date';
-				else if($field_type=='datetimepicker')
+				else if($field_type=='datepicker')
 					$field_class = $field_class.' cf_datetime';
 				else if($field_type=='agedatepicker')
 					$field_class = $field_class.' cf_agedate';
@@ -1159,7 +1159,7 @@ function cforms_style() {
 			//echo '<script type="text/javascript" src="' . $cforms_root. '/js/cformsadmincal.js"></script>'."\n";
 			### add jQuery script & calendar
 
-			wp_enqueue_script('jquery');
+            wp_enqueue_script('jquery');
 			wp_enqueue_script('jquery-ui-core');
 			wp_enqueue_script('jquery-ui-slider');
 
@@ -1224,9 +1224,9 @@ function cforms_style() {
 							 'jQuery(".cf_agedate").datepicker("option", "maxDate", date_max);';
 						}
 						
-						echo "\t\t\t".'jQuery(".cf_datetime").datetimepicker({"firstDay":cfCAL.firstDayOfWeek, minDate: new Date(), "dateFormat": cfCAL.dateFormat,"dayNamesMin": cfCAL.dayNames, "dayNamesShort": cfCAL.dayNames, "monthNames": cfCAL.monthNames,
+						echo "\t\t\t".'jQuery(".cf_datetime").datepicker({"firstDay":cfCAL.firstDayOfWeek, minDate: new Date(), "dateFormat": cfCAL.dateFormat,"dayNamesMin": cfCAL.dayNames, "dayNamesShort": cfCAL.dayNames, "monthNames": cfCAL.monthNames,
 						onSelect: function(a,b){
-										var date = new Date(jQuery(this).datetimepicker(\'getDate\'));
+										var date = new Date(jQuery(this).datepicker(\'getDate\'));
 										var day = date.getDay(), Sunday = 0, Monday = 1, Tuesday = 2, Wednesday = 3, Thursday = 4, Friday = 5, Saturday = 6;
 										
 										var restrictionDays = [';
@@ -1257,7 +1257,7 @@ function cforms_style() {
 										while(date.getMinutes()>mMax && date.getHours()==hMax)
 											date.setMinutes(date.getMinutes()-jQuery(this).datepicker("option", "stepMinute"));
 										
-										jQuery(this).datetimepicker("setDate", date);
+										jQuery(this).datepicker("setDate", date);
 									},
 						beforeShowDay: function(date){
 										  var day = date.getDay(), Sunday = 0, Monday = 1, Tuesday = 2, Wednesday = 3, Thursday = 4, Friday = 5, Saturday = 6;
@@ -1282,7 +1282,7 @@ function cforms_style() {
 									}
 						});'."\n".
 			
-						"\t\t\t".'jQuery(".cf_time").timepicker({});'."\n".
+						"\t\t\t".'jQuery(".cf_time").datepicker({});'."\n".
 			
 			
 				
