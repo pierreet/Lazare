@@ -1,0 +1,188 @@
+<page backtop="0mm" backbottom="0mm" backleft="0mm" backright="0mm">
+   <style type="text/css">
+   page {font-size:12px;}
+	h1 {text-align:center;}
+	.main {width:100%;border:1px solid black;border-collapse:collapse;}
+	 .main td {border:1px solid black;border-collapse:collapse;padding:5px;}
+	 .sec td {border:none;padding:2px;}
+   </style>
+
+<h1 style="margin:0;">MANDAT SEPA</h1>
+   <table class="main">
+	<tr>
+		<td width="90"></td>
+		<td><h4 style="margin:0;">MANDAT de prélèvement SEPA</h4>RUM{NUM}<br />Référence unique de mandat</td>
+		<td><IMG SRC="{PATH}lazare.png" NAME="logo_asso" BORDER=0 width=100 /></td>
+	</tr>
+	<tr>
+		<td colspan=3>En signant ce formulaire de mandat, vous autorisez (A) LAZARE à envoyer des instructions à votre banque pour débiter votre compte, et
+		(B) votre banque à débiter votre compte conformément aux instructions de LAZARE.<br />Vous bénéficiez du droit d'être remboursé par votre banque selon les conditions
+		décrites dans la convention que vous avez passée avec elle.<br />Une demande de remboursement doit être présentée:<br />- dans les 8 semaines suivant la date de débit
+		de votre compte pour un prélèvement autorisé,<br />- sans tarder et au plus tard dans les 13 mois en cas de prélèvement non autorisé.<br />
+		<i>Veuillez compléter les champs marqués *</i></td>
+	</tr>
+   <tr>
+		<td colspan=3>								
+			<table class="sec">
+				<tr>
+					<td width="110">Votre Nom</td>
+					<td >* {PRENOM} {NOM} (1)</td>
+				</tr>
+				<tr>
+					<td width="110"></td>
+					<td style="font-size:75%;">Nom/Prénoms du débiteur</td>
+				</tr>
+				<tr>
+					<td width="110">Votre adresse</td>
+					<td >* {ADRESSE} {ADRESSE_CP} {ADRESSE_VILLE}(2)(3)</td>
+				</tr>
+				<tr>
+					<td width="110"></td>
+					<td >* FRANCE............................................................................ (4)</td>
+				</tr>
+				<tr>
+					<td width="110">Les coordonnées de votre compte</td>
+					<td >* {IBAN} &nbsp;&nbsp;&nbsp; (5)</td>
+				</tr>
+				<tr>
+					<td width="110"></td>
+					<td style="font-size:75%;">Numéro d'identification international du compte bancaire - IBAN (International Bank Account Number)</td>
+				</tr>
+				<tr>
+					<td width="110"></td>
+					<td >* {BIC} (6)</td>
+				</tr>
+				<tr>
+					<td width="110"></td>
+					<td style="font-size:75%;">Code international d'identification de votre banque - BIC (Bank Identifier Code)</td>
+				</tr>
+				<tr>
+					<td width="110">Nom du créancier</td>
+					<td >* LAZARE (7)</td>
+				</tr>
+				<tr>
+					<td width="110"></td>
+					<td style="font-size:75%;">Nom du créancier</td>
+				</tr>
+				<tr>
+					<td width="110"></td>
+					<td >* FR53ZZZ616364 (8)</td>
+				</tr>
+				<tr>
+					<td width="110"></td>
+					<td style="font-size:75%;">Identifiant du créancier</td>
+				</tr>
+				<tr>
+					<td width="110"></td>
+					<td >* 1 rue du Plâtre (9)</td>
+				</tr>
+				<tr>
+					<td width="110"></td>
+					<td style="font-size:75%;">Numéro et nom de la rue</td>
+				</tr>
+				<tr>
+					<td width="110"></td>
+					<td >75004  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Paris  (10)</td>
+				</tr>
+				<tr>
+					<td width="110"></td>
+					<td style="font-size:75%;">Code Postal&nbsp;&nbsp;&nbsp;&nbsp;Ville</td>
+				</tr>	
+				<tr>
+					<td width="110"></td>
+					<td >* FRANCE  (11)</td>
+				</tr>
+				<tr>
+					<td width="110"></td>
+					<td style="font-size:75%;">Pays</td>
+				</tr>
+				<tr>
+					<td width="110">Type de paiement</td>
+					<td >* <strong>Paiement récurrent/répétitif</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="text-decoration:line-through;">&nbsp;Paiement ponctuel&nbsp;</span> &nbsp;&nbsp;&nbsp;(12)</td>
+				</tr>
+				<tr>
+					<td width="110">Signé à</td>
+					<td>* ................................................
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; __/__/____
+					</td>
+				</tr>
+				<tr>
+					<td width="110"></td>
+					<td style="font-size:75%;">Lieu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date: JJ/MM/AAAA</td>
+				</tr>
+				<tr>
+					<td width="110">Signature(s)</td>
+					<td>Veuillez signer ici <textarea rows=3 cols=30 ></textarea></td>
+				</tr>
+				<tr><td colspan=2><span style="font-size:75%;">Note : Vos droits concernant le présent mandat sont expliqués dans un document que vous pouvez obtenir auprès de votre banque.</span></td></tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=3>
+			<table class="sec">
+			<tr><td colspan=2><span style="font-size:75%;">Informations relatives au contrat entre le créancier et le débiteur - fournies seulement à titre indicatif.</span></td></tr>
+				<tr>
+					<td width="110" rowspan="2">Code identifiant du débiteur</td>
+					<td >* ............................................................................................ (14)</td>
+				</tr>
+				<tr>
+					<td style="font-size:75%;">Indiquer ici tout code que vous souhaitez voir restitué par votre banque</td>
+				</tr>
+				<tr>
+					<td width="110" rowspan="8">Tiers débiteur pour le compte duquel le paiement est effectué (si différent du débiteur lui-même)</td>
+					<td >* ............................................................................................ (15)</td>
+				</tr>
+				<tr>
+					<td style="font-size:75%;">Nom du tiers débiteur : si votre paiement concerne un accord passé entre LAZARE et un tiers (par exemple, vous payer<br />
+						la facture d'une autre personne), veuillez indiquer ici son nom. Si vous payez pour votre propre compte, ne pas remplir.</td>
+				</tr>
+				<tr>
+					<td >* ............................................................................................ (16)</td>
+				</tr>
+				<tr>
+					<td style="font-size:75%;">Code identifiant du tiers débiteur</td>
+				</tr>
+				<tr>
+					<td >* ............................................................................................ (17)</td>
+				</tr>
+				<tr>
+					<td style="font-size:75%;">Nom du tiers créancier : le créancier doit compléter cette section s'il remet des prélèvements pour le compte d'un tiers.</td>
+				</tr>
+				<tr>
+					<td >* ............................................................................................ (18)</td>
+				</tr>
+				<tr>
+					<td style="font-size:75%;">Code identifiant du tiers créancier</td>
+				</tr>
+				<tr>
+					<td width="110" >Contrat concerné</td>
+					<td >* ............................................................................................ (19)</td>
+				</tr>
+				<tr>
+					<td width="110" ></td>
+					<td style="font-size:75%;">Numéro d'identification du contrat</td>
+				</tr>
+				<tr>
+					<td width="110" ></td>
+					<td >* ............................................................................................ (20)</td>
+				</tr>
+				<tr>
+					<td width="110" ></td>
+					<td style="font-size:75%;">Description du contrat</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>A retourner à: LAZARE<br />1, rue du plâtre<br />75004 PARIS</td>
+		<td style="font-size:75%;" colspan=2>Zone réservée à l'usage exclusif du créancier</td>
+	</tr>
+   </table>
+   
+
+
+</page> 

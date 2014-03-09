@@ -92,42 +92,16 @@ wplazare(document).ready(function() {
 
 function validatePrelevementForm(){
 	var rulesTmp = {
-			"wp_lazare_forms[banque_code]": {
-	            maxlength: 5,
-	            minlength: 5
-			},
-			"wp_lazare_forms[banque_code_guichet]": {
-	            maxlength: 5,
-	            minlength: 5
-			},
-			"wp_lazare_forms[banque_code_numero_compte]": {
-	            maxlength: 11,
-	            minlength: 11
-			},
-			"wp_lazare_forms[banque_code_cle_rib]": {
-	            maxlength: 2,
-	            minlength: 2
-			},
-			"wp_lazare_forms[banque_iban]": {
-	            required: true,
-	            maxlength: 34,
-	            minlength: 6
-			},
-			"wp_lazare_forms[banque_nom]": {
-	            required: true
-			},
-			"wp_lazare_forms[banque_adresse]": {
-	            required: true
-			},
-			"wp_lazare_forms[banque_code_postal]": {
-	            required: true,
-	            maxlength: 5,
-	            minlength: 5,
-	            digits: true
-			},
-			"wp_lazare_forms[banque_ville]": {
-	            required: true
-			}
+        "wp_lazare_forms[banque_bic]": {
+            required: true,
+            maxlength: 11,
+            minlength: 8
+        },
+        "wp_lazare_forms[banque_iban]": {
+            required: true,
+            maxlength: 34,
+            minlength: 6
+        }
 		};
 	if(wplazare('#prelevement_form').hasClass('locataireCharge')){
 		rulesTmp['location'] = { required: true	};
