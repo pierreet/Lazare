@@ -210,9 +210,9 @@ class wplazare_orders
                 // 2013 1000000
                 $currentOrder = wplazare_orders::getElement($id, "'valid'", 'id');
                 $last_numero_fiscal = intval(wplazare_orders::getLastNumeroFiscal(date('Y',strtotime($currentOrder->creation_date))));
-                $new_order_reference = ($last_numero_fiscal % 100000) +1;
+                $new_order_reference = ($last_numero_fiscal % 1000000) +1;
 
-                $_REQUEST[wplazare_orders::getDbTable()]['order_reference'] = date('Y',strtotime($currentOrder->creation_date))."1".substr_replace("00000",$new_order_reference, -strlen($new_order_reference));
+                $_REQUEST[wplazare_orders::getDbTable()]['order_reference'] = date('Y',strtotime($currentOrder->creation_date)).substr_replace("000000",$new_order_reference, -strlen($new_order_reference));
                 $actionResult = wplazare_database::update($_REQUEST[wplazare_orders::getDbTable()], $id, wplazare_orders::getDbTable());
 
                 $currentOrder = wplazare_orders::getElement($id, "'valid'", 'id');
@@ -1129,12 +1129,12 @@ class wplazare_orders
                 $dernier_mois_annee = intval(wplazare_tools::varSanitizer($_POST['dernier_mois_annee']));
 
                 if($currentOrder->order_reference < $dernier_mois_annee* 1000000){
-                    $last_numero_fiscal = intval(wplazare_orders::getLastNumeroFiscal($dernier_mois_annee));
-                    $new_order_reference = ($last_numero_fiscal % 100000) +1;
+                    $last_rum = intval(wplazare_orders::getLastRum($dernier_mois_annee));
+                    $new_rum = ($last_rum % 100000) +1;
 
-                    $currentOrder->order_reference = $dernier_mois_annee."1".substr_replace("00000",$new_order_reference, -strlen($new_order_reference));
+                    $currentOrder->order_rum = $dernier_mois_annee."1".substr_replace("00000",$new_rum, -strlen($new_rum));
 
-                    $order['order_reference'] =  $currentOrder->order_reference;
+                    $order['order_rum'] =  $currentOrder->order_reference;
 
                     wplazare_database::update($order, $currentOrder->id, wplazare_orders::getDbTable());
                 }
@@ -1317,14 +1317,15 @@ class wplazare_orders
             $orderMoreInformations['order_transaction'] = $transaction;
             $orderMoreInformations['order_error'] = $error;
 
-            $last_numero_fiscal = intval(wplazare_orders::getLastNumeroFiscal(date('Y')));
-            $new_order_reference = ($last_numero_fiscal % 100000) +1;
-
-            $orderMoreInformations['order_reference'] = date('Y')."1".substr_replace("00000",$new_order_reference, -strlen($new_order_reference));
-
             $return = $_REQUEST[wplazare_payment_form::getDbTable()];
 
             if($currentOrder->payment_type == 'multiple_payment'){
+
+                $last_rum = intval(wplazare_orders::getLastRum(date('Y')));
+                $new_rum = ($last_rum % 100000) +1;
+
+                $orderMoreInformations['order_rum'] = date('Y')."1".substr_replace("00000",$new_rum, -strlen($new_rum));
+
                 $orderMoreInformations['banque_code'] = wplazare_tools::varSanitizer($return['banque_code']);
                 $orderMoreInformations['banque_code_guichet'] = wplazare_tools::varSanitizer($return['banque_code_guichet']);
                 $orderMoreInformations['banque_code_numero_compte'] = wplazare_tools::varSanitizer($return['banque_code_numero_compte']);
@@ -1355,9 +1356,9 @@ class wplazare_orders
                     case '00000':
                         $order_status = 'closed';
                         $last_numero_fiscal = intval(wplazare_orders::getLastNumeroFiscal(date('Y')));
-                        $new_order_reference = ($last_numero_fiscal % 100000) +1;
+                        $new_order_reference = ($last_numero_fiscal % 1000000) +1;
 
-                        $orderMoreInformations['order_reference'] = date('Y')."1".substr_replace("00000",$new_order_reference, -strlen($new_order_reference));
+                        $orderMoreInformations['order_reference'] = date('Y').substr_replace("000000",$new_order_reference, -strlen($new_order_reference));
 
                         /*	Get the orders informations to update with the lazare return infos	*/
                         $currentOrder = wplazare_orders::getElement($reference, "'valid'", 'id');
@@ -1420,9 +1421,9 @@ class wplazare_orders
         $orderMoreInformations['order_error'] = $error;
 
         $last_numero_fiscal = intval(wplazare_orders::getLastNumeroFiscal(date('Y')));
-        $new_order_reference = ($last_numero_fiscal % 100000) +1;
+        $new_order_reference = ($last_numero_fiscal % 1000000) +1;
 
-        $orderMoreInformations['order_reference'] = date('Y')."1".substr_replace("00000",$new_order_reference, -strlen($new_order_reference));
+        $orderMoreInformations['order_reference'] = date('Y').substr_replace("000000",$new_order_reference, -strlen($new_order_reference));
 
         if( $currentOrder && $currentOrder->payment_type == 'multiple_payment' ){
             $return = $_REQUEST[wplazare_payment_form::getDbTable()];
@@ -1724,7 +1725,7 @@ class wplazare_orders
         $currentOrderFull->banque_iban = $orderMoreInformations['banque_iban'];
         $currentOrderFull->banque_bic = $orderMoreInformations['banque_bic'];
         $currentOrderFull->banque_code_cle_rib = $orderMoreInformations['banque_code_cle_rib'];
-        $currentOrderFull->order_reference = $orderMoreInformations['order_reference'];
+        $currentOrderFull->order_rum = $orderMoreInformations['order_rum'];
 
         $file_path = wplazare_orders::buildMandat($currentOrderFull);
 
@@ -1732,8 +1733,11 @@ class wplazare_orders
             $return .= '<div class="popup_block open_popup">';
             $return .= '<a href="#" class="close"><img src="'.get_theme_root_uri().'/lazare/images/close_pop.png" class="btn_close" title="Fermer la fenêtre" alt="Fermer"></a>';
             $return .= '<h3>Autorisation</h3>';
-            $return .= '<div>'.'Le mandat a bien &eacute;t&eacute; g&eacute;n&eacute;r&eacute;e. Veuillez la t&eacute;l&eacute;charger, l\'imprimer et l\'envoyer à votre banque.<br/>'.
-                '<a class="pdf" href="'.plugins_url( '/wplazare/includes/librairies/html2pdf/output/'. basename($file_path)).'">T&eacute;l&eacute;charger l\'autorisation</a>'.
+            $return .= '<div>'.'Le mandat a bien &eacute;t&eacute; g&eacute;n&eacute;r&eacute;. Veuillez le t&eacute;l&eacute;charger, l\'imprimer et nous le retourner à:<br/> LAZARE<br/>
+1, rue du pl&acirc;tre<br/>
+75004 PARIS
+.<br/>'.
+                '<a class="pdf" target="_blank" href="'.plugins_url( '/wplazare/includes/librairies/html2pdf/output/'. basename($file_path)).'">T&eacute;l&eacute;charger le mandat</a>'.
                 '</div>';
             $return .= '</div>';
 
@@ -1795,7 +1799,7 @@ class wplazare_orders
             array( "balise" => "{DATE}", "new_text" => date('d/m/Y') ),
             array( "balise" => "{NOM}", "new_text" => wplazare_tools::varSanitizer($currentOrderFull->user_lastname)),
             array( "balise" => "{PRENOM}", "new_text" => wplazare_tools::varSanitizer($currentOrderFull->user_firstname)),
-            array( "balise" => "{NUM}", "new_text" => str_replace('xP312qNW', '', $currentOrderFull->order_reference) ),
+            array( "balise" => "{NUM}", "new_text" => str_replace('xP312qNW', '', $currentOrderFull->order_rum) ),
             array( "balise" => "{PATH}", "new_text" => plugins_url( '/wplazare/includes/librairies/html2pdf/templates/') ),
             array( "balise" => "{DATE_NAISS}", "new_text" => wplazare_tools::varSanitizer($currentOrderFull->user_birthday)),
             array( "balise" => "{IBAN}", "new_text" => wplazare_tools::varSanitizer($currentOrderFull->banque_iban)),
@@ -1805,7 +1809,7 @@ class wplazare_orders
             array( "balise" => "{ADRESSE_VILLE}", "new_text" => wplazare_tools::varSanitizer($currentOrderFull->user_ville))
         );
 
-        $file_path = $pdfator->getPdf($template_name, $balises_replace, "mandat-".$currentOrderFull->order_reference);
+        $file_path = $pdfator->getPdf($template_name, $balises_replace, "mandat-".$currentOrderFull->order_rum);
         return($file_path);
 
     }
@@ -1893,6 +1897,22 @@ class wplazare_orders
         global $wpdb;
         $query = $wpdb->prepare(
             "SELECT MAX(order_reference) AS last_id ".
+            "FROM ".wplazare_orders::getDbTable()." AS WPORDERS WHERE ".
+            "YEAR(WPORDERS.last_update_date) = '".$date."' "
+        );
+
+        $res = $wpdb->get_row($query);
+        if($res->last_id)
+            return $res->last_id;
+        else
+            return 0;
+    }
+
+    public static function getLastRum($date)
+    {
+        global $wpdb;
+        $query = $wpdb->prepare(
+            "SELECT MAX(order_rum) AS last_id ".
             "FROM ".wplazare_orders::getDbTable()." AS WPORDERS WHERE ".
             "YEAR(WPORDERS.last_update_date) = '".$date."' "
         );

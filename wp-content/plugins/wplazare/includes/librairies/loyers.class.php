@@ -141,7 +141,7 @@ class wplazare_loyers
 							$_REQUEST[wplazare_loyers::getDbTable()]['creation_date'] = date('Y-m-d H:i:s');
 							$actionResult = wplazare_database::save($_REQUEST[wplazare_loyers::getDbTable()], wplazare_loyers::getDbTable() );
 							//$new_loyer_id = $wpdb->insert_id;
-							if( ($actionResult=="done") && isset( $_REQUEST["notif_email".$locationId] ) && ($is_payed==1) )
+							if( ($actionResult=="done") && isset( $_REQUEST["notif_email_".$locationId] ) && ($is_payed==1) )
 							{
 								wplazare_loyers::send_attestation_mail($locataire_id, $current_mois, $current_annee);
 							}
@@ -871,8 +871,11 @@ class wplazare_loyers
 		return $locataire_name;
 	}
 	
-	function send_attestation_mail($locataire_id, $current_mois, $current_annee)
+	function send_attestation_mail($locataire_id, $current_mois, $current_annee, $debug = false)
 	{
+        if($debug){
+            echo "<h3>send_attestation_mail($locataire_id, $current_mois, $current_annee, $debug)</h3>";
+        }
 		$locataire_name = stripslashes( wplazare_tools::getUserName($locataire_id) );
 		
 		$headers = "From: ".get_option('blogname')." <".get_option('admin_email').">\r\n";
@@ -882,6 +885,11 @@ class wplazare_loyers
 
 
 		$subject = "Quittance de ".$locataire_name;
+
+        if($debug){
+            echo "<h3>subject</h3>";
+            echo $subject;
+        }
 		
 		$template_name ="quittance_loyer";
 		$pdfator = new wplazare_pdfator();
@@ -895,9 +903,9 @@ class wplazare_loyers
 
         if($current_association->nom == 'Lazare'){
 			$association = 'Lazare';
-			$nom_president = 'Etienne Villemain';
+			$nom_president = 'François CATTA';
 			$coordonnees_president = 'Tel : 06 63 68 12 31';
-			$signature_president = 'sign4.jpg';
+			$signature_president = 'FCATTA.jpg';
 			$logo_association = 'lazare.png';
 		}
 		else{
@@ -910,6 +918,11 @@ class wplazare_loyers
 
         $message = "Bonjour,<br /><br />";
         $message .= "Vous trouverez ci-joint la quittance de vos indemnit&eacute;s d&rsquo;occupation pour ce mois-ci.<br/><br/>Bonne r&eacute;ception,<br/><br/>L&rsquo;&eacute;quipe ".$association;
+
+        if($debug){
+            echo "<h3>Message</h3>";
+            echo $message;
+        }
 
         $balises_replace = array(
             array( "balise" => "{U_USERNAME}", "new_text" => $locataire_name),
@@ -928,8 +941,14 @@ class wplazare_loyers
             array( "balise" => "{ANNEE_ATTESTATION}", "new_text" => $current_annee ),
             array( "balise" => "{PRIX_LOYER}", "new_text" => ( $current_appart->prix - $current_location->remise ) )
         );
+
+        if($debug){
+            echo "<h3>balises_replace</h3>";
+            print_r($balises_replace);
+        }
 								
 		$attachments = array( $pdfator->getPdf($template_name, $balises_replace) );
+        if($debug) print_r($attachments);
 		// envoi au locataire ou au responsable
 		$locataire_user_data = get_userdata( $locataire_id );
 		if( ($locataire_user_data) && ($locataire_user_data->user_email != "") )
@@ -940,11 +959,12 @@ class wplazare_loyers
 			$responsable_user_data = get_userdata( $current_appart->responsable );
             $destinataire_email =  $responsable_user_data->user_email;
 		}
-        wp_mail( $destinataire_email, $subject, $message, $headers, $attachments);
+        if($debug) echo wp_mail( $destinataire_email, $subject, $message, $headers, $attachments);
+        else wp_mail( $destinataire_email, $subject, $message, $headers, $attachments);
 				
-		$pdfator->clearTempPdf($template_name);
+		//$pdfator->clearTempPdf($template_name);
 		
 		return $locataire_name;
-	}	
-	
+	}
+
 }
