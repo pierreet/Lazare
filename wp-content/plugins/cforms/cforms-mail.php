@@ -49,7 +49,7 @@ if(isOk($_POST['a']) && isOk($_POST['content']) && cforms_is_email($_POST['a']) 
 	
 	
 	if ( $smtpsettings[0]=='1' ){
-		$sent = cforms_phpmailer( $no, $frommail, $replyto, $to, $subject, $body, '', '', '', 'ac' );
+		$sent = cforms_phpmailer( $no, $frommail, $replyto, $to, $subject, $body, '', $body, '', 'ac' );
 	}else{
 		if ( $mail->html_show_ac ) {
 			$mail->is_html(true);
