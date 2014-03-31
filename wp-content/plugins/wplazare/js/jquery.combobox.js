@@ -77,7 +77,7 @@
 			})
 			.addClass( "ui-widget ui-widget-content ui-corner-left" );
 
-			input.data( "autocomplete" )._renderItem = function( ul, item ) {
+			input.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
 				return jQuery( "<li>" )
 				.data( "item.autocomplete", item )
 				.append( "<a>" + item.label + "</a>" )

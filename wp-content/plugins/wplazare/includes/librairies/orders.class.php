@@ -1090,7 +1090,7 @@ class wplazare_orders
         $query = $wpdb->prepare(
             "SELECT O.*
             FROM " . wplazare_orders::getDbTable() . " AS O
-		WHERE O.status IN (".$elementStatus.") " . $moreQuery_filters . "
+		WHERE O.status IN (".$elementStatus.") " . $moreQuery_filters . " AND O.payment_amount > 0
 		" . $orderByStatement
         );
 
