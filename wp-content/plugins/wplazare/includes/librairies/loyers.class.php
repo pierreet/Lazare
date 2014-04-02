@@ -903,9 +903,9 @@ class wplazare_loyers
 
         if($current_association->nom == 'Lazare'){
 			$association = 'Lazare';
-			$nom_president = 'François CATTA';
+			$nom_president = 'Etienne Villemain';
 			$coordonnees_president = 'Tel : 06 63 68 12 31';
-			$signature_president = 'FCATTA.jpg';
+			$signature_president = 'sign4.jpg';
 			$logo_association = 'lazare.png';
 		}
 		else{
