@@ -353,7 +353,7 @@ if( jQuery(".cf_date").length>0 || jQuery(".cf_time").length>0 ){
 });
 
 function dateTimeInput(className){
-	jQuery("."+className).datetimepicker({"firstDay":cfCAL.firstDayOfWeek, minDate: new Date(), "dateFormat": cfCAL.dateFormat,"dayNamesMin": cfCAL.dayNames, "dayNamesShort": cfCAL.dayNames, "monthNames": cfCAL.monthNames});
+	if(jQuery.isFunction(jQuery.fn.datetimepicker)) jQuery("."+className).datetimepicker({"firstDay":cfCAL.firstDayOfWeek, minDate: new Date(), "dateFormat": cfCAL.dateFormat,"dayNamesMin": cfCAL.dayNames, "dayNamesShort": cfCAL.dayNames, "monthNames": cfCAL.monthNames});
 }
 
 <?php
