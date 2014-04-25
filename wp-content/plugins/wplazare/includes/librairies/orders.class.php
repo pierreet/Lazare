@@ -234,9 +234,6 @@ class wplazare_orders
                 $_REQUEST[wplazare_orders::getDbTable()]['payment_type'] = 'virement_payment';
                 $_REQUEST[wplazare_orders::getDbTable()]['status'] = 'valid';
 
-                $currentOrder = wplazare_orders::getElement($id, "'valid'", 'id');
-                if($currentOrder->user_recu > 0) wplazare_orders::sendRecu($currentOrder);
-
                 // 2013 1000000
                 $last_numero_fiscal = intval(wplazare_orders::getLastNumeroFiscal(date('Y',strtotime($currentOrder->creation_date))));
                 $new_order_reference = ($last_numero_fiscal % 100000) +1;
@@ -244,6 +241,8 @@ class wplazare_orders
                 $_REQUEST[wplazare_orders::getDbTable()]['order_reference'] = date('Y',strtotime($currentOrder->creation_date))."1".substr_replace("00000",$new_order_reference, -strlen($new_order_reference));
                 $actionResult = wplazare_database::update($_REQUEST[wplazare_orders::getDbTable()], $id, wplazare_orders::getDbTable());
 
+                $currentOrder = wplazare_orders::getElement($id, "'valid'", 'id');
+                if($currentOrder->user_recu > 0) wplazare_orders::sendRecu($currentOrder);
             }
             else
             {
