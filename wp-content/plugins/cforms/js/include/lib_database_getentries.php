@@ -217,11 +217,11 @@ if ($showIDs<>'') {
 		if(!$rdv && !$rep) //action rdv on ne met pas admin.php dans href car ajouter dans le javascript
 			echo '<a href="?page='.$plugindir.'/cforms-mail.php&mail='.$entry->email.'&body='.$msg_rdv.'&obj='.$cformsSettings['global']['cforms_register_rdv_obj'].'" class="allbuttons rdv" id="rdvbutton'.$entry->sub_id.'" dates="'.$dates_rdv.'" type="submit" id="rdvbutton'.$entry->sub_id.'">'.__('Choisir le RDV', 'cforms').'</a>'.$e;
 
-		if(!$ged && $rdv && !$rep){ //action post rdv
+		/*if(!$ged && $rdv && !$rep){ //action post rdv*/
 			echo '<a href="?page='.$plugindir.'/cforms-mail.php&mail='.$entry->email.'&body='.$msg_accept_rdv.'&obj='.$cformsSettings['global']['cforms_register_accept_rdv_obj'].'" class="allbuttons rdv_accept"  type="submit" id="rep_rdv_acccept_button'.$entry->sub_id.'">'.__('Réponse positive', 'cforms').'</a>'.$e;
 			echo '<a href="?page='.$plugindir.'/cforms-mail.php&mail='.$entry->email.'&body='.$msg_deny_rdv.'&obj='.$cformsSettings['global']['cforms_register_deny_rdv_obj'].'" class="allbuttons rdv_deny deleteall"  type="submit" id="rep_rdv_deny_button'.$entry->sub_id.'">'.__('Réponse négative', 'cforms').'</a>'.$e;
 			
-		}
+		/*}*/
 		if($ged && !$miss_ged && !$rep)//si il manque des documents
 			echo '<a href="?page='.$plugindir.'/cforms-mail.php&mail='.$entry->email.'&body='.$msg_ged.'&obj='.$cformsSettings['global']['cforms_register_ged_obj'].'" class="allbuttons ged_submit"  type="submit" id="ged_button'.$entry->sub_id.'">'.__('Relance documents', 'cforms').'</a>'.$e;
 	
