@@ -235,6 +235,7 @@ class wplazare_orders
                 $_REQUEST[wplazare_orders::getDbTable()]['status'] = 'valid';
 
                 // 2013 1000000
+                $currentOrder = wplazare_orders::getElement($id, "'valid'", 'id');
                 $last_numero_fiscal = intval(wplazare_orders::getLastNumeroFiscal(date('Y',strtotime($currentOrder->creation_date))));
                 $new_order_reference = ($last_numero_fiscal % 100000) +1;
 
