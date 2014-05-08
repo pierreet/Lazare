@@ -1586,10 +1586,12 @@ class wplazare_users {
 				if ($retour != '')
 					$retour .= '</table>';
 
+                $current_appart = wplazare_apparts::getElement($current_appart_id);
+
 				$retour .= '<h3>Appartement '
 						. stripslashes(
 								wplazare_apparts::getAdresseComplete(
-										$current_appart_id)) . '</h3>';
+                                    $current_appart)) . '</h3>';
 
 				$retour .= '<table>';
 
@@ -2038,10 +2040,20 @@ VALUES ('" . str_replace(array("'", ' '), '',wplazare_tools::varSanitizer(ucfirs
 
 	function deleteUser() {
 
-		$user_id = wplazare_tools::varSanitizer(intval($_REQUEST['user_id']));
+        global $wpdb;
+
+        $user_id = wplazare_tools::varSanitizer(intval($_REQUEST['user_id']));
 
 		if ((wplazare_tools::getRole($user_id) != 'administrator')
 				&& current_user_can('wplazare_edit_user')) {
+
+            $wpdb->update(
+                'wp_lazare_location',
+                array(
+                    'status' => 'deleted'
+                ),
+                array( 'user' => $user_id )
+            );
 
 			wp_delete_user($user_id);
 

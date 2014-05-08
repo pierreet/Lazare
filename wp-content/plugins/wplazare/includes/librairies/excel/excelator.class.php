@@ -47,9 +47,10 @@ class wplazare_excelator {
 
 		$i = 2;
 		foreach ($locataires as $result) {
+            $current_appart = wplazare_apparts::getElement($result->appart_id);
 			$sheet->setCellValue('A' . $i,
 							wplazare_apparts::getAdresseComplete(
-									$result->appart_id));
+                                $current_appart));
 
 			$user_id = $result->locataire_id;
 
