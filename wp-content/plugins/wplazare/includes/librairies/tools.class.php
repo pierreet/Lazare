@@ -680,14 +680,14 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
 	}
 
     public static function synchroList(){
-		$mktime=time();
+		/*$mktime=time();
 		
 		global $wpdb;
 
 		$query = "INSERT IGNORE INTO `wp_wysija_user` (`wpuser_id`,`email`,`firstname`,`created_at` ,`status` ) 
 		SELECT `ID`,`user_email`,`display_name`,$mktime,1 FROM wp_users INNER JOIN wp_usermeta ON ( wp_users.ID = wp_usermeta.user_id ) WHERE wp_usermeta.meta_key = 'wp_capabilities'";
 
-		$prepared_query = $wpdb->prepare($query);
+		$prepared_query = $wpdb->prepare($query,Array());
 		
 		$wpdb->query($prepared_query);
 		
@@ -705,7 +705,7 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
 				$query3 = "INSERT IGNORE INTO `wp_wysija_user_list` (`user_id`,`list_id`,`sub_date`) VALUES ($result->user_id, $res2->list_id, $mktime)";
 				$wpdb->query($query3);
 			}
-		} 
+		} */
 	}
 
     public static function lastLogin($user_login) {
