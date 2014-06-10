@@ -1757,7 +1757,7 @@ class wplazare_orders
             $attachments = array( $file_path );
             // envoi au locataire ou au responsable
             //$destinataire_email = "admin@maisonlazare.com";
-            $destinataire_email = "alienorrousseau@maisonlazare.com";
+            $destinataire_email = "contact@lazare.eu";
             wp_mail( $destinataire_email, $subject, $message, $headers, $attachments);
         }
         else{

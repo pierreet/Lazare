@@ -769,7 +769,7 @@ VALUES (NULL ,  '$user_id',  '$email',  '$firstname',  '$lastname',  '',  '', NU
 	}
 
     public static function addSpaceOnPhone($phone_number){
-		return chunk_split (str_replace(" ", "", $phone_number), 2, "&nbsp;");
+		return chunk_split (str_replace("&nbsp;", "",str_replace(" ", "", $phone_number)), 2, "&nbsp;");
 	}
 
     public static function updateAttendeeRole(){
