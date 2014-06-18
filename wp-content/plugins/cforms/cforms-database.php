@@ -82,7 +82,6 @@ jQuery("#flex1").flexigrid ( {
 		],
 	buttons : [
 		{name: '<?php _e('Détails','cforms'); ?>', bclass: 'add', onpress : cf_tracking_view},
-		{name: '<?php _e('Supprimer','cforms'); ?>', bclass: 'delete', onpress : function (){jQuery('#cf_delete_dialog').jqmShow();} },
 		{name: '<?php _e('Télécharger','cforms'); ?>', bclass: 'dl', onpress : function (){jQuery('#cf_dl_dialog').jqmShow();}},
 		{separator: true}
 		],
