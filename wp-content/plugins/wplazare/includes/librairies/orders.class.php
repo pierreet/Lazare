@@ -1904,11 +1904,17 @@ class wplazare_orders
 
         $res = $wpdb->get_row($query);
         if($res->last_id){
-            if($res->last_id < 10000);
-            return 1;
+            if( intval($res->last_id) < 10000){
+                return 0;
+            }
+            else{
+                return $res->last_id;
+            }
         }
-        else
+        else{
             return 0;
+        }
+
     }
 
     public static function getLastRum($date)
