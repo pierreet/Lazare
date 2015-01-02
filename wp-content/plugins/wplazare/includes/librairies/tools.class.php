@@ -244,7 +244,7 @@ class wplazare_tools
     public static function getResponsablesForSelect(){
 		$elements = array(); 
 		$elements['0'] = '- Pas de responsable -';
-		$blogusers = get_users('role=Benevole');
+		$blogusers = get_users( array('role' => array('Benevole','Responsable')));
 		
 	    foreach ($blogusers as $user) {
 	        $resp_name = wplazare_tools::getUserName($user->ID);
