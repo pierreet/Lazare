@@ -363,7 +363,7 @@ class wplazare_tools
 	*/
     public static function getLocataires(){
 		$locataires = array();
-		$benevoles = get_users('role='.WPLAZARE_ROLE_BENEVOLE);
+		$benevoles = get_users( array('role' => array('Benevole','Responsable')));
 	    foreach ($benevoles as $locataire) {
 	        $locataires[$locataire->ID] = wplazare_tools::getUserName($locataire->ID);
 	    }
