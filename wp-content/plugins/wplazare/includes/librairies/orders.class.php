@@ -1903,8 +1903,10 @@ class wplazare_orders
         );
 
         $res = $wpdb->get_row($query);
-        if($res->last_id)
-            return $res->last_id;
+        if($res->last_id){
+            if($res->last_id < 10000);
+            return 1;
+        }
         else
             return 0;
     }
