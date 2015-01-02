@@ -1899,7 +1899,7 @@ class wplazare_orders
         $query = $wpdb->prepare(
             "SELECT MAX(order_reference) AS last_id ".
             "FROM ".wplazare_orders::getDbTable()." AS WPORDERS WHERE ".
-            "YEAR(WPORDERS.last_update_date) = '".$date."' "
+            "YEAR(WPORDERS.creation_date) = '".$date."' "
         );
 
         $res = $wpdb->get_row($query);
