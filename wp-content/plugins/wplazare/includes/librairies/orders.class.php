@@ -1115,12 +1115,10 @@ class wplazare_orders
         $return = "";
 
         if($itemToEdit && $itemToEdit != 0){
-            $template_name ="recu_fiscal";
+            $template_name ="recu_fiscal_2015";
             $pdfator = new wplazare_pdfator();
 
             $currentOrder = wplazare_orders::getElement($itemToEdit, "'valid'", 'id');
-
-
 
             if($currentOrder->payment_type == "multiple_payment" && $currentOrder->location_id == NULL){
                 $template_name="recu_fiscal_don_mensuel";
@@ -1492,7 +1490,7 @@ class wplazare_orders
 
         $subject = "Recu fiscal LAZARE";
 
-        $template_name ="recu_fiscal";
+        $template_name ="recu_fiscal_2015";
 
         $pdfator = new wplazare_pdfator();
 

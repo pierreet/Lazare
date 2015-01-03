@@ -49,6 +49,8 @@ class wplazare_pdfator
                 unlink($output_filename);
             }
 			$html2pdf = new HTML2PDF('P','A4','fr');
+			$html2pdf->addFont('Times', '', WPLAZARE_HTML2PDF_PLUGIN_DIR.'/_tcpdf_5.0.002/fonts/times.php');
+
 			$html2pdf->WriteHTML($content);
 			$html2pdf->Output($output_filename, 'F');
 			if( @file_exists($output_filename) )
