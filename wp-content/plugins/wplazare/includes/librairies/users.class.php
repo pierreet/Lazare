@@ -1965,7 +1965,10 @@ VALUES ('" . str_replace(array("'", ' '), '',wplazare_tools::varSanitizer(ucfirs
 
 			$user_id = username_exists($user_name);
 		}
-		if ($first_name != "" && $last_name != "" && !$user_id) {
+        else{
+            return 'Nom d\'utilisateur existant';
+        }
+		if (!$user_id) {
 
 			$random_password = wp_generate_password($length = 12,
 					$include_standard_special_chars = false);
@@ -1997,8 +2000,14 @@ VALUES ('" . str_replace(array("'", ' '), '',wplazare_tools::varSanitizer(ucfirs
 				$oUserAccessManager->getAccessHandler()->savePlObjectData('user', $user_id, $post_data['uam_usergroups']);
 
 			}
+            else{
+                return 'Oups, utilisateur non créé';
+            }
 
 		}
+        else{
+            return 'Utilisateur déjà existant, ID : '.$user_id;
+        }
 
 		return 'Utilisateur cr&eacute;&eacute; avec succ&egrave;s.';
 
